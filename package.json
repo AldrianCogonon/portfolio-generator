@@ -1,0 +1,31 @@
+{
+  "name": "portfolio-generator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Don't push to main/master. Create your own branch and create a pull request to avoid breaking the project.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AldrianCogonon/portfolio-generator.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AldrianCogonon/portfolio-generator/issues"
+  },
+  "homepage": "https://github.com/AldrianCogonon/portfolio-generator#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.3"
+  }
+}
