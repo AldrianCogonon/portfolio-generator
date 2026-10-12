@@ -3,9 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#f5f6f8">
+    <title>Log in or Sign up | SOYON</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #19212d;
+            background: #f5f6f8;
+            font-synthesis: none;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .page {
+            display: grid;
+            min-height: 100vh;
+            padding: 32px 20px;
+            place-items: center;
+        }
+
+        .account {
+            width: min(100%, 420px);
+            padding: 36px;
+            border: 1px solid #e7e9ee;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 16px 48px rgb(24 35 52 / 8%);
+        }
+
+        .brand {
+            margin: 0 0 28px;
+            color: #19212d;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.7rem;
+            letter-spacing: -0.04em;
+            text-align: center;
+        }
+
+        .intro {
+            margin: 10px 0 26px;
+            color: #707987;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .switcher {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            margin-bottom: 24px;
+            padding: 4px;
+            border-radius: 10px;
+            background: #f1f3f6;
+        }
+
+        .switcher button {
+            min-height: 42px;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            color: #687282;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .switcher button[aria-selected="true"] {
+            background: #fff;
+            color: #19212d;
+            box-shadow: 0 1px 4px rgb(24 35 52 / 12%);
+        }
+
+        .form {
+            display: grid;
+            gap: 17px;
+        }
+
+        .form[hidden] {
+            display: none;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            color: #303949;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            min-height: 46px;
+            padding: 0 13px;
+            border: 1px solid #d9dee6;
+            border-radius: 8px;
+            background: #fff;
+            color: #19212d;
+            font: inherit;
+            font-size: 0.95rem;
+        }
+
+        input::placeholder {
+            color: #9aa2ae;
+        }
+
+        input:focus-visible,
+        button:focus-visible {
+            outline: 3px solid rgb(49 102 171 / 30%);
+            outline-offset: 2px;
+        }
+
+        .submit {
+            min-height: 48px;
+            margin-top: 3px;
+            border: 0;
+            border-radius: 8px;
+            background: #203b5a;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .submit:hover {
+            background: #172d46;
+        }
+
+        .notice {
+            min-height: 1.25em;
+            margin: 0;
+            color: #596577;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .account {
+                padding: 28px 22px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <main class="page">
+        <section class="account" aria-labelledby="account-title">
+            <p class="brand">SOYON</p>
+            <h1 id="account-title">Welcome back</h1>
+            <p class="intro" id="account-intro">Log in to your account.</p>
+
+            <div class="switcher" role="tablist" aria-label="Account">
+                <button id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-form">Log in</button>
+                <button id="signup-tab" type="button" role="tab" aria-selected="false" aria-controls="signup-form">Sign up</button>
+            </div>
+
+            <form class="form" id="login-form" aria-labelledby="login-tab">
+                <label for="login-email">
+                    Email
+                    <input id="login-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                </label>
+                <label for="login-password">
+                    Password
+                    <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+                </label>
+                <button class="submit" type="submit">Log in</button>
+                <p class="notice" aria-live="polite"></p>
+            </form>
+
+            <form class="form" id="signup-form" aria-labelledby="signup-tab" hidden>
+                <label for="signup-name">
+                    Full name
+                    <input id="signup-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+                </label>
+                <label for="signup-email">
+                    Email
+                    <input id="signup-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                </label>
+                <label for="signup-password">
+                    Password
+                    <input id="signup-password" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+                </label>
+                <button class="submit" type="submit">Create account</button>
+                <p class="notice" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const title = document.querySelector("#account-title");
+        const intro = document.querySelector("#account-intro");
+        const tabs = {
+            login: document.querySelector("#login-tab"),
+            signup: document.querySelector("#signup-tab"),
+        };
+        const forms = {
+            login: document.querySelector("#login-form"),
+            signup: document.querySelector("#signup-form"),
+        };
+
+        function showForm(view, updateHistory = true) {
+            const isSignup = view === "signup";
+            tabs.login.setAttribute("aria-selected", String(!isSignup));
+            tabs.signup.setAttribute("aria-selected", String(isSignup));
+            forms.login.hidden = isSignup;
+            forms.signup.hidden = !isSignup;
+            title.textContent = isSignup ? "Create your account" : "Welcome back";
+            intro.textContent = isSignup ? "Sign up to get started." : "Log in to your account.";
+            if (updateHistory) {
+                history.replaceState(null, "", isSignup ? "#signup" : "#login");
+            }
+        }
+
+        tabs.login.addEventListener("click", () => showForm("login"));
+        tabs.signup.addEventListener("click", () => showForm("signup"));
+
+        for (const form of Object.values(forms)) {
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                form.querySelector(".notice").textContent = "Account sign-in is not connected yet.";
+            });
+        }
+
+        showForm(window.location.hash === "#signup" ? "signup" : "login", false);
+    </script>
 </body>
 </html>
