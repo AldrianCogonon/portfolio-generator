@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="./css/style.css"/>
     <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-icon-1.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <script type="module" src="./src/main.js" defer></script>
 </head>
@@ -21,8 +22,8 @@
                     class="w-40 p-4"
                 >
             </div>
-            <button id="login" value="Login">Login</button>
-            <button id="sign-in" value="SignIn">Sign In</button>
+            <button id="login" value="Login" data-auth="login">Login</button>
+            <button id="sign-in" value="SignIn" data-auth="signup">Sign In</button>
         </header>
         
         <section class="hero">
@@ -60,5 +61,73 @@
     <footer>
         <h1>Footer</h1>
     </footer>
+
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+      <div class="relative flex w-full max-w-4xl overflow-hidden bg-white shadow-2xl sm:rounded-lg max-h-screen overflow-y-auto" style="font-family:'Inter',system-ui,sans-serif">
+
+        <aside class="hidden md:flex md:w-2/5 flex-col justify-between bg-slate-900 p-8 text-white">
+          <div class="flex items-center gap-2 text-sm font-semibold tracking-widest">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="1"/><rect x="9" y="9" width="12" height="12" rx="1"/></svg>
+            SOYON
+          </div>
+          <div>
+            <p class="mb-3 text-xs font-semibold tracking-widest text-blue-400">Your work, in one place</p>
+            <h2 class="text-4xl leading-tight font-bold" style="font-family:'Playfair Display',Georgia,serif">Build something that feels like you.</h2>
+            <p class="mt-4 text-sm text-slate-400">Save your information, shape your story, and publish when you're ready.</p>
+          </div>
+        </aside>
+
+        <section class="w-full md:w-3/5 p-6 sm:p-10">
+          <button id="auth-close" type="button" aria-label="Close" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-slate-200 text-slate-500 hover:bg-slate-50">&times;</button>
+
+          <div class="flex gap-6 border-b border-slate-200 pr-12 text-sm" role="tablist">
+            <button id="tab-signup" type="button" role="tab" class="-mb-px border-b-2 pb-3 font-semibold">Create account</button>
+            <button id="tab-login" type="button" role="tab" class="-mb-px border-b-2 border-transparent pb-3 text-slate-400">Log in</button>
+          </div>
+
+          <form id="signup-form" class="mt-8 space-y-4" novalidate>
+            <p class="text-xs font-semibold tracking-widest text-slate-500">Start for free</p>
+            <h3 id="auth-title" class="text-3xl text-slate-900">Create your account.</h3>
+            <p class="text-sm text-slate-500">A few details are all you need to begin.</p>
+
+            <label class="block text-xs font-semibold text-slate-600">Full name
+              <input id="su-name" type="text" autocomplete="name" placeholder="Your full name" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            </label>
+            <label class="block text-xs font-semibold text-slate-600">Email address
+              <input id="su-email" type="email" autocomplete="email" placeholder="you@email.com" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            </label>
+            <label class="block text-xs font-semibold text-slate-600">Password
+              <input id="su-password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            </label>
+
+            <p id="su-msg" class="hidden text-sm" aria-live="polite"></p>
+            <button id="su-submit" type="submit" class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60">
+              <span>Create free account</span><span aria-hidden="true">&rarr;</span>
+            </button>
+          </form>
+
+          <form id="login-form" class="mt-8 hidden space-y-4" novalidate>
+            <p class="text-xs font-semibold tracking-widest text-slate-500">Welcome back</p>
+            <h3 class="text-3xl text-slate-900">Continue your portfolio.</h3>
+            <p class="text-sm text-slate-500">Enter your details to pick up where you left off.</p>
+
+            <label class="block text-xs font-semibold text-slate-600">Email address
+              <input id="li-email" type="email" autocomplete="email" placeholder="you@email.com" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            </label>
+            <label class="block text-xs font-semibold text-slate-600">Password
+              <input id="li-password" type="password" autocomplete="current-password" placeholder="At least 8 characters" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            </label>
+            <div class="text-right"><button id="forgot-btn" type="button" class="text-xs font-semibold text-blue-600 hover:underline">Forgot password?</button></div>
+
+            <p id="li-msg" class="hidden text-sm" aria-live="polite"></p>
+            <button id="li-submit" type="submit" class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60">
+              <span>Log in</span><span aria-hidden="true">&rarr;</span>
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="./src/auth.js"></script>
 </body>
 </html>
