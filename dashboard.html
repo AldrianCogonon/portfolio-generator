@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your SOYON portfolios.">
+  <title>Dashboard | SOYON</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script type="module" src="./src/dashboard.js"></script>
+</head>
+
+<body class="min-h-screen bg-stone-50 font-['Inter',sans-serif] text-slate-900">
+
+  <div class="min-h-screen md:flex">
+
+    <aside class="border-b border-slate-200 bg-white p-5 md:min-h-screen md:w-64 md:border-b-0 md:border-r">
+      <a href="./index.html"
+         class="text-2xl font-bold tracking-widest text-blue-700">
+        SOYON
+      </a>
+
+      <p class="mb-5 mt-2 text-xs text-slate-500">
+        PORTFOLIO WORKSPACE
+      </p>
+
+      <nav class="space-y-2" aria-label="Dashboard navigation">
+        <a href="./dashboard.html"
+           class="block rounded-lg bg-blue-50 px-4 py-3 font-semibold text-blue-700">
+          Dashboard
+        </a>
+
+        <a href="#my-portfolios"
+           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
+          My Portfolios
+        </a>
+
+        <a href="#templates"
+           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
+          Templates
+        </a>
+
+        <a href="#account"
+           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
+          Account
+        </a>
+      </nav>
+
+      <a href="./index.html"
+         class="mt-6 block rounded-lg px-4 py-3 text-sm text-slate-500 hover:bg-slate-100">
+        ← Back to homepage
+      </a>
+    </aside>
+
+    <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-10">
+
+      <header class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p class="mb-2 text-sm font-medium text-blue-700">
+            YOUR CREATIVE WORKSPACE
+          </p>
+          <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+            Dashboard
+          </h1>
+          <p class="mt-2 text-slate-500">
+            Create and manage your professional portfolios.
+          </p>
+        </div>
+
+        <button id="create-portfolio"
+          class="rounded-lg bg-blue-700 px-5 py-3 font-semibold text-white transition hover:bg-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">
+          + Create portfolio
+        </button>
+      </header>
+
+      <section class="mb-10 overflow-hidden rounded-2xl bg-slate-900 p-6 text-white sm:p-9">
+        <p class="mb-3 text-sm font-medium text-blue-300">
+          YOUR NEXT OPPORTUNITY STARTS HERE
+        </p>
+
+        <h2 class="max-w-xl text-2xl font-bold sm:text-3xl">
+          Turn your skills and projects into a portfolio that stands out.
+        </h2>
+
+        <p class="mt-3 max-w-xl leading-7 text-slate-300">
+          Add your experience, showcase your work, and choose a design
+          that represents you.
+        </p>
+
+        <a href="#templates"
+           class="mt-6 inline-flex rounded-lg bg-white px-5 py-3 font-semibold text-slate-900 hover:bg-blue-50">
+          Explore templates →
+        </a>
+      </section>
+
+      <section id="my-portfolios" class="mb-12">
+        <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-bold">My portfolios</h2>
+            <p class="mt-1 text-sm text-slate-500">
+              Your saved portfolio projects appear here.
+            </p>
+          </div>
+
+          <span id="portfolio-count"
+            class="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-600">
+            0 portfolios
+          </span>
+        </div>
+
+        <div id="portfolio-list"
+          class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="mb-4 flex aspect-[16/9] items-center justify-center rounded-lg bg-blue-50">
+              <span class="text-4xl font-bold text-blue-700">S</span>
+            </div>
+
+            <p class="text-xs font-semibold uppercase tracking-wider text-blue-700">
+              Simple template
+            </p>
+
+            <h3 class="mt-2 font-bold">My first portfolio</h3>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Sample content — replace with saved data.
+            </p>
+
+            <div class="mt-5 flex gap-3">
+              <button class="edit-sample flex-1 rounded-lg bg-blue-700 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-800">
+                Edit
+              </button>
+
+              <button class="delete-sample rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
+                Delete
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+        <p id="dashboard-message" class="mt-4 text-sm text-slate-500"
+           aria-live="polite"></p>
+      </section>
+
+      <section id="templates">
+        <h2 class="text-xl font-bold">Choose your starting design</h2>
+        <p class="mt-1 mb-5 text-sm text-slate-500">
+          Pick one of the three SOYON portfolio templates.
+        </p>
+
+        <div class="grid gap-5 lg:grid-cols-3">
+
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-stone-100">
+              <div class="w-2/3 space-y-2 text-center">
+                <div class="mx-auto h-2 w-1/2 rounded bg-slate-400"></div>
+                <div class="mx-auto h-1.5 w-full rounded bg-slate-300"></div>
+                <div class="mx-auto h-1.5 w-3/4 rounded bg-slate-300"></div>
+              </div>
+            </div>
+            <h3 class="font-bold">Simple</h3>
+            <p class="my-2 text-sm leading-6 text-slate-500">
+              Clean typography and a straightforward professional layout.
+            </p>
+            <button data-template="simple"
+              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
+              Use Simple
+            </button>
+          </article>
+
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-slate-900 p-5">
+              <div class="w-full space-y-3">
+                <div class="h-3 w-1/2 rounded bg-white"></div>
+                <div class="h-2 w-3/4 rounded bg-blue-400"></div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="h-10 rounded bg-slate-700"></div>
+                  <div class="h-10 rounded bg-slate-700"></div>
+                </div>
+              </div>
+            </div>
+            <h3 class="font-bold">Modern</h3>
+            <p class="my-2 text-sm leading-6 text-slate-500">
+              Bold contrast, structured sections, and a contemporary feel.
+            </p>
+            <button data-template="modern"
+              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
+              Use Modern
+            </button>
+          </article>
+
+          <article class="rounded-xl border border-slate-200 bg-white p-5">
+            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-purple-50 p-5">
+              <div class="w-full space-y-3">
+                <div class="h-3 w-2/3 rounded-full bg-purple-400"></div>
+                <div class="h-2 w-1/2 rounded-full bg-pink-300"></div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="h-12 rounded-xl bg-purple-200"></div>
+                  <div class="h-12 rounded-xl bg-pink-200"></div>
+                </div>
+              </div>
+            </div>
+            <h3 class="font-bold">Creative</h3>
+            <p class="my-2 text-sm leading-6 text-slate-500">
+              Expressive colors and layouts for showcasing creative work.
+            </p>
+            <button data-template="creative"
+              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
+              Use Creative
+            </button>
+          </article>
+
+        </div>
+      </section>
+
+      <footer id="account" class="mt-12 border-t border-slate-200 pt-5 text-sm text-slate-500">
+        SOYON · Your professional portfolio workspace
+      </footer>
+
+    </main>
+  </div>
+
+</body>
+</html>
