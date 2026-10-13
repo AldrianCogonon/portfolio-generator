@@ -3,226 +3,304 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Manage your SOYON portfolios.">
+  <meta name="description" content="Manage your SOYON portfolios, templates, and creative projects.">
+  <meta name="theme-color" content="#f8f7f4">
+  <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-favicon.svg">
   <title>Dashboard | SOYON</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <script type="module" src="./src/dashboard.js"></script>
 </head>
 
-<body class="min-h-screen bg-stone-50 font-['Inter',sans-serif] text-slate-900">
-
-  <div class="min-h-screen md:flex">
-
-    <aside class="border-b border-slate-200 bg-white p-5 md:min-h-screen md:w-64 md:border-b-0 md:border-r">
-      <a href="./index.html"
-         class="text-2xl font-bold tracking-widest text-blue-700">
-        SOYON
+<body class="min-h-screen bg-stone-50 font-['DM_Sans',sans-serif] text-slate-900 antialiased">
+  <div class="min-h-screen lg:flex">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-slate-200 bg-white px-3 py-4 transition-transform duration-200 lg:translate-x-0">
+  
+    <div class="mb-3 -ml-1 flex items-start justify-between">
+      <a href="./index.html#top" aria-label="SOYON home" class="block shrink-0">
+        <span class="logo-gradient h-22 w-66" aria-hidden="true"></span>
       </a>
 
-      <p class="mb-5 mt-2 text-xs text-slate-500">
-        PORTFOLIO WORKSPACE
-      </p>
+      <button
+        id="close-sidebar"
+        type="button"
+        class="shrink-0 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 lg:hidden"
+        aria-label="Close navigation"
+      >
+        <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path d="m6 6 12 12M18 6 6 18"/>
+          </svg>
+      </button>
+    </div>
 
-      <nav class="space-y-2" aria-label="Dashboard navigation">
-        <a href="./dashboard.html"
-           class="block rounded-lg bg-blue-50 px-4 py-3 font-semibold text-blue-700">
-          Dashboard
-        </a>
-
-        <a href="#my-portfolios"
-           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
-          My Portfolios
-        </a>
-
-        <a href="#templates"
-           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
-          Templates
-        </a>
-
-        <a href="#account"
-           class="block rounded-lg px-4 py-3 text-slate-600 hover:bg-slate-100">
-          Account
-        </a>
-      </nav>
-
-      <a href="./index.html"
-         class="mt-6 block rounded-lg px-4 py-3 text-sm text-slate-500 hover:bg-slate-100">
-        ← Back to homepage
+    <p class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Workspace</p>
+    
+    <nav aria-label="Main navigation" class="space-y-1.5">
+      <a href="./index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+        <span>Home</span>
       </a>
+
+      <a href="./dashboard.html" aria-current="page" class="nav-link nav-link-active">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="./portfolios.html" class="nav-link">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v8A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+        <span>My Portfolios</span>
+      </a>
+
+      <a href="#templates" class="nav-link" data-scroll-target="templates">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+        <span>Templates</span>
+      </a>
+
+      <a href="#recent-portfolios" class="nav-link" data-scroll-target="recent-portfolios">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg>
+        <span>Recent projects</span>
+      </a>
+    </nav>
+
+    <div class="my-7 border-t border-slate-100"></div>
+    <p class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Preferences</p>
+
+    <nav class="space-y-1.5">
+      <a href="#account" class="nav-link" data-scroll-target="account">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.3"/><path d="M5 20c.7-3.3 3.2-5 7-5s6.3 1.7 7 5"/><circle cx="12" cy="12" r="9"/></svg>
+        <span>Account settings</span>
+      </a>
+    </nav>
+
+      <div class="mt-auto rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
+        <div class="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-white text-blue-700 shadow-sm">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <p class="font-semibold text-slate-800">Need a little inspiration?</p>
+        <p class="mt-1 text-sm leading-5 text-slate-500">Explore the templates and find a style that feels like you.</p>
+        <a href="#templates" data-scroll-target="templates" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">Explore templates <span aria-hidden="true">→</span></a>
+      </div>
     </aside>
 
-    <main class="min-w-0 flex-1 p-5 sm:p-8 lg:p-10">
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 hidden bg-slate-950/40 lg:hidden"></div>
 
-      <header class="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <p class="mb-2 text-sm font-medium text-blue-700">
-            YOUR CREATIVE WORKSPACE
-          </p>
-          <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
-            Dashboard
-          </h1>
-          <p class="mt-2 text-slate-500">
-            Create and manage your professional portfolios.
-          </p>
-        </div>
+    <div class="min-w-0 flex-1 lg:ml-72">
 
-        <button id="create-portfolio"
-          class="rounded-lg bg-blue-700 px-5 py-3 font-semibold text-white transition hover:bg-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">
-          + Create portfolio
-        </button>
-      </header>
+      <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-stone-50/90 backdrop-blur-xl">
+        <div class="flex h-[72px] items-center gap-3 px-4 sm:px-7 lg:px-10">
+          <button id="open-sidebar" type="button" class="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 hover:bg-slate-100 lg:hidden" aria-label="Open navigation">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
 
-      <section class="mb-10 overflow-hidden rounded-2xl bg-slate-900 p-6 text-white sm:p-9">
-        <p class="mb-3 text-sm font-medium text-blue-300">
-          YOUR NEXT OPPORTUNITY STARTS HERE
-        </p>
-
-        <h2 class="max-w-xl text-2xl font-bold sm:text-3xl">
-          Turn your skills and projects into a portfolio that stands out.
-        </h2>
-
-        <p class="mt-3 max-w-xl leading-7 text-slate-300">
-          Add your experience, showcase your work, and choose a design
-          that represents you.
-        </p>
-
-        <a href="#templates"
-           class="mt-6 inline-flex rounded-lg bg-white px-5 py-3 font-semibold text-slate-900 hover:bg-blue-50">
-          Explore templates →
-        </a>
-      </section>
-
-      <section id="my-portfolios" class="mb-12">
-        <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 class="text-xl font-bold">My portfolios</h2>
-            <p class="mt-1 text-sm text-slate-500">
-              Your saved portfolio projects appear here.
-            </p>
+          <div class="hidden items-center gap-2 text-sm text-slate-500 sm:flex">
+            <span>Workspace</span><span class="text-slate-300">/</span><span class="font-semibold text-slate-800">Dashboard</span>
           </div>
 
-          <span id="portfolio-count"
-            class="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-600">
-            0 portfolios
-          </span>
+          <div class="flex-1"></div>
+
+          <label class="relative hidden w-full max-w-xs md:block">
+            <span class="sr-only">Search portfolios</span>
+            <svg viewBox="0 0 24 24" class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="portfolio-search" type="search" placeholder="Search your portfolios..." class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100">
+          </label>
+
+          <button type="button" id="notification-button" class="relative rounded-xl p-2.5 text-slate-500 transition hover:bg-white hover:text-slate-800" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+            <span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-blue-600 ring-2 ring-stone-50"></span>
+          </button>
+
+          <button id="profile-button" type="button" class="flex items-center gap-2 rounded-xl p-1.5 transition hover:bg-white" aria-label="Open profile menu">
+            <span id="profile-avatar" class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">S</span>
+            <span class="hidden text-left sm:block"><span id="profile-name" class="block text-sm font-semibold text-slate-800">SOYON Creator</span><span class="block text-xs text-slate-500">Workspace</span></span>
+            <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-slate-400 sm:block" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 10 5 5 5-5"/></svg>
+          </button>
+
+          <div id="profile-menu" class="absolute right-4 top-[62px] hidden w-48 rounded-xl border border-slate-200 bg-white p-2 shadow-xl sm:right-7 lg:right-10">
+            <a href="#account" data-scroll-target="account" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">Account settings</a>
+            <a href="./index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">Back to homepage</a>
+            <button id="sign-out-button" type="button" class="block w-full rounded-lg px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50">Sign out</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-7 sm:py-9 lg:px-10">
+        <section class="mb-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+        <div class="min-w-0">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-blue-600">
+            Your creative workspace
+            </p>
+
+            <h1 class="font-['Playfair_Display',serif] text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+            Welcome back<span id="welcome-name">.</span>
+            </h1>
+
+            <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
+            Bring your experience, projects, and ideas together in a portfolio that feels like you.
+            </p>
         </div>
 
-        <div id="portfolio-list"
-          class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <button
+            id="create-portfolio"
+            type="button"
+            class="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 sm:self-auto"
+        >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Create new portfolio
+        </button>
+        </section>
 
-          <article class="rounded-xl border border-slate-200 bg-white p-5">
-            <div class="mb-4 flex aspect-[16/9] items-center justify-center rounded-lg bg-blue-50">
-              <span class="text-4xl font-bold text-blue-700">S</span>
-            </div>
+        <section aria-labelledby="workspace-overview-title" class="mb-10">
+        <div class="mb-3 flex items-center justify-between gap-3">
+            <h2 id="workspace-overview-title" class="text-sm font-semibold text-slate-800">
+            Workspace overview
+            </h2>
 
-            <p class="text-xs font-semibold uppercase tracking-wider text-blue-700">
-              Simple template
-            </p>
-
-            <h3 class="mt-2 font-bold">My first portfolio</h3>
-
-            <p class="mt-1 text-sm text-slate-500">
-              Sample content — replace with saved data.
-            </p>
-
-            <div class="mt-5 flex gap-3">
-              <button class="edit-sample flex-1 rounded-lg bg-blue-700 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-800">
-                Edit
-              </button>
-
-              <button class="delete-sample rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
-                Delete
-              </button>
-            </div>
-          </article>
-
+            <span class="text-xs text-slate-400">Your portfolio activity</span>
         </div>
 
-        <p id="dashboard-message" class="mt-4 text-sm text-slate-500"
-           aria-live="polite"></p>
-      </section>
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-      <section id="templates">
-        <h2 class="text-xl font-bold">Choose your starting design</h2>
-        <p class="mt-1 mb-5 text-sm text-slate-500">
-          Pick one of the three SOYON portfolio templates.
-        </p>
-
-        <div class="grid gap-5 lg:grid-cols-3">
-
-          <article class="rounded-xl border border-slate-200 bg-white p-5">
-            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-stone-100">
-              <div class="w-2/3 space-y-2 text-center">
-                <div class="mx-auto h-2 w-1/2 rounded bg-slate-400"></div>
-                <div class="mx-auto h-1.5 w-full rounded bg-slate-300"></div>
-                <div class="mx-auto h-1.5 w-3/4 rounded bg-slate-300"></div>
-              </div>
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v8A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5z"/>
+                </svg>
             </div>
-            <h3 class="font-bold">Simple</h3>
-            <p class="my-2 text-sm leading-6 text-slate-500">
-              Clean typography and a straightforward professional layout.
-            </p>
-            <button data-template="simple"
-              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
-              Use Simple
-            </button>
-          </article>
+            <div>
+                <p class="text-sm text-slate-500">Total portfolios</p>
+                <p id="stat-total" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+            </div>
+            </article>
 
-          <article class="rounded-xl border border-slate-200 bg-white p-5">
-            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-slate-900 p-5">
-              <div class="w-full space-y-3">
-                <div class="h-3 w-1/2 rounded bg-white"></div>
-                <div class="h-2 w-3/4 rounded bg-blue-400"></div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="h-10 rounded bg-slate-700"></div>
-                  <div class="h-10 rounded bg-slate-700"></div>
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="m8 12 2.5 2.5L16 9"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-slate-500">Published</p>
+                <p id="stat-published" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+            </div>
+            </article>
+
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M7 3.5h7l5 5v12H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/>
+                <path d="M14 3.5v5h5M9 13h6M9 16.5h4"/>
+                </svg>
+            </div>
+            <div>
+                <p class="text-sm text-slate-500">Drafts in progress</p>
+                <p id="stat-drafts" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+            </div>
+            </article>
+        </div>
+        </section>
+
+        <section id="recent-portfolios" class="mb-12 scroll-mt-28">
+          <div class="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900">Recently worked on</h2>
+              <p class="mt-1 text-sm text-slate-500">Pick up where you left off.</p>
+            </div>
+            <a href="./portfolios.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">View all portfolios <span aria-hidden="true">→</span></a>
+          </div>
+
+          <div id="portfolio-list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"></div>
+
+          <div id="empty-state" class="hidden rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
+              <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-slate-900">Your first portfolio starts here</h3>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">Create a portfolio to bring your skills, experience, and projects together in one place.</p>
+            <button type="button" class="create-empty-state mt-5 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-800">Create your first portfolio</button>
+          </div>
+
+          <p id="dashboard-message" class="mt-4 min-h-5 text-sm text-slate-500" aria-live="polite"></p>
+        </section>
+
+        <section id="templates" class="mb-12 scroll-mt-28">
+          <div class="mb-5">
+            <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">Start with a style</p>
+            <h2 class="mt-2 text-xl font-bold tracking-tight text-slate-900">Choose your template</h2>
+            <p class="mt-1 text-sm text-slate-500">Three distinct starting points. Make every detail your own.</p>
+          </div>
+
+          <div class="grid gap-5 lg:grid-cols-3">
+            <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
+              <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl border border-stone-200 bg-[#f7f4ee] p-5">
+                <div class="w-full max-w-[230px] bg-white p-4 shadow-sm">
+                  <div class="mb-3 h-2 w-2/5 rounded bg-slate-800"></div><div class="mb-1 h-1 w-3/4 rounded bg-slate-300"></div><div class="h-1 w-1/2 rounded bg-slate-200"></div>
+                  <div class="my-4 border-t border-stone-200"></div><div class="mb-2 h-1.5 w-1/3 rounded bg-slate-600"></div><div class="mb-1 h-1 w-full rounded bg-slate-200"></div><div class="h-1 w-4/5 rounded bg-slate-200"></div>
+                  <div class="mt-4 grid grid-cols-3 gap-2"><div class="h-7 rounded bg-stone-100"></div><div class="h-7 rounded bg-stone-100"></div><div class="h-7 rounded bg-stone-100"></div></div>
                 </div>
+                <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-600">01 · Minimal</span>
               </div>
-            </div>
-            <h3 class="font-bold">Modern</h3>
-            <p class="my-2 text-sm leading-6 text-slate-500">
-              Bold contrast, structured sections, and a contemporary feel.
-            </p>
-            <button data-template="modern"
-              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
-              Use Modern
-            </button>
-          </article>
+              <div class="flex items-start justify-between gap-3 pt-4">
+                <div><h3 class="font-bold text-slate-900">Simple</h3><p class="mt-1 text-sm leading-5 text-slate-500">Clear, timeless, and easy to scan.</p></div>
+                <span class="rounded-lg bg-stone-100 p-2 text-slate-500"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14M5 9h14M5 14h9M5 19h9"/></svg></span>
+              </div>
+              <button type="button" data-template="simple" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Simple</button>
+            </article>
 
-          <article class="rounded-xl border border-slate-200 bg-white p-5">
-            <div class="mb-4 flex aspect-[16/10] items-center justify-center rounded-lg bg-purple-50 p-5">
-              <div class="w-full space-y-3">
-                <div class="h-3 w-2/3 rounded-full bg-purple-400"></div>
-                <div class="h-2 w-1/2 rounded-full bg-pink-300"></div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="h-12 rounded-xl bg-purple-200"></div>
-                  <div class="h-12 rounded-xl bg-pink-200"></div>
+            <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
+              <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl bg-slate-900 p-5">
+                <div class="w-full max-w-[250px] text-white">
+                  <div class="mb-3 flex items-center justify-between"><div class="h-1 w-12 rounded bg-blue-300"></div><div class="h-1 w-8 rounded bg-slate-600"></div></div>
+                  <div class="grid grid-cols-[1.2fr_.8fr] gap-3"><div><div class="mb-2 h-3 w-full rounded-sm bg-white"></div><div class="mb-1 h-2 w-4/5 rounded-sm bg-white"></div><div class="mt-3 h-1 w-full rounded bg-slate-600"></div><div class="mt-1 h-1 w-3/4 rounded bg-slate-700"></div><div class="mt-4 h-5 w-16 rounded border border-blue-300"></div></div><div class="flex items-center justify-center rounded bg-gradient-to-br from-blue-300 to-slate-600"><div class="h-14 w-10 rounded-sm bg-slate-800/70"></div></div></div>
+                  <div class="mt-5 grid grid-cols-3 gap-2"><div class="h-7 rounded bg-white/10"></div><div class="h-7 rounded bg-white/10"></div><div class="h-7 rounded bg-white/10"></div></div>
                 </div>
+                <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-200">02 · Structured</span>
               </div>
-            </div>
-            <h3 class="font-bold">Creative</h3>
-            <p class="my-2 text-sm leading-6 text-slate-500">
-              Expressive colors and layouts for showcasing creative work.
-            </p>
-            <button data-template="creative"
-              class="choose-template mt-2 w-full rounded-lg border border-slate-300 px-4 py-2.5 font-semibold hover:bg-slate-50">
-              Use Creative
-            </button>
-          </article>
+              <div class="flex items-start justify-between gap-3 pt-4">
+                <div><h3 class="font-bold text-slate-900">Modern</h3><p class="mt-1 text-sm leading-5 text-slate-500">Bold contrast and a confident layout.</p></div>
+                <span class="rounded-lg bg-blue-50 p-2 text-blue-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4zM4 10h16M10 10v9"/></svg></span>
+              </div>
+              <button type="button" data-template="modern" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Modern</button>
+            </article>
 
-        </div>
-      </section>
+            <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
+              <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl bg-indigo-50 p-5">
+                <div class="relative w-full max-w-[250px] overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                  <div class="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-blue-100"></div><div class="relative z-10 mb-3 h-2 w-2/5 rounded-full bg-indigo-700"></div>
+                  <div class="relative z-10 mb-1 h-3 w-3/4 rounded bg-slate-800"></div><div class="relative z-10 h-3 w-1/2 rounded bg-blue-500"></div>
+                  <div class="mt-4 grid grid-cols-[1fr_.8fr] gap-3"><div><div class="mb-1 h-1 w-full rounded bg-slate-200"></div><div class="mb-1 h-1 w-4/5 rounded bg-slate-200"></div><div class="mt-3 h-5 w-14 rounded-full bg-blue-600"></div></div><div class="flex items-end justify-center rounded-lg bg-gradient-to-br from-indigo-200 to-blue-400 p-2"><div class="h-10 w-8 rounded-t-full bg-white/70"></div></div></div>
+                </div>
+                <span class="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-700">03 · Expressive</span>
+              </div>
+              <div class="flex items-start justify-between gap-3 pt-4">
+                <div><h3 class="font-bold text-slate-900">Creative</h3><p class="mt-1 text-sm leading-5 text-slate-500">A little more personality and color.</p></div>
+                <span class="rounded-lg bg-indigo-50 p-2 text-indigo-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/><path d="m19 14 1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2z"/></svg></span>
+              </div>
+              <button type="button" data-template="creative" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Creative</button>
+            </article>
+          </div>
+        </section>
 
-      <footer id="account" class="mt-12 border-t border-slate-200 pt-5 text-sm text-slate-500">
-        SOYON · Your professional portfolio workspace
-      </footer>
-
-    </main>
+        <footer id="account" class="scroll-mt-28 border-t border-slate-200 py-6">
+          <div class="flex flex-col justify-between gap-2 text-xs text-slate-400 sm:flex-row">
+            <p>© <span id="current-year"></span> SOYON. Your work, your story.</p>
+            <a href="./index.html#top" class="font-medium text-slate-500 hover:text-blue-700">Back to homepage ↑</a>
+          </div>
+        </footer>
+      </main>
+    </div>
   </div>
-
 </body>
 </html>
