@@ -1,133 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Create a professional portfolio with SOYON in a few simple steps.">
+<title>SOYON</title>
 
-    <title>SOYON</title>
-    
-    <link rel="stylesheet" href="./css/style.css"/>
-    <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-icon-1.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script type="module" src="./src/main.js" defer></script>
+<script type="module" src="./src/main.js" defer></script>
 </head>
-<body>
+
+<body class="min-h-screen bg-stone-50 font-['Inter',sans-serif] text-slate-900 antialiased">
     <main>
-        <header class="flex justify-between items-center">
-            <div class="flex items-center">
-                <img
-                    src="./asset/logo/soyon-svg-logo-1.svg"
-                    alt="SOYON Logo"
-                    class="w-40 p-4"
+
+        <header
+            id="site-header"
+            class="sticky top-0 z-50 border-b border-stone-200 bg-stone-50/95 backdrop-blur-md transition-shadow duration-300"
+        >
+            <div class="mx-0 flex w-full max-w-none items-center justify-between px-2 py-0 sm:px-4 lg:px-6 xl:px-8">
+                <a href="#top" aria-label="SOYON home" class="inline-flex items-center">
+                    <span class="logo-gradient h-12 w-36 sm:h-16 sm:w-48" aria-hidden="true"></span>
+                </a>
+
+                <nav aria-label="Account navigation" class="flex items-center gap-3 sm:gap-5">
+                <a
+                    id="login"
+                    href="./login-sign.html#login"
+                    class="rounded-sm px-3 py-2 text-sm font-medium text-slate-700 transition hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                 >
+                    Login
+                </a>
+
+                <a
+                    id="sign-in"
+                    href="./login-sign.html#signup"
+                    class="sunset-gradient-button rounded-sm bg-blue-600 px-8 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                >
+                    Sign In
+                </a>
+                </nav>
             </div>
-            <button id="login" value="Login" data-auth="login">Login</button>
-            <button id="sign-in" value="SignIn" data-auth="signup">Sign In</button>
         </header>
         
-        <section class="hero">
-            <h1 class="headline">Create Your <br>Professional Portfolio</h1>
-            <div class="subheadlines">
-                <h4>
-                    Build your portfolio from your information, choose a<br>
-                    design, and generate it in a few simple steps.
-                </h4>
-                <h5 class="check-1">Drop in your project images and <br>text-zero drag-and-drop or formatting fatigue.</h5>
-                <h5 class="check-2">Save your portfolio online and access your information<br>whenever you need it.</h5>
-                <h5 class="check-3">Skip the boring resumes and instantly download<br> a high-end, flawlessly designed template document.</h5>
-                <button class="cta" id="create-now">Create Now</button>
+        <section id="top" class="mx-0 mt-2 grid w-full max-w-none items-center gap-12 px-5 pt-8 pb-16 sm:mt-3 sm:px-8 sm:pt-10 sm:pb-20 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:pt-12 lg:pb-28 xl:px-20">
+
+        <div class="max-w-2xl">
+            <p class="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-blue-700">
+            <span class="grid h-8 w-8 place-items-center rounded-full border border-blue-200 text-[11px]">01</span>
+            Portfolios, simplified
+            </p>
+
+            <h1 class="font-['Playfair_Display',Georgia,serif] text-4xl font-bold leading-[1.08] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            Create Your<br>
+            Professional <span class="text-blue-700">Portfolio</span>
+            </h1>
+
+            <p class="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg sm:leading-8">
+            Build your portfolio from your information, choose a design, and generate it in a few simple steps.
+            </p>
+
+            <ul class="mt-7 space-y-4 text-sm leading-6 text-slate-700 sm:text-base">
+            <li class="flex items-start gap-3">
+                <span class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-700" aria-hidden="true">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none">
+                    <path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </span>
+                Create an account and get started.
+            </li>
+
+            <li class="flex items-start gap-3">
+                <span class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-700" aria-hidden="true">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none">
+                    <path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </span>
+                Enter your information and save your portfolio.
+            </li>
+
+            <li class="flex items-start gap-3">
+                <span class="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-100 text-blue-700" aria-hidden="true">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none">
+                    <path d="m3.5 8 3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </span>
+                Choose a template and generate your portfolio.
+            </li>
+            </ul>
+
+            <div class="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+            <a
+                id="create-now"
+                href="./login-sign.html#signup"
+                class="inline-flex items-center gap-5 rounded-sm bg-blue-600 px-6 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            >
+                Create Now
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <div class="flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-semibold tracking-[0.16em] text-slate-500">
+                <span>No code needed</span>
+                <span>Free to start</span>
             </div>
-        </section> 
-    </main>
-    <section class="steps">
-        <div class="steps-headlines">
-            <h1>From Start to Portfolio</h1>
-            <h4>Create your professional portfolioin three simple steps</h4>
+            </div>
         </div>
 
-        <div class="steps-container">
-            <div class="step1">
-            <img>
+        <div class="relative mx-auto w-full max-w-2xl">
+            <div class="absolute -top-4 right-3 z-10 flex items-center gap-2 rounded-sm border border-stone-200 bg-white px-4 py-3 text-xs font-medium text-slate-700 shadow-lg sm:right-0">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            Ready to publish
             </div>
-            <div class="step2">
-                <img>
+
+            <div class="overflow-hidden rounded-md border border-stone-200 bg-white shadow-2xl shadow-slate-900/10">
+            <div class="flex items-center justify-between border-b border-stone-200 px-4 py-3">
+                <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                <span class="h-3 w-3 border-2 border-blue-600"></span>
+                Portfolio preview
+                </div>
+
+                <div class="flex gap-1.5" aria-hidden="true">
+                <span class="h-2 w-2 rounded-full bg-stone-300"></span>
+                <span class="h-2 w-2 rounded-full bg-stone-300"></span>
+                <span class="h-2 w-2 rounded-full bg-stone-300"></span>
+                </div>
             </div>
-            <div class="step3">
-                <img>
+
+            <div class="grid min-h-[390px] sm:grid-cols-[0.8fr_1.5fr]">
+                <aside class="flex flex-col items-start bg-slate-900 p-6 text-white sm:p-7">
+                <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=faces&fit=crop&fm=jpg&q=88&w=500&h=600"
+                    alt="Portfolio profile example"
+                    class="h-24 w-24 rounded-full object-cover ring-4 ring-white/10"
+                >
+
+                <h2 class="mt-5 text-xl font-semibold">Maya Chen</h2>
+                <p class="mt-1 text-sm text-slate-400">Product Designer</p>
+
+                <div class="mt-5 flex gap-2 text-xs font-semibold text-slate-300" aria-label="Social profiles">
+                    <span class="grid h-7 w-7 place-items-center rounded-full border border-slate-600">in</span>
+                    <span class="grid h-7 w-7 place-items-center rounded-full border border-slate-600">be</span>
+                    <span class="grid h-7 w-7 place-items-center rounded-full border border-slate-600">ig</span>
+                </div>
+
+                <div class="mt-auto pt-8 text-xs text-emerald-300">
+                    <span class="mr-2 inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
+                    Available for work
+                </div>
+                </aside>
+
+                <div class="p-5 sm:p-7">
+                <p class="text-[10px] font-semibold tracking-[0.2em] text-slate-400">
+                    PORTFOLIO / 2025
+                </p>
+
+                <section class="mt-6 grid grid-cols-[24px_1fr] gap-3 border-b border-stone-200 pb-6">
+                    <span class="text-xs text-blue-700">01</span>
+
+                    <div>
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                        About me
+                    </p>
+
+                    <h3 class="mt-2 font-['Playfair_Display',Georgia,serif] text-xl leading-snug text-slate-900 sm:text-2xl">
+                        I design useful digital experiences with clarity and care.
+                    </h3>
+                    </div>
+                </section>
+
+                <section class="mt-5">
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                    Selected skills
+                    </p>
+
+                    <div class="mt-3 flex flex-wrap gap-2 text-[10px] text-slate-600">
+                    <span class="rounded-full border border-stone-200 px-3 py-1.5">Product design</span>
+                    <span class="rounded-full border border-stone-200 px-3 py-1.5">UI systems</span>
+                    <span class="rounded-full border border-stone-200 px-3 py-1.5">Research</span>
+                    </div>
+                </section>
+
+                <section class="mt-6">
+                    <div class="mb-3 flex items-center justify-between">
+                    <p class="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                        Projects
+                    </p>
+                    <span class="text-xs text-blue-700">View all ↗</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                    <article class="flex min-h-28 flex-col justify-between bg-blue-100 p-3">
+                        <span class="text-[10px] text-blue-800">01</span>
+                        <div>
+                        <div class="mb-2 h-5 w-5 rounded-full border-4 border-blue-500"></div>
+                        <strong class="text-xs text-slate-800">Finance, simplified.</strong>
+                        </div>
+                    </article>
+
+                    <article class="flex min-h-28 flex-col justify-between bg-amber-50 p-3">
+                        <span class="text-[10px] text-amber-900">02</span>
+                        <div>
+                        <div class="mb-2 space-y-1">
+                            <i class="block h-1 w-10 bg-amber-300"></i>
+                            <i class="block h-1 w-14 bg-amber-200"></i>
+                            <i class="block h-1 w-8 bg-amber-300"></i>
+                        </div>
+                        <strong class="text-xs text-slate-800">Workplace wellbeing.</strong>
+                        </div>
+                    </article>
+                    </div>
+                </section>
+                </div>
+            </div>
+            </div>
+
+            <div class="absolute -bottom-5 left-4 flex items-center gap-3 rounded-sm border border-stone-200 bg-white px-4 py-3 shadow-lg sm:left-8">
+            <span class="grid h-9 w-9 place-items-center bg-blue-600 font-['Playfair_Display',Georgia,serif] text-lg text-white">S</span>
+            <span>
+                <small class="block text-[10px] text-slate-500">Built with</small>
+                <strong class="text-sm tracking-widest">SOYON</strong>
+            </span>
             </div>
         </div>
-    </section>
-    <footer>
-        <h1>Footer</h1>
+        </section>
+
+        <section id="how-it-works" class="border-t border-stone-200 bg-white py-16 sm:py-20 lg:py-24">
+        <div class="mx-0 w-full max-w-none px-5 sm:px-8 lg:px-16 xl:px-20">
+            <div class="grid gap-5 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
+                How it works
+                </p>
+
+                <h2 class="mt-3 font-['Playfair_Display',Georgia,serif] text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                From Start to <span class="text-blue-700">Portfolio</span>
+                </h2>
+            </div>
+
+            <p class="max-w-xl text-sm leading-7 text-slate-600 sm:text-base">
+                Create your professional portfolio in three simple steps. Everything you need, nothing you don’t.
+            </p>
+            </div>
+
+            <div class="mt-12 hidden items-center gap-4 text-xs font-semibold tracking-widest text-slate-400 md:flex" aria-hidden="true">
+            <span>01</span>
+            <span class="h-px flex-1 bg-stone-200"></span>
+            <span>→</span>
+            <span class="h-px flex-1 bg-stone-200"></span>
+            <span>03</span>
+            </div>
+
+            <div class="mt-10 grid gap-6 lg:grid-cols-3">
+
+            <article class="overflow-hidden border border-stone-200 bg-stone-50">
+                <div class="p-6 sm:p-7">
+                <span class="text-xs font-semibold tracking-widest text-blue-700">01 / START</span>
+                <h3 class="mt-4 font-['Playfair_Display',Georgia,serif] text-2xl font-semibold">
+                    Begin with the basics.
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Create an account to get started.
+                </p>
+                </div>
+
+                <div class="mx-4 mb-4 rounded-sm border border-stone-200 bg-white p-4 sm:mx-6 sm:mb-6 sm:p-5">
+                <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                    <span class="text-xs font-semibold tracking-widest">SOYON</span>
+                    <span class="text-[10px] text-slate-400">STEP 1 OF 3</span>
+                </div>
+
+                <div class="grid gap-5 py-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    <div>
+                    <p class="text-[10px] font-semibold tracking-widest text-blue-700">WELCOME TO SOYON</p>
+                    <p class="mt-2 font-['Playfair_Display',Georgia,serif] text-xl">Let’s make your work visible.</p>
+                    <p class="mt-2 text-xs leading-5 text-slate-500">No code. No complex setup.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                    <div>
+                        <p class="text-[10px] text-slate-500">Full name</p>
+                        <div class="mt-1 border border-stone-200 px-3 py-2 text-xs text-slate-600">Maya Chen</div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] text-slate-500">Email address</p>
+                        <div class="mt-1 border border-stone-200 px-3 py-2 text-xs text-slate-600">maya@studio.com</div>
+                    </div>
+
+                    <div class="flex items-center justify-between bg-blue-600 px-3 py-2 text-xs font-semibold text-white">
+                        Continue <span>→</span>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </article>
+
+            <article class="overflow-hidden border border-stone-200 bg-stone-50">
+                <div class="p-6 sm:p-7">
+                <span class="text-xs font-semibold tracking-widest text-blue-700">02 / BUILD</span>
+                <h3 class="mt-4 font-['Playfair_Display',Georgia,serif] text-2xl font-semibold">
+                    Make it yours.
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Add your information and save your portfolio.
+                </p>
+                </div>
+
+                <div class="mx-4 mb-4 overflow-hidden rounded-sm border border-stone-200 bg-white sm:mx-6 sm:mb-6">
+                <div class="flex items-center justify-between border-b border-stone-100 p-4">
+                    <div>
+                    <p class="text-[10px] font-semibold tracking-widest text-blue-700">YOUR INFORMATION</p>
+                    <p class="mt-1 font-['Playfair_Display',Georgia,serif] text-lg">Build your story.</p>
+                    </div>
+                    <span class="text-[10px] font-medium text-emerald-700">✓ Saved</span>
+                </div>
+
+                <div class="grid gap-4 p-4 sm:grid-cols-[1fr_0.7fr]">
+                    <div class="space-y-3">
+                    <div class="border border-stone-200 p-3">
+                        <p class="text-[10px] text-slate-500">Professional title</p>
+                        <p class="mt-1 text-xs font-semibold">Product Designer</p>
+                    </div>
+
+                    <div class="border border-stone-200 p-3">
+                        <p class="text-[10px] text-slate-500">About me</p>
+                        <p class="mt-1 text-xs leading-5 text-slate-600">
+                        I turn complex problems into useful, accessible digital experiences.
+                        </p>
+                    </div>
+
+                    <div class="border border-stone-200 p-3">
+                        <p class="text-[10px] text-slate-500">Skills</p>
+                        <div class="mt-2 flex flex-wrap gap-1">
+                        <span class="bg-blue-50 px-2 py-1 text-[9px]">Product design</span>
+                        <span class="bg-blue-50 px-2 py-1 text-[9px]">UI systems</span>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center bg-stone-50 p-3 text-center">
+                    <div class="grid h-16 w-16 place-items-center rounded-full border-[6px] border-blue-100 border-t-blue-600 text-xs font-semibold">
+                        72%
+                    </div>
+                    <strong class="mt-3 text-xs">Looking good.</strong>
+                    <p class="mt-1 text-[10px] leading-4 text-slate-500">
+                        Add one more project to strengthen your portfolio.
+                    </p>
+                    </div>
+                </div>
+                </div>
+            </article>
+
+            <article class="overflow-hidden border border-stone-200 bg-stone-50">
+                <div class="p-6 sm:p-7">
+                <span class="text-xs font-semibold tracking-widest text-blue-700">03 / CREATE</span>
+                <h3 class="mt-4 font-['Playfair_Display',Georgia,serif] text-2xl font-semibold">
+                    Choose, then create.
+                </h3>
+                <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Choose a template and generate your portfolio.
+                </p>
+                </div>
+
+                <div class="mx-4 mb-4 rounded-sm border border-stone-200 bg-white p-4 sm:mx-6 sm:mb-6 sm:p-5">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                    <p class="text-[10px] font-semibold tracking-widest text-blue-700">FINAL STEP</p>
+                    <p class="mt-1 font-['Playfair_Display',Georgia,serif] text-lg">Your portfolio is ready.</p>
+                    </div>
+                    <span class="whitespace-nowrap text-[9px] text-emerald-700">● All changes saved</span>
+                </div>
+
+                <p class="mt-5 text-xs font-semibold">Choose your direction</p>
+
+                <div class="mt-3 space-y-2">
+                    <div class="flex items-center gap-3 border border-blue-600 bg-blue-50 p-3">
+                    <span class="grid h-4 w-4 place-items-center rounded-full border border-blue-600">
+                        <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+                    </span>
+                    <span class="flex-1">
+                        <strong class="block text-xs">Editorial</strong>
+                        <small class="text-[10px] text-slate-500">Bold and expressive</small>
+                    </span>
+                    <span class="text-[10px]">01</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 border border-stone-200 p-3">
+                    <span class="h-4 w-4 rounded-full border border-stone-300"></span>
+                    <span class="flex-1">
+                        <strong class="block text-xs">Minimal</strong>
+                        <small class="text-[10px] text-slate-500">Quiet and focused</small>
+                    </span>
+                    <span class="text-[10px]">02</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 border border-stone-200 p-3">
+                    <span class="h-4 w-4 rounded-full border border-stone-300"></span>
+                    <span class="flex-1">
+                        <strong class="block text-xs">Studio</strong>
+                        <small class="text-[10px] text-slate-500">Structured and modular</small>
+                    </span>
+                    <span class="text-[10px]">03</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between gap-2 bg-blue-600 px-3 py-3 text-xs font-semibold text-white">
+                    <span>Generate portfolio</span>
+                    <span>→</span>
+                </div>
+                </div>
+            </article>
+            </div>
+
+            <div class="mt-12 flex flex-col gap-6 bg-slate-900 px-6 py-8 text-white sm:px-10 sm:py-10 md:flex-row md:items-center md:justify-between lg:px-12">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
+                Your work deserves a home
+                </p>
+
+                <h2 class="mt-3 font-['Playfair_Display',Georgia,serif] text-3xl leading-tight sm:text-4xl">
+                Start with your story.<br>
+                We’ll shape the rest.
+                </h2>
+            </div>
+
+            <a
+                href="./login-sign.html#signup"
+                class="inline-flex shrink-0 items-center justify-between gap-5 bg-white px-5 py-4 text-sm font-semibold text-slate-900 transition hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+            >
+                Create your portfolio <span aria-hidden="true">→</span>
+            </a>
+            </div>
+        </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-stone-200 bg-stone-50">
+        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+        <span class="font-semibold tracking-[0.2em] text-slate-800">SOYON</span>
+        <p>Build a portfolio that feels like you.</p>
+        <p>© <span id="year">2026</span> SOYON. All rights reserved.</p>
+        </div>
     </footer>
 
-    <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-0 sm:p-4" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-      <div class="relative flex w-full max-w-4xl overflow-hidden bg-white shadow-2xl sm:rounded-lg max-h-screen overflow-y-auto" style="font-family:'Inter',system-ui,sans-serif">
-
-        <aside class="hidden md:flex md:w-2/5 flex-col justify-between bg-slate-900 p-8 text-white">
-          <div class="flex items-center gap-2 text-sm font-semibold tracking-widest">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="1"/><rect x="9" y="9" width="12" height="12" rx="1"/></svg>
+    <div
+        id="auth-modal"
+        class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto bg-black/60 p-0 sm:p-4"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
+    >
+        <div class="relative my-auto flex max-h-screen w-full max-w-4xl overflow-y-auto bg-white shadow-2xl sm:rounded-lg">
+        <aside class="hidden w-2/5 flex-col justify-between bg-slate-900 p-8 text-white md:flex">
+            <div class="flex items-center gap-2 text-sm font-semibold tracking-widest">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="12" height="12" rx="1"/>
+                <rect x="9" y="9" width="12" height="12" rx="1"/>
+            </svg>
             SOYON
-          </div>
-          <div>
-            <p class="mb-3 text-xs font-semibold tracking-widest text-blue-400">Your work, in one place</p>
-            <h2 class="text-4xl leading-tight font-bold" style="font-family:'Playfair Display',Georgia,serif">Build something that feels like you.</h2>
-            <p class="mt-4 text-sm text-slate-400">Save your information, shape your story, and publish when you're ready.</p>
-          </div>
+            </div>
+
+            <div>
+            <p class="mb-3 text-xs font-semibold tracking-widest text-blue-400">
+                Your work, in one place
+            </p>
+
+            <h2 class="font-['Playfair_Display',Georgia,serif] text-4xl font-bold leading-tight">
+                Build something that feels like you.
+            </h2>
+
+            <p class="mt-4 text-sm leading-6 text-slate-400">
+                Save your information, shape your story, and publish when you're ready.
+            </p>
+            </div>
+
+            <p class="text-xs tracking-[0.2em] text-slate-400">01 — ACCOUNT</p>
         </aside>
 
-        <section class="w-full md:w-3/5 p-6 sm:p-10">
-          <button id="auth-close" type="button" aria-label="Close" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-slate-200 text-slate-500 hover:bg-slate-50">&times;</button>
+        <section class="relative w-full p-6 sm:p-10 md:w-3/5">
+            <button
+            id="auth-close"
+            type="button"
+            aria-label="Close"
+            class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-slate-200 text-xl text-slate-500 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            >
+            &times;
+            </button>
 
-          <div class="flex gap-6 border-b border-slate-200 pr-12 text-sm" role="tablist">
-            <button id="tab-signup" type="button" role="tab" class="-mb-px border-b-2 pb-3 font-semibold">Create account</button>
-            <button id="tab-login" type="button" role="tab" class="-mb-px border-b-2 border-transparent pb-3 text-slate-400">Log in</button>
-          </div>
+            <div class="flex gap-6 border-b border-slate-200 pr-12 text-sm" role="tablist" aria-label="Authentication options">
+            <button
+                id="tab-signup"
+                type="button"
+                role="tab"
+                aria-controls="signup-form"
+                aria-selected="true"
+                class="-mb-px border-b-2 border-blue-600 pb-3 font-semibold text-slate-900"
+            >
+                Create account
+            </button>
 
-          <form id="signup-form" class="mt-8 space-y-4" novalidate>
+            <button
+                id="tab-login"
+                type="button"
+                role="tab"
+                aria-controls="login-form"
+                aria-selected="false"
+                class="-mb-px border-b-2 border-transparent pb-3 text-slate-400 transition hover:text-slate-700"
+            >
+                Log in
+            </button>
+            </div>
+
+            <form id="signup-form" class="mt-8 space-y-4" novalidate>
             <p class="text-xs font-semibold tracking-widest text-slate-500">Start for free</p>
-            <h3 id="auth-title" class="text-3xl text-slate-900">Create your account.</h3>
-            <p class="text-sm text-slate-500">A few details are all you need to begin.</p>
 
-            <label class="block text-xs font-semibold text-slate-600">Full name
-              <input id="su-name" type="text" autocomplete="name" placeholder="Your full name" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            <h3 id="auth-title" class="font-['Playfair_Display',Georgia,serif] text-3xl text-slate-900">
+                Create your account.
+            </h3>
+
+            <p class="text-sm text-slate-500">
+                A few details are all you need to begin.
+            </p>
+
+            <label class="block text-xs font-semibold text-slate-600" for="su-name">
+                Full name
+                <input
+                id="su-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Your full name"
+                class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                required
+                >
             </label>
-            <label class="block text-xs font-semibold text-slate-600">Email address
-              <input id="su-email" type="email" autocomplete="email" placeholder="you@email.com" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+
+            <label class="block text-xs font-semibold text-slate-600" for="su-email">
+                Email address
+                <input
+                id="su-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="you@email.com"
+                class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                required
+                >
             </label>
-            <label class="block text-xs font-semibold text-slate-600">Password
-              <input id="su-password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+
+            <label class="block text-xs font-semibold text-slate-600" for="su-password">
+                Password
+                <input
+                id="su-password"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                placeholder="At least 8 characters"
+                minlength="8"
+                class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                required
+                >
             </label>
 
             <p id="su-msg" class="hidden text-sm" aria-live="polite"></p>
-            <button id="su-submit" type="submit" class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60">
-              <span>Create free account</span><span aria-hidden="true">&rarr;</span>
+
+            <button
+                id="su-submit"
+                type="submit"
+                class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60"
+            >
+                <span>Create free account</span>
+                <span aria-hidden="true">→</span>
             </button>
-          </form>
 
-          <form id="login-form" class="mt-8 hidden space-y-4" novalidate>
+            <p class="text-xs leading-5 text-slate-500">
+                By continuing, you agree to SOYON’s Terms and Privacy Policy.
+            </p>
+            </form>
+
+            <form id="login-form" class="mt-8 hidden space-y-4" novalidate>
             <p class="text-xs font-semibold tracking-widest text-slate-500">Welcome back</p>
-            <h3 class="text-3xl text-slate-900">Continue your portfolio.</h3>
-            <p class="text-sm text-slate-500">Enter your details to pick up where you left off.</p>
 
-            <label class="block text-xs font-semibold text-slate-600">Email address
-              <input id="li-email" type="email" autocomplete="email" placeholder="you@email.com" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+            <h3 class="font-['Playfair_Display',Georgia,serif] text-3xl text-slate-900">
+                Continue your portfolio.
+            </h3>
+
+            <p class="text-sm text-slate-500">
+                Enter your details to pick up where you left off.
+            </p>
+
+            <label class="block text-xs font-semibold text-slate-600" for="li-email">
+                Email address
+                <input
+                id="li-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="you@email.com"
+                class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                required
+                >
             </label>
-            <label class="block text-xs font-semibold text-slate-600">Password
-              <input id="li-password" type="password" autocomplete="current-password" placeholder="At least 8 characters" class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100" required>
+
+            <label class="block text-xs font-semibold text-slate-600" for="li-password">
+                Password
+                <input
+                id="li-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Your password"
+                class="mt-1 w-full border border-slate-200 px-3 py-3 text-sm font-normal outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                required
+                >
             </label>
-            <div class="text-right"><button id="forgot-btn" type="button" class="text-xs font-semibold text-blue-600 hover:underline">Forgot password?</button></div>
+
+            <div class="text-right">
+                <button id="forgot-btn" type="button" class="text-xs font-semibold text-blue-600 hover:underline">
+                Forgot password?
+                </button>
+            </div>
 
             <p id="li-msg" class="hidden text-sm" aria-live="polite"></p>
-            <button id="li-submit" type="submit" class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60">
-              <span>Log in</span><span aria-hidden="true">&rarr;</span>
+
+            <button
+                id="li-submit"
+                type="submit"
+                class="flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-60"
+            >
+                <span>Log in</span>
+                <span aria-hidden="true">→</span>
             </button>
-          </form>
+            </form>
         </section>
-      </div>
+        </div>
     </div>
 
-    <script type="module" src="./src/auth.js"></script>
+    <a
+        id="floating-create"
+        href="./login-sign.html#signup"
+        class="fixed bottom-6 left-1/2 z-50
+            inline-flex -translate-x-1/2 translate-y-8
+            items-center justify-center rounded-full
+            bg-gradient-to-r from-violet-600 via-rose-500 to-orange-500
+            px-7 py-3.5 text-sm font-semibold text-white
+            opacity-0 pointer-events-none shadow-lg
+            transition-all duration-300 ease-out
+            hover:scale-105 hover:shadow-xl
+            focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+        aria-hidden="true"
+        tabindex="-1"
+    >
+        Create Now
+        <span class="ml-2" aria-hidden="true">→</span>
+    </a>
+
+    <script type="module" src="./src/scroll-cta-button.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
