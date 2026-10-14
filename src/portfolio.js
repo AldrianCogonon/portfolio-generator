@@ -75,8 +75,6 @@ function notify(message) {
   }, 2600);
 }
 
-/* Portfolio preview templates */
-
 function previewMarkup(type) {
   if (type === "marketing") {
     return `
