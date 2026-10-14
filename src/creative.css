@@ -1,0 +1,323 @@
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #dcd9d5;
+  --amber:  #f5a623;
+  --violet: #9d8be0;
+  --night:  #231a3d;
+  --mint:   #7fd6d0;
+  --peach:  #f4b8a0;
+  --white:  #ffffff;
+  --line:   #8a8782;
+}
+ 
+ 
+/* 2. BASE
+   -------------------------------------------------------------------------- */
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+ 
+body {
+  background: var(--violet);
+  background-image: radial-gradient(circle at 20% 0%, #b3a4ec 0%, var(--violet) 60%);
+  background-attachment: fixed;
+}
+ 
+[contenteditable]:hover { outline: 1px dashed var(--ink); outline-offset: 2px; }
+[contenteditable]:focus { outline: 2px solid var(--amber); outline-offset: 2px; }
+ 
+ 
+/* 3. NAVIGATION
+   -------------------------------------------------------------------------- */
+.nav { position: sticky; top: 0; z-index: 30; background: var(--ink); color: var(--white); }
+.nav nav a { color: rgba(255, 255, 255, 0.75); }
+.nav nav a:hover { color: var(--amber); }
+ 
+ 
+/* 4. SHEETS (page cards) AND PAGE HEADER
+   -------------------------------------------------------------------------- */
+.sheet {
+  position: relative;
+  padding: 1.75rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 40px -18px rgba(35, 26, 61, 0.55);
+}
+.sheet-amber { background: var(--amber); border-color: #c98310; }
+ 
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.4rem;
+  border-bottom: 3px solid var(--ink);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+}
+.tag { padding: 0.15rem 0.6rem; background: var(--ink); color: var(--white); }
+ 
+ 
+/* 5. COVER
+   -------------------------------------------------------------------------- */
+.cover { padding: 2.25rem; }
+ 
+.dot { position: absolute; top: 1rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--ink); }
+.dot-l { left: 1rem; }
+.dot-r { right: 1rem; background: var(--line); }
+ 
+.cover-title {
+  margin: 0.5rem 0 1.75rem;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: clamp(2.5rem, 9vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-align: center;
+}
+ 
+.cover-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(16rem, 40vw, 26rem);
+  background: var(--violet);
+}
+ 
+.cover-circle { display: grid; place-items: center; width: min(78%, 20rem); aspect-ratio: 1; background: var(--night); border-radius: 50%; }
+.cover-circle img { width: 78%; aspect-ratio: 1; object-fit: cover; background: var(--paper); border-radius: 50%; }
+ 
+.cover-badge {
+  position: absolute;
+  bottom: -2.4rem;
+  left: 50%;
+  z-index: 2;
+  width: 4.75rem;
+  height: 4.75rem;
+  margin-left: -2.375rem;
+  object-fit: cover;
+  background: var(--paper);
+  border: 4px solid var(--white);
+  border-radius: 50%;
+}
+ 
+.arrow { position: absolute; top: 50%; font-size: 0.8rem; transform: translateY(-50%); }
+.arrow-l { left: -1.5rem; }
+.arrow-r { right: -1.5rem; }
+ 
+.squiggle { position: absolute; }
+.sq-1 { top: 8%; left: 14%; width: 3.5rem; }
+.sq-2 { bottom: 16%; right: 8%; width: 5rem; }
+ 
+.cover-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--amber);
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+ 
+.cover-row {
+  padding: 0.6rem;
+  border-bottom: 3px solid var(--paper);
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.cover-row:nth-of-type(2) { background: var(--paper); }
+ 
+ 
+/* 6. TYPE AND LABELS
+   -------------------------------------------------------------------------- */
+.h-display { font-family: 'Chakra Petch', sans-serif; font-size: 1.1rem; font-weight: 600; line-height: 1.15; letter-spacing: 0.12em; }
+.h-display.big { font-size: clamp(1.75rem, 5vw, 2.75rem); line-height: 1.05; }
+ 
+.chip { display: inline-block; padding: 0.1rem 0.6rem; background: var(--amber); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; }
+.chip-ink { background: var(--ink); color: var(--white); }
+ 
+/* round number badge */
+.stat { display: grid; place-items: center; flex-shrink: 0; width: 4.5rem; height: 4.5rem; background: var(--white); border-radius: 50%; text-align: center; box-shadow: 0 0 0 4px var(--amber) inset; }
+.stat b { font-family: 'Chakra Petch', sans-serif; font-size: 1.3rem; line-height: 1; }
+.stat small { margin-top: -1.1rem; font-size: 0.45rem; letter-spacing: 0.1em; }
+ 
+ 
+/* 7. TABLES
+   -------------------------------------------------------------------------- */
+.tbl { border: 1px solid var(--ink); background: var(--white); font-size: 0.7rem; }
+.tbl-head { display: flex; justify-content: space-between; padding: 0.35rem 0.75rem; background: var(--ink); color: var(--white); font-weight: 700; letter-spacing: 0.15em; }
+.tbl-head.amber { background: var(--amber); color: var(--ink); }
+.tbl-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.75rem; border-top: 1px solid var(--ink); }
+a.tbl-row:hover { background: var(--amber); }
+.tbl-row > span:last-child { text-align: right; }
+.job b { display: block; font-family: 'Chakra Petch', sans-serif; font-size: 0.85rem; letter-spacing: 0.05em; }
+.job small { display: block; margin-top: 0.15rem; color: #555; }
+ 
+ 
+/* 8. ABOUT / PERSONAL INFO
+   -------------------------------------------------------------------------- */
+.avatar { width: 4.5rem; height: 4.5rem; flex-shrink: 0; object-fit: cover; background: var(--white); border: 3px solid var(--amber); border-radius: 50%; }
+ 
+.art-block { display: grid; place-items: center; width: 15rem; height: 17rem; margin-inline: auto; background: var(--violet); border: 1px solid var(--ink); }
+.ring-dark { display: grid; place-items: center; width: 11rem; height: 11rem; background: var(--night); border-radius: 50%; }
+.ring-dark img { width: 8.5rem; height: 8.5rem; object-fit: cover; background: var(--paper); border-radius: 50%; }
+ 
+ 
+/* 9. EDUCATION LIST
+   -------------------------------------------------------------------------- */
+.list-dots li { position: relative; display: grid; grid-template-columns: 1fr; gap: 0.15rem; padding: 0.9rem 0 0.9rem 1.5rem; border-bottom: 1px solid var(--ink); }
+.list-dots li::before { content: ""; position: absolute; left: 0; top: 1.25rem; width: 0.7rem; height: 0.7rem; background: var(--amber); border-radius: 50%; }
+.list-dots b { font-family: 'Chakra Petch', sans-serif; font-size: 0.95rem; letter-spacing: 0.04em; }
+.list-dots span { font-size: 0.75rem; }
+.list-dots em { font-size: 0.7rem; font-style: normal; font-weight: 700; }
+@media (min-width: 768px) {
+  .list-dots li { grid-template-columns: 2fr 1.4fr auto; align-items: center; gap: 1rem; }
+}
+ 
+ 
+/* 10. SKILLS
+   -------------------------------------------------------------------------- */
+.skill { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem; background: var(--white); border: 1px solid var(--ink); font-size: 0.75rem; font-weight: 700; }
+.skill i { flex-shrink: 0; width: 0.65rem; height: 0.65rem; background: var(--amber); border-radius: 50%; }
+ 
+ 
+/* 11. PROJECTS
+   -------------------------------------------------------------------------- */
+.project { display: flex; flex-direction: column; gap: 0.5rem; padding: 0.75rem; background: var(--paper); border: 1px solid var(--ink); }
+.project .chip { align-self: flex-start; }
+.project h3 { font-family: 'Chakra Petch', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.project p { flex: 1; font-size: 0.7rem; line-height: 1.5; }
+ 
+/* image placeholders (replace with background-image: url(...)) */
+.shot { aspect-ratio: 4 / 3; border: 1px solid var(--ink); }
+.shot-peach  { background: radial-gradient(circle at 50% 50%, var(--ink) 0 14%, transparent 15%), var(--peach); }
+.shot-violet { background: radial-gradient(circle at 50% 50%, var(--night) 0 30%, transparent 31%), var(--violet); }
+.shot-mint   { background: radial-gradient(circle at 50% 50%, var(--amber) 0 20%, transparent 21%), var(--mint); }
+ 
+ 
+/* 12. BUTTONS AND FORM
+   -------------------------------------------------------------------------- */
+.btn { display: inline-block; padding: 0.55rem 1rem; background: var(--ink); color: var(--white); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-align: center; transition: background 0.2s, color 0.2s; }
+.btn:hover { background: var(--amber); color: var(--ink); }
+.btn-wide { width: 100%; padding: 0.8rem; }
+ 
+.lbl { display: block; margin-bottom: 0.25rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; }
+.inp { width: 100%; padding: 0.6rem 0.75rem; background: var(--white); border: 1px solid var(--ink); border-radius: 0; font-size: 0.8rem; }
+.inp:focus { outline: 3px solid var(--amber); }
+ 
+ 
+/* 13. FOOTER, ACCESSIBILITY AND MOTION
+   -------------------------------------------------------------------------- */
+.foot { padding: 1.25rem; background: var(--ink); color: rgba(255, 255, 255, 0.8); font-size: 0.65rem; letter-spacing: 0.15em; text-align: center; }
+ 
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+ 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}
+
+/* Creative editorial polish */
+:root {
+  --ink: #211735;
+  --paper: #fff8ee;
+  --amber: #ffbd59;
+  --violet: #7962cf;
+  --night: #30204e;
+  --mint: #91e2ce;
+  --peach: #ffb69d;
+  --line: #30204e;
+}
+
+body {
+  background-color: var(--violet);
+  background-image: radial-gradient(circle at 12% 10%, #b9a9ff 0, transparent 28%),
+    radial-gradient(circle at 90% 55%, #a78dea 0, transparent 26%),
+    linear-gradient(135deg, #7962cf, #5943a8);
+}
+
+.nav { box-shadow: 0 4px 0 rgba(33, 23, 53, 0.2); }
+.nav > div { min-height: 3.5rem; }
+.nav a { transition: color 0.2s ease, transform 0.2s ease; }
+.nav a:hover { color: var(--amber); }
+
+main { padding-bottom: 4rem; }
+.sheet {
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 1.1rem;
+  box-shadow: 10px 10px 0 rgba(33, 23, 53, 0.28), 0 24px 40px -18px rgba(35, 26, 61, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.sheet:hover { transform: translateY(-3px); box-shadow: 12px 14px 0 rgba(33, 23, 53, 0.24), 0 28px 45px -18px rgba(35, 26, 61, 0.52); }
+.sheet-amber { background: linear-gradient(145deg, #ffd27f, var(--amber)); }
+
+.cover { padding: clamp(1.25rem, 4vw, 2.75rem); }
+.cover-title {
+  color: var(--ink);
+  font-size: clamp(3rem, 11vw, 7rem);
+  text-shadow: 4px 4px 0 var(--amber);
+  transform: rotate(-2deg);
+}
+.cover-art {
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 48% 52% 43% 57% / 57% 44% 56% 43%;
+  background: linear-gradient(135deg, #a996f0, var(--violet));
+}
+.cover-art::before, .cover-art::after {
+  position: absolute;
+  content: "";
+  width: 5rem;
+  height: 5rem;
+  border: 2px solid rgba(255,255,255,.7);
+  border-radius: 50%;
+}
+.cover-art::before { top: -1.5rem; right: 18%; }
+.cover-art::after { bottom: -2rem; left: 18%; width: 7rem; height: 7rem; }
+.cover-circle { box-shadow: 0 0 0 10px rgba(255,255,255,.16), 0 16px 0 rgba(33,23,53,.2); }
+.cover-circle img { border: 5px solid var(--amber); }
+.cover-badge { box-shadow: 0 5px 0 var(--ink); }
+.cover-bar { border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.cover-row { border-bottom-width: 2px; }
+
+.page-head { border-bottom-width: 2px; }
+.tag, .chip { border: 1px solid var(--ink); border-radius: 999px; }
+.chip { padding: .25rem .75rem; }
+.h-display { text-wrap: balance; }
+.stat { border: 2px solid var(--ink); box-shadow: 0 0 0 5px var(--amber) inset, 4px 5px 0 var(--ink); }
+
+.tbl { overflow: hidden; border-width: 2px; border-radius: .65rem; box-shadow: 4px 4px 0 rgba(33,23,53,.12); }
+.tbl-head { padding-block: .55rem; }
+.tbl-row { transition: background-color .18s ease, padding .18s ease; }
+a.tbl-row:hover { padding-left: 1rem; }
+.avatar, .ring-dark, .cover-circle { transition: transform .25s ease; }
+.avatar:hover, .ring-dark:hover { transform: rotate(-5deg) scale(1.04); }
+.art-block { border-width: 2px; border-radius: 1rem; box-shadow: 7px 7px 0 var(--ink); transform: rotate(2deg); }
+
+.skill { border-width: 2px; border-radius: .65rem; box-shadow: 3px 3px 0 var(--ink); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.skill:hover { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 6px 6px 0 var(--ink); background: #fff0d5; }
+.skill i { box-shadow: 0 0 0 3px rgba(255,189,89,.3); }
+.project { border-width: 2px; border-radius: .8rem; box-shadow: 5px 5px 0 var(--ink); transition: transform .2s ease, box-shadow .2s ease; }
+.project:hover { transform: translateY(-5px) rotate(-1deg); box-shadow: 8px 10px 0 var(--ink); }
+.shot { overflow: hidden; border-width: 2px; border-radius: .55rem; }
+.shot-peach { background: radial-gradient(circle at 50% 50%, var(--ink) 0 14%, transparent 15%), repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.3) 14px 17px), var(--peach); }
+.shot-violet { background: radial-gradient(circle at 50% 50%, var(--night) 0 30%, transparent 31%), repeating-radial-gradient(circle at 50% 50%, transparent 0 22px, rgba(255,255,255,.32) 23px 25px), var(--violet); }
+.shot-mint { background: radial-gradient(circle at 50% 50%, var(--amber) 0 20%, transparent 21%), repeating-linear-gradient(45deg, transparent 0 15px, rgba(33,23,53,.12) 15px 18px), var(--mint); }
+.btn { border: 2px solid var(--ink); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink); transition: transform .2s ease, background .2s ease, color .2s ease; }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink); }
+.inp { border-width: 2px; border-radius: .45rem; }
+.foot { border-top: 3px solid var(--amber); }
+
+@media (max-width: 640px) {
+  .sheet { padding: 1.25rem; border-radius: .8rem; box-shadow: 6px 6px 0 rgba(33,23,53,.28); }
+  .cover { padding: 1.25rem; }
+  .cover-title { letter-spacing: .12em; }
+  .arrow-l { left: .5rem; }
+  .arrow-r { right: .5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet, .nav a, .skill, .project, .btn, .tbl-row, .avatar, .ring-dark { transition: none; }
+  .sheet:hover, .skill:hover, .project:hover, .btn:hover { transform: none; }
+}
