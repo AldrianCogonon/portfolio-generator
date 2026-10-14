@@ -14,6 +14,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         auth: resolve(__dirname, 'login-sign.html'),
         dashboard: resolve(__dirname, 'dashboard.html'),
+        portfolio: resolve(__dirname, 'portfolio.html'),
       },
     },
   },
