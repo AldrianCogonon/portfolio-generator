@@ -51,43 +51,5 @@
             </form>
         </section>
     </main>
-
-    <script>
-        const title = document.querySelector("#account-title");
-        const intro = document.querySelector("#account-intro");
-        const tabs = {
-            login: document.querySelector("#login-tab"),
-            signup: document.querySelector("#signup-tab"),
-        };
-        const forms = {
-            login: document.querySelector("#login-form"),
-            signup: document.querySelector("#signup-form"),
-        };
-
-        function showForm(view, updateHistory = true) {
-            const isSignup = view === "signup";
-            tabs.login.setAttribute("aria-selected", String(!isSignup));
-            tabs.signup.setAttribute("aria-selected", String(isSignup));
-            forms.login.hidden = isSignup;
-            forms.signup.hidden = !isSignup;
-            title.textContent = isSignup ? "Create your account" : "Welcome back";
-            intro.textContent = isSignup ? "Sign up to get started." : "Log in to your account.";
-            if (updateHistory) {
-                history.replaceState(null, "", isSignup ? "#signup" : "#login");
-            }
-        }
-
-        tabs.login.addEventListener("click", () => showForm("login"));
-        tabs.signup.addEventListener("click", () => showForm("signup"));
-
-        for (const form of Object.values(forms)) {
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                form.querySelector(".notice").textContent = "Account sign-in is not connected yet.";
-            });
-        }
-
-        showForm(window.location.hash === "#signup" ? "signup" : "login", false);
-    </script>
 </body>
 </html>
