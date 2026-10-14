@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <title>View Portfolio | SOYON</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #f5f5f1;
+      color: #1f2937;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 5%;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #111827;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #243b53;
+      color: white;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 10px 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      background: white;
+      color: #1f2937;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button-primary {
+      border-color: #243b53;
+      background: #243b53;
+      color: white;
+    }
+
+    .page-heading {
+      max-width: 1100px;
+      margin: 28px auto 16px;
+      padding: 0 20px;
+    }
+
+    .page-heading h1 {
+      margin: 0 0 6px;
+      font-size: clamp(24px, 4vw, 36px);
+    }
+
+    .page-heading p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .portfolio-frame {
+      width: calc(100% - 40px);
+      max-width: 1100px;
+      height: 78vh;
+      min-height: 560px;
+      display: block;
+      margin: 0 auto 40px;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 12px 35px rgb(15 23 42 / 8%);
+    }
+
+    .status {
+      max-width: 1100px;
+      margin: 0 auto 14px;
+      padding: 0 20px;
+      color: #b91c1c;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .actions { width: 100%; }
+      .actions .button { flex: 1; }
+
+      .portfolio-frame {
+        width: calc(100% - 24px);
+        height: 70vh;
+        min-height: 450px;
+      }
+
+      .page-heading { padding: 0 12px; }
+      .status { padding: 0 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="./dashboard.html" class="brand">
+      <span class="brand-mark">S</span>
+      <span>SOYON</span>
+    </a>
+
+    <div class="actions">
+      <a href="./portfolio.html" class="button">My portfolios</a>
+      <a id="edit-link" href="./portfolio-editor.html"
+         class="button button-primary">Edit portfolio</a>
+      <button id="download-button" class="button" type="button">
+        Download HTML
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-heading">
+      <h1 id="portfolio-title">Portfolio preview</h1>
+      <p id="portfolio-subtitle">
+        Review your portfolio before sharing it.
+      </p>
+    </section>
+
+    <p id="view-message" class="status" role="status" aria-live="polite"></p>
+
+    <iframe
+      id="portfolio-view"
+      class="portfolio-frame"
+      title="Generated portfolio"
+      sandbox="allow-same-origin"
+    ></iframe>
+  </main>
+
+  <script type="module" src="./src/view-portfolio.js"></script>
+</body>
+</html>

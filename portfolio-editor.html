@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <title>Portfolio Editor | SOYON</title>
+  <link rel="stylesheet" href="./src/portfolio-editor.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./dashboard.html" aria-label="SOYON dashboard">
+        <span class="brand-mark">S</span>
+        <span>SOYON</span>
+      </a>
+
+      <nav class="topbar-actions" aria-label="Main navigation">
+        <a href="./dashboard.html" class="nav-link">Dashboard</a>
+        <a href="./portfolio.html" class="nav-link">My portfolios</a>
+      </nav>
+    </header>
+
+    <main class="editor-layout">
+      <section class="editor-panel" aria-labelledby="editor-heading">
+        <div class="page-heading">
+          <p class="eyebrow">PORTFOLIO BUILDER</p>
+          <h1 id="editor-heading">Create your portfolio</h1>
+          <p class="muted">
+            Add your details, choose a design, and preview your portfolio.
+          </p>
+        </div>
+
+        <form id="portfolio-form">
+          <fieldset class="form-section">
+            <legend>Basic information</legend>
+
+            <label for="title">Portfolio title</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="My Professional Portfolio"
+              required
+            >
+
+            <label for="full_name">Full name</label>
+            <input
+              id="full_name"
+              name="full_name"
+              type="text"
+              placeholder="Your full name"
+              autocomplete="name"
+              required
+            >
+
+            <label for="profile_image">Profile picture URL</label>
+            <input
+              id="profile_image"
+              name="profile_image"
+              type="url"
+              placeholder="https://example.com/photo.jpg"
+            >
+            <p class="field-hint">
+              Use a publicly accessible image URL. Local image upload can be
+              added separately.
+            </p>
+
+            <div class="form-grid">
+              <div>
+                <label for="email">Email address</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                >
+              </div>
+
+              <div>
+                <label for="phone">Contact number</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+63 ..."
+                  autocomplete="tel"
+                >
+              </div>
+            </div>
+
+            <label for="address">Address</label>
+            <input
+              id="address"
+              name="address"
+              type="text"
+              placeholder="City, country"
+              autocomplete="street-address"
+            >
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>About you</legend>
+
+            <label for="about">About me</label>
+            <textarea
+              id="about"
+              name="about"
+              rows="5"
+              placeholder="Introduce yourself, your interests, and your goals."
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Education and experience</legend>
+
+            <label for="education">Educational background</label>
+            <textarea
+              id="education"
+              name="education"
+              rows="4"
+              placeholder="School, course, dates, achievements — one item per line"
+            ></textarea>
+
+            <label for="experience">Work experience</label>
+            <textarea
+              id="experience"
+              name="experience"
+              rows="4"
+              placeholder="Role, organization, dates, and responsibilities — one item per line"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Skills and projects</legend>
+
+            <label for="skills">Skills</label>
+            <textarea
+              id="skills"
+              name="skills"
+              rows="3"
+              placeholder="Design, communication, HTML, teamwork..."
+            ></textarea>
+
+            <label for="projects">Projects</label>
+            <textarea
+              id="projects"
+              name="projects"
+              rows="5"
+              placeholder="Project name, what you created, and your contribution — one item per line"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Social links</legend>
+
+            <label for="social_links">
+              Social media or website links
+            </label>
+            <textarea
+              id="social_links"
+              name="social_links"
+              rows="4"
+              placeholder="GitHub: https://github.com/yourname&#10;Website: https://example.com"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Choose a template</legend>
+            <p class="field-hint">
+              Select a template to change the live preview.
+            </p>
+
+            <div class="template-options">
+              <label class="template-option">
+                <input
+                  type="radio"
+                  name="template_key"
+                  value="simple"
+                  checked
+                >
+                <span class="template-swatch simple-swatch"></span>
+                <strong>Simple</strong>
+                <small>Clean and professional</small>
+              </label>
+
+              <label class="template-option">
+                <input
+                  type="radio"
+                  name="template_key"
+                  value="modern"
+                >
+                <span class="template-swatch modern-swatch"></span>
+                <strong>Modern</strong>
+                <small>Dark, polished layout</small>
+              </label>
+
+              <label class="template-option">
+                <input
+                  type="radio"
+                  name="template_key"
+                  value="creative"
+                >
+                <span class="template-swatch creative-swatch"></span>
+                <strong>Creative</strong>
+                <small>Bold editorial style</small>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="editor-actions">
+            <button
+              id="preview-button"
+              class="button button-secondary"
+              type="button"
+            >
+              Refresh preview
+            </button>
+
+            <button
+              id="save-button"
+              class="button button-primary"
+              type="submit"
+            >
+              Save portfolio
+            </button>
+
+            <button
+              id="generate-button"
+              class="button button-dark"
+              type="button"
+            >
+              Open portfolio
+            </button>
+          </div>
+
+          <p id="form-message" class="form-message" role="status"
+             aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-heading">
+        <div class="preview-heading">
+          <div>
+            <p class="eyebrow">LIVE PREVIEW</p>
+            <h2 id="preview-heading">Your portfolio</h2>
+          </div>
+          <span id="preview-label" class="preview-label">Simple template</span>
+        </div>
+
+        <div class="preview-frame">
+          <iframe
+            id="portfolio-preview"
+            title="Live portfolio preview"
+            sandbox="allow-same-origin"
+          ></iframe>
+        </div>
+
+        <p class="field-hint">
+          Your preview updates as you edit the form. Save before opening the
+          standalone portfolio page.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./src/portfolio-editor.js"></script>
+</body>
+</html>
