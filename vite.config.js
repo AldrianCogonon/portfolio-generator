@@ -13,10 +13,10 @@ const pages = [
   "portfolio",
   "portfolio-editor",
   "view-portfolio",
-  "reset-password",
   "simple",
   "modern",
   "creative",
+  "reset-password",
 ];
 
 export default defineConfig({
