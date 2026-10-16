@@ -1,9 +1,11 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7f4">
+  <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-favicon.svg">
   <title>View Portfolio | SOYON</title>
   <style>
     * { box-sizing: border-box; }
@@ -74,6 +76,11 @@
       color: white;
     }
 
+    .button:disabled {
+      cursor: not-allowed;
+      opacity: .55;
+    }
+
     .page-heading {
       max-width: 1100px;
       margin: 28px auto 16px;
@@ -111,7 +118,26 @@
       color: #b91c1c;
       font-size: 14px;
     }
+    .logo-gradient {
+      display: block !important;
+      width: 264px !important;
+      min-width: 264px !important;
+      max-width: none !important;
+      height: 92px !important;
+      flex: none !important;
+      margin: 0 !important;
 
+      background: linear-gradient(
+        115deg,
+        #7c3aed 0%,
+        #e11d48 34%,
+        #2563eb 67%,
+        #f97316 100%
+      );
+
+      -webkit-mask: url("./asset/logo/soyon-svg-logo-1.svg") center / contain no-repeat;
+      mask: url("./asset/logo/soyon-svg-logo-1.svg") center / contain no-repeat;
+    }
     @media (max-width: 600px) {
       .topbar {
         align-items: flex-start;
@@ -134,17 +160,16 @@
 </head>
 <body>
   <header class="topbar">
-    <a href="./dashboard.html" class="brand">
-      <span class="brand-mark">S</span>
-      <span>SOYON</span>
+    <a class="brand" aria-label="SOYON dashboard">
+      <span class="logo-gradient" aria-hidden="true"></span>
     </a>
 
     <div class="actions">
       <a href="./portfolio.html" class="button">My portfolios</a>
       <a id="edit-link" href="./portfolio-editor.html"
          class="button button-primary">Edit portfolio</a>
-      <button id="download-button" class="button" type="button">
-        Download HTML
+      <button id="download-button" class="button" type="button" disabled>
+        Download PDF
       </button>
     </div>
   </header>
@@ -163,7 +188,7 @@
       id="portfolio-view"
       class="portfolio-frame"
       title="Generated portfolio"
-      sandbox="allow-same-origin"
+      sandbox="allow-same-origin allow-modals"
     ></iframe>
   </main>
 

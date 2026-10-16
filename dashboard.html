@@ -7,108 +7,106 @@
   <meta name="theme-color" content="#f8f7f4">
   <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-favicon.svg">
   <title>Dashboard | SOYON</title>
-
+  <link rel="stylesheet" href="./src/dashboard.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-  <script type="module" src="./src/dashboard.js"></script>
 </head>
 
 <body class="min-h-screen bg-stone-50 font-['DM_Sans',sans-serif] text-slate-900 antialiased">
   <div class="min-h-screen lg:flex">
     <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-slate-200 bg-white px-3 py-4 transition-transform duration-200 lg:translate-x-0">
-  
-    <div class="mb-3 flex items-center justify-between px-3">
-      <a
-        aria-label="SOYON home"
-        class="block shrink-0"
-      >
-        <span
-          class="logo-gradient h-12 w-36"
-          aria-hidden="true"
-        ></span>
-      </a>
+      <div class="relative mb-3 flex h-[100px] items-center justify-center px-3">
+        <a aria-label="SOYON home" href="./index.html" class="absolute left-[45%] top-1/2 w-[264px] max-w-full -translate-x-1/2 -translate-y-1/2">
+          <span class="logo-gradient" aria-hidden="true"></span>
+        </a>
 
-      <button
-        id="close-sidebar"
-        type="button"
-        class="shrink-0 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 lg:hidden"
-        aria-label="Close navigation"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          aria-hidden="true"
-        >
-          <path d="m6 6 12 12M18 6 6 18"/>
-        </svg>
-      </button>
-    </div>
-    <p class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Workspace</p>
-    
-    <nav aria-label="Main navigation" class="space-y-1.5\\\\\\\\">
-      <a href="./dashboard.html" aria-current="page" class="nav-link nav-link-active">
-        <svg width="256px" class="h-5 w-5" height="256px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Dashboard</title> <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect id="Container" x="0" y="0" width="24" height="24"> </rect> <rect id="shape-1" stroke="#030819" stroke-width="2" stroke-linecap="round" x="4" y="4" width="16" height="16" rx="2"> </rect> <line x1="4" y1="9" x2="20" y2="9" id="shape-2" stroke="#030819" stroke-width="2" stroke-linecap="round"> </line> <line x1="9" y1="10" x2="9" y2="20" id="shape-3" stroke="#030819" stroke-width="2" stroke-linecap="round"> </line> </g> </g></svg>
-        <span>Dashboard</span>
-      </a>
+        <button id="close-sidebar" type="button" class="shrink-0 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 lg:hidden" aria-label="Close navigation">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18"/>
+          </svg>
+        </button>
+      </div>
 
-      <a href="./portfolio.html" class="nav-link">
-        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M18 10L13 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2 6.94975C2 6.06722 2 5.62595 2.06935 5.25839C2.37464 3.64031 3.64031 2.37464 5.25839 2.06935C5.62595 2 6.06722 2 6.94975 2C7.33642 2 7.52976 2 7.71557 2.01738C8.51665 2.09229 9.27652 2.40704 9.89594 2.92051C10.0396 3.03961 10.1763 3.17633 10.4497 3.44975L11 4C11.8158 4.81578 12.2237 5.22367 12.7121 5.49543C12.9804 5.64471 13.2651 5.7626 13.5604 5.84678C14.0979 6 14.6747 6 15.8284 6H16.2021C18.8345 6 20.1506 6 21.0062 6.76946C21.0849 6.84024 21.1598 6.91514 21.2305 6.99383C22 7.84935 22 9.16554 22 11.7979V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V6.94975Z" stroke="#1C274C" stroke-width="1.5"></path> </g></svg>
-        <span>Portfolios</span>
-      </a>
+      <p class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">Workspace</p>
 
-      <a href="#templates" class="nav-link" data-scroll-target="templates">
-        <svg viewBox="0 0 28 28" class="h-5 w-5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>grid</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-102.000000, -933.000000)" fill="#000000"> <path d="M128,941 C128,942.104 127.104,943 126,943 L122,943 C120.896,943 120,942.104 120,941 L120,937 C120,935.896 120.896,935 122,935 L126,935 C127.104,935 128,935.896 128,937 L128,941 L128,941 Z M126,933 L122,933 C119.791,933 118,934.791 118,937 L118,941 C118,943.209 119.791,945 122,945 L126,945 C128.209,945 130,943.209 130,941 L130,937 C130,934.791 128.209,933 126,933 L126,933 Z M128,957 C128,958.104 127.104,959 126,959 L122,959 C120.896,959 120,958.104 120,957 L120,953 C120,951.896 120.896,951 122,951 L126,951 C127.104,951 128,951.896 128,953 L128,957 L128,957 Z M126,949 L122,949 C119.791,949 118,950.791 118,953 L118,957 C118,959.209 119.791,961 122,961 L126,961 C128.209,961 130,959.209 130,957 L130,953 C130,950.791 128.209,949 126,949 L126,949 Z M112,941 C112,942.104 111.104,943 110,943 L106,943 C104.896,943 104,942.104 104,941 L104,937 C104,935.896 104.896,935 106,935 L110,935 C111.104,935 112,935.896 112,937 L112,941 L112,941 Z M110,933 L106,933 C103.791,933 102,934.791 102,937 L102,941 C102,943.209 103.791,945 106,945 L110,945 C112.209,945 114,943.209 114,941 L114,937 C114,934.791 112.209,933 110,933 L110,933 Z M112,957 C112,958.104 111.104,959 110,959 L106,959 C104.896,959 104,958.104 104,957 L104,953 C104,951.896 104.896,951 106,951 L110,951 C111.104,951 112,951.896 112,953 L112,957 L112,957 Z M110,949 L106,949 C103.791,949 102,950.791 102,953 L102,957 C102,959.209 103.791,961 106,961 L110,961 C112.209,961 114,959.209 114,957 L114,953 C114,950.791 112.209,949 110,949 L110,949 Z" id="grid" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
-        <span>Templates</span>
-      </a>
-    </nav>
+      <nav aria-label="Main navigation" class="space-y-1.5">
+        <a href="./dashboard.html" aria-current="page" class="nav-link nav-link-active">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <path d="M4 9h16M9 9v11"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="./portfolio.html" class="nav-link">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path opacity=".5" d="M18 10h-5"/>
+            <path d="M2 7V6.95a5 5 0 0 1 .07-1.69 4 4 0 0 1 3.19-3.19A5 5 0 0 1 6.95 2h0a4 4 0 0 1 2.94.92L11 4a4 4 0 0 0 2.83 1.17h2.37c2.63 0 3.95 0 4.8.77.08.07.16.15.23.23C22 7.02 22 8.34 22 11v3c0 3.77 0 5.66-1.17 6.83S17.77 22 14 22h-4c-3.77 0-5.66 0-6.83-1.17S2 17.77 2 14z"/>
+          </svg>
+          <span>Portfolios</span>
+        </a>
+
+        <a href="#templates" class="nav-link" data-scroll-target="templates">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <span>Templates</span>
+        </a>
+      </nav>
 
       <div class="mt-auto rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
         <div class="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-white text-blue-700 shadow-sm">
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/>
+            <circle cx="12" cy="12" r="4"/>
+          </svg>
         </div>
         <p class="font-semibold text-slate-800">Need a little inspiration?</p>
         <p class="mt-1 text-sm leading-5 text-slate-500">Explore the templates and find a style that feels like you.</p>
-        <a href="#templates" data-scroll-target="templates" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">Explore templates <span aria-hidden="true">→</span></a>
+        <a href="#templates" data-scroll-target="templates" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">
+          Explore templates <span aria-hidden="true">→</span>
+        </a>
       </div>
     </aside>
 
     <div id="sidebar-overlay" class="fixed inset-0 z-30 hidden bg-slate-950/40 lg:hidden"></div>
 
     <div class="min-w-0 flex-1 lg:ml-72">
-
       <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-stone-50/90 backdrop-blur-xl">
         <div class="flex h-[72px] items-center gap-3 px-4 sm:px-7 lg:px-10">
           <button id="open-sidebar" type="button" class="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 hover:bg-slate-100 lg:hidden" aria-label="Open navigation">
-            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
           </button>
 
           <div class="hidden items-center gap-2 text-sm text-slate-500 sm:flex">
-            <span>Workspace</span><span class="text-slate-300">/</span><span class="font-semibold text-slate-800">Dashboard</span>
+            <span>Workspace</span>
+            <span class="text-slate-300">/</span>
+            <span class="font-semibold text-slate-800">Dashboard</span>
           </div>
 
           <div class="flex-1"></div>
 
-          <label class="relative hidden w-full max-w-xs md:block">
-            <span class="sr-only">Search portfolios</span>
-            <svg viewBox="0 0 24 24" class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
-            <input id="portfolio-search" type="search" placeholder="Search your portfolios..." class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100">
-          </label>
-
-          <button id="profile-button" type="button" class="flex items-center gap-2 rounded-xl p-1.5 transition hover:bg-white" aria-label="Open profile menu">
+          <button id="profile-button" type="button" class="flex items-center gap-2 rounded-xl p-1.5 transition hover:bg-white" aria-label="Open profile menu" aria-haspopup="true" aria-expanded="false">
             <span id="profile-avatar" class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">S</span>
-            <span class="hidden text-left sm:block"><span id="profile-name" class="block text-sm font-semibold text-slate-800">SOYON Creator</span><span class="block text-xs text-slate-500">Workspace</span></span>
-            <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-slate-400 sm:block" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m7 10 5 5 5-5"/></svg>
+            <span class="hidden text-left sm:block">
+              <span id="profile-name" class="block text-sm font-semibold text-slate-800">SOYON Creator</span>
+              <span class="block text-xs text-slate-500">Workspace</span>
+            </span>
+            <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-slate-400 sm:block" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="m7 10 5 5 5-5"/>
+            </svg>
           </button>
 
           <div id="profile-menu" class="absolute right-4 top-[62px] hidden w-48 rounded-xl border border-slate-200 bg-white p-2 shadow-xl sm:right-7 lg:right-10">
-            <a href="#account" data-scroll-target="account" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">Account settings</a>
-            <a href="./index.html" class="block rounded-lg px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">Back to homepage</a>
-            <button id="sign-out-button" type="button" class="block w-full rounded-lg px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50">Sign out</button>
+            <button id="sign-out-button" type="button" class="block min-h-10 w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+              Logout
+            </button>
           </div>
         </div>
       </header>
@@ -116,79 +114,67 @@
       <main class="mx-auto w-full max-w-[1440px] px-4 py-7 sm:px-7 sm:py-9 lg:px-10">
         <section class="mb-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div class="min-w-0">
-              <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-blue-600">
-              Your creative workspace
-              </p>
-
-              <h1 class="font-['Playfair_Display',serif] text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+            <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Your creative workspace</p>
+            <h1 class="font-['Playfair_Display',serif] text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
               Welcome back<span id="welcome-name">.</span>
-              </h1>
-
-              <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
+            </h1>
+            <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
               Bring your experience, projects, and ideas together in a portfolio that feels like you.
-              </p>
+            </p>
           </div>
 
-          <button
-              id="create-portfolio"
-              type="button"
-              class="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 sm:self-auto"
-          >
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <button id="create-portfolio" type="button" class="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 sm:self-auto">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M12 5v14M5 12h14"/>
-              </svg>
-              Create new portfolio
+            </svg>
+            Create new portfolio
           </button>
         </section>
 
         <section aria-labelledby="workspace-overview-title" class="mb-10">
           <div class="mb-3 flex items-center justify-between gap-3">
-              <h2 id="workspace-overview-title" class="text-sm font-semibold text-slate-800">
-              Workspace overview
-              </h2>
-
-              <span class="text-xs text-slate-400">Your portfolio activity</span>
+            <h2 id="workspace-overview-title" class="text-sm font-semibold text-slate-800">Workspace overview</h2>
+            <span class="text-xs text-slate-400">Your portfolio activity</span>
           </div>
 
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-
-              <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
               <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v8A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5z"/>
-                  </svg>
+                </svg>
               </div>
               <div>
-                  <p class="text-sm text-slate-500">Total portfolios</p>
-                  <p id="stat-total" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+                <p class="text-sm text-slate-500">Total portfolios</p>
+                <p id="stat-total" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
               </div>
-              </article>
+            </article>
 
-              <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
               <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <circle cx="12" cy="12" r="9"/>
                   <path d="m8 12 2.5 2.5L16 9"/>
-                  </svg>
+                </svg>
               </div>
               <div>
-                  <p class="text-sm text-slate-500">Published</p>
-                  <p id="stat-published" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+                <p class="text-sm text-slate-500">Published</p>
+                <p id="stat-published" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
               </div>
-              </article>
+            </article>
 
-              <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
+            <article class="flex items-center gap-4 rounded-2xl border border-slate-200/80 bg-white p-4">
               <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <path d="M7 3.5h7l5 5v12H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/>
                   <path d="M14 3.5v5h5M9 13h6M9 16.5h4"/>
-                  </svg>
+                </svg>
               </div>
               <div>
-                  <p class="text-sm text-slate-500">Drafts in progress</p>
-                  <p id="stat-drafts" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
+                <p class="text-sm text-slate-500">Drafts in progress</p>
+                <p id="stat-drafts" class="mt-1 text-2xl font-bold tracking-tight text-slate-900">0</p>
               </div>
-              </article>
+            </article>
           </div>
         </section>
 
@@ -198,18 +184,26 @@
               <h2 class="text-xl font-bold tracking-tight text-slate-900">Recently worked on</h2>
               <p class="mt-1 text-sm text-slate-500">Pick up where you left off.</p>
             </div>
-            <a href="./portfolios.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">View all portfolios <span aria-hidden="true">→</span></a>
+            <a href="./portfolios.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">
+              View all portfolios <span aria-hidden="true">→</span>
+            </a>
           </div>
 
           <div id="portfolio-list" class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"></div>
 
           <div id="empty-state" class="hidden rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
             <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
-              <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg>
+              <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
             </div>
             <h3 class="mt-4 text-lg font-semibold text-slate-900">Your first portfolio starts here</h3>
-            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">Create a portfolio to bring your skills, experience, and projects together in one place.</p>
-            <button type="button" class="create-empty-state mt-5 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-800">Create your first portfolio</button>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
+              Create a portfolio to bring your skills, experience, and projects together in one place.
+            </p>
+            <button type="button" class="create-empty-state mt-5 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-800">
+              Create your first portfolio
+            </button>
           </div>
 
           <p id="dashboard-message" class="mt-4 min-h-5 text-sm text-slate-500" aria-live="polite"></p>
@@ -226,15 +220,26 @@
             <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
               <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl border border-stone-200 bg-[#f7f4ee] p-5">
                 <div class="w-full max-w-[230px] bg-white p-4 shadow-sm">
-                  <div class="mb-3 h-2 w-2/5 rounded bg-slate-800"></div><div class="mb-1 h-1 w-3/4 rounded bg-slate-300"></div><div class="h-1 w-1/2 rounded bg-slate-200"></div>
-                  <div class="my-4 border-t border-stone-200"></div><div class="mb-2 h-1.5 w-1/3 rounded bg-slate-600"></div><div class="mb-1 h-1 w-full rounded bg-slate-200"></div><div class="h-1 w-4/5 rounded bg-slate-200"></div>
-                  <div class="mt-4 grid grid-cols-3 gap-2"><div class="h-7 rounded bg-stone-100"></div><div class="h-7 rounded bg-stone-100"></div><div class="h-7 rounded bg-stone-100"></div></div>
+                  <div class="mb-3 h-2 w-2/5 rounded bg-slate-800"></div>
+                  <div class="mb-1 h-1 w-3/4 rounded bg-slate-300"></div>
+                  <div class="h-1 w-1/2 rounded bg-slate-200"></div>
+                  <div class="my-4 border-t border-stone-200"></div>
+                  <div class="mb-2 h-1.5 w-1/3 rounded bg-slate-600"></div>
+                  <div class="mb-1 h-1 w-full rounded bg-slate-200"></div>
+                  <div class="h-1 w-4/5 rounded bg-slate-200"></div>
+                  <div class="mt-4 grid grid-cols-3 gap-2">
+                    <div class="h-7 rounded bg-stone-100"></div>
+                    <div class="h-7 rounded bg-stone-100"></div>
+                    <div class="h-7 rounded bg-stone-100"></div>
+                  </div>
                 </div>
                 <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-600">01 · Minimal</span>
               </div>
               <div class="flex items-start justify-between gap-3 pt-4">
-                <div><h3 class="font-bold text-slate-900">Simple</h3><p class="mt-1 text-sm leading-5 text-slate-500">Clear, timeless, and easy to scan.</p></div>
-                <span class="rounded-lg bg-stone-100 p-2 text-slate-500"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14M5 9h14M5 14h9M5 19h9"/></svg></span>
+                <div>
+                  <h3 class="font-bold text-slate-900">Simple</h3>
+                  <p class="mt-1 text-sm leading-5 text-slate-500">Clear, timeless, and easy to scan.</p>
+                </div>
               </div>
               <button type="button" data-template="simple" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Simple</button>
             </article>
@@ -242,15 +247,35 @@
             <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
               <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl bg-slate-900 p-5">
                 <div class="w-full max-w-[250px] text-white">
-                  <div class="mb-3 flex items-center justify-between"><div class="h-1 w-12 rounded bg-blue-300"></div><div class="h-1 w-8 rounded bg-slate-600"></div></div>
-                  <div class="grid grid-cols-[1.2fr_.8fr] gap-3"><div><div class="mb-2 h-3 w-full rounded-sm bg-white"></div><div class="mb-1 h-2 w-4/5 rounded-sm bg-white"></div><div class="mt-3 h-1 w-full rounded bg-slate-600"></div><div class="mt-1 h-1 w-3/4 rounded bg-slate-700"></div><div class="mt-4 h-5 w-16 rounded border border-blue-300"></div></div><div class="flex items-center justify-center rounded bg-gradient-to-br from-blue-300 to-slate-600"><div class="h-14 w-10 rounded-sm bg-slate-800/70"></div></div></div>
-                  <div class="mt-5 grid grid-cols-3 gap-2"><div class="h-7 rounded bg-white/10"></div><div class="h-7 rounded bg-white/10"></div><div class="h-7 rounded bg-white/10"></div></div>
+                  <div class="mb-3 flex items-center justify-between">
+                    <div class="h-1 w-12 rounded bg-blue-300"></div>
+                    <div class="h-1 w-8 rounded bg-slate-600"></div>
+                  </div>
+                  <div class="grid grid-cols-[1.2fr_.8fr] gap-3">
+                    <div>
+                      <div class="mb-2 h-3 w-full rounded-sm bg-white"></div>
+                      <div class="mb-1 h-2 w-4/5 rounded-sm bg-white"></div>
+                      <div class="mt-3 h-1 w-full rounded bg-slate-600"></div>
+                      <div class="mt-1 h-1 w-3/4 rounded bg-slate-700"></div>
+                      <div class="mt-4 h-5 w-16 rounded border border-blue-300"></div>
+                    </div>
+                    <div class="flex items-center justify-center rounded bg-gradient-to-br from-blue-300 to-slate-600">
+                      <div class="h-14 w-10 rounded-sm bg-slate-800/70"></div>
+                    </div>
+                  </div>
+                  <div class="mt-5 grid grid-cols-3 gap-2">
+                    <div class="h-7 rounded bg-white/10"></div>
+                    <div class="h-7 rounded bg-white/10"></div>
+                    <div class="h-7 rounded bg-white/10"></div>
+                  </div>
                 </div>
                 <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-200">02 · Structured</span>
               </div>
               <div class="flex items-start justify-between gap-3 pt-4">
-                <div><h3 class="font-bold text-slate-900">Modern</h3><p class="mt-1 text-sm leading-5 text-slate-500">Bold contrast and a confident layout.</p></div>
-                <span class="rounded-lg bg-blue-50 p-2 text-blue-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v14H4zM4 10h16M10 10v9"/></svg></span>
+                <div>
+                  <h3 class="font-bold text-slate-900">Modern</h3>
+                  <p class="mt-1 text-sm leading-5 text-slate-500">Bold contrast and a confident layout.</p>
+                </div>
               </div>
               <button type="button" data-template="modern" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Modern</button>
             </article>
@@ -258,15 +283,28 @@
             <article class="template-card group rounded-2xl border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-950/5">
               <div class="relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-xl bg-indigo-50 p-5">
                 <div class="relative w-full max-w-[250px] overflow-hidden rounded-lg bg-white p-4 shadow-sm">
-                  <div class="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-blue-100"></div><div class="relative z-10 mb-3 h-2 w-2/5 rounded-full bg-indigo-700"></div>
-                  <div class="relative z-10 mb-1 h-3 w-3/4 rounded bg-slate-800"></div><div class="relative z-10 h-3 w-1/2 rounded bg-blue-500"></div>
-                  <div class="mt-4 grid grid-cols-[1fr_.8fr] gap-3"><div><div class="mb-1 h-1 w-full rounded bg-slate-200"></div><div class="mb-1 h-1 w-4/5 rounded bg-slate-200"></div><div class="mt-3 h-5 w-14 rounded-full bg-blue-600"></div></div><div class="flex items-end justify-center rounded-lg bg-gradient-to-br from-indigo-200 to-blue-400 p-2"><div class="h-10 w-8 rounded-t-full bg-white/70"></div></div></div>
+                  <div class="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-blue-100"></div>
+                  <div class="relative z-10 mb-3 h-2 w-2/5 rounded-full bg-indigo-700"></div>
+                  <div class="relative z-10 mb-1 h-3 w-3/4 rounded bg-slate-800"></div>
+                  <div class="relative z-10 h-3 w-1/2 rounded bg-blue-500"></div>
+                  <div class="mt-4 grid grid-cols-[1fr_.8fr] gap-3">
+                    <div>
+                      <div class="mb-1 h-1 w-full rounded bg-slate-200"></div>
+                      <div class="mb-1 h-1 w-4/5 rounded bg-slate-200"></div>
+                      <div class="mt-3 h-5 w-14 rounded-full bg-blue-600"></div>
+                    </div>
+                    <div class="flex items-end justify-center rounded-lg bg-gradient-to-br from-indigo-200 to-blue-400 p-2">
+                      <div class="h-10 w-8 rounded-t-full bg-white/70"></div>
+                    </div>
+                  </div>
                 </div>
                 <span class="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-indigo-700">03 · Expressive</span>
               </div>
               <div class="flex items-start justify-between gap-3 pt-4">
-                <div><h3 class="font-bold text-slate-900">Creative</h3><p class="mt-1 text-sm leading-5 text-slate-500">A little more personality and color.</p></div>
-                <span class="rounded-lg bg-indigo-50 p-2 text-indigo-700"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/><path d="m19 14 1.2 2.8L23 18l-2.8 1.2L19 22l-1.2-2.8L15 18l2.8-1.2z"/></svg></span>
+                <div>
+                  <h3 class="font-bold text-slate-900">Creative</h3>
+                  <p class="mt-1 text-sm leading-5 text-slate-500">A little more personality and color.</p>
+                </div>
               </div>
               <button type="button" data-template="creative" class="choose-template mt-4 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">Use Creative</button>
             </article>
@@ -282,7 +320,7 @@
       </main>
     </div>
   </div>
-  
+
   <script type="module" src="./src/dashboard-auth.js"></script>
   <script type="module" src="./src/dashboard.js"></script>
 </body>

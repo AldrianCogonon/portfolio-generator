@@ -1,4 +1,3 @@
-
 import "./index.css";
 import { portfolioStore } from "./portfolio-store.js";
 
@@ -36,7 +35,6 @@ const portfolioList = document.querySelector("#portfolio-list");
 const portfolioCount = document.querySelector("#stat-total");
 const publishedCount = document.querySelector("#stat-published");
 const draftCount = document.querySelector("#stat-drafts");
-const searchInput = document.querySelector("#portfolio-search");
 const message = document.querySelector("#dashboard-message");
 const emptyState = document.querySelector("#empty-state");
 
@@ -126,9 +124,11 @@ function renderPreview(templateKey) {
 
 function renderPortfolioCard(portfolio) {
   const isPublished = portfolio.status === "published";
+
   const statusClasses = isPublished
     ? "bg-emerald-50 text-emerald-700"
     : "bg-amber-50 text-amber-700";
+
   const statusLabel = isPublished ? "Published" : "Pending";
 
   const updated = portfolio.updated_at
@@ -149,6 +149,7 @@ function renderPortfolioCard(portfolio) {
           <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">
             ${escapeHTML(formatTemplate(portfolio.template_key))}
           </p>
+
           <h3 class="mt-1 truncate font-bold text-slate-900">
             ${escapeHTML(portfolioTitle)}
           </h3>
@@ -159,35 +160,39 @@ function renderPortfolioCard(portfolio) {
           class="portfolio-menu-button rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
           data-menu-id="${escapeHTML(portfolio.id)}"
           aria-label="More actions for ${escapeHTML(portfolioTitle)}"
-        >
-          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
-            <circle cx="5" cy="12" r="1.5"/>
-            <circle cx="12" cy="12" r="1.5"/>
-            <circle cx="19" cy="12" r="1.5"/>
-          </svg>
-        </button>
+        ></button>
       </div>
 
       <div class="mt-2 flex flex-wrap items-center gap-2">
         <span class="rounded-full px-2.5 py-1 text-xs font-semibold ${statusClasses}">
           ${statusLabel}
         </span>
+
         <span class="text-xs text-slate-400">
           Updated ${escapeHTML(updated)}
         </span>
       </div>
 
-      <div class="mt-4 flex gap-2">
+      <div class="mt-4 flex flex-wrap gap-2">
         <button
           type="button"
-          class="edit-portfolio flex-1 rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm font-semibold text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+          class="view-portfolio flex-1 rounded-xl bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+          data-view-id="${escapeHTML(portfolio.id)}"
+        >
+          View
+        </button>
+
+        <button
+          type="button"
+          class="edit-portfolio flex-1 rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
           data-edit-id="${escapeHTML(portfolio.id)}"
         >
-          Edit portfolio →
+          Edit
         </button>
+
         <button
           type="button"
-          class="delete-portfolio rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-semibold text-rose-600 hover:bg-rose-50"
+          class="delete-portfolio rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-semibold text-rose-600 transition hover:bg-rose-50"
           data-delete-id="${escapeHTML(portfolio.id)}"
           aria-label="Delete ${escapeHTML(portfolioTitle)}"
         >
@@ -198,21 +203,10 @@ function renderPortfolioCard(portfolio) {
 }
 
 function renderPortfolios() {
-  const query = (searchInput?.value || "").trim().toLowerCase();
-
-  const filtered = portfolios.filter(portfolio => {
-    const text = [
-      portfolio.title,
-      formatTemplate(portfolio.template_key),
-      portfolio.status
-    ].join(" ").toLowerCase();
-
-    return text.includes(query);
-  });
-
+  // Search has been removed, so show every portfolio returned by the store.
   if (portfolioList) {
-    portfolioList.innerHTML = filtered.map(renderPortfolioCard).join("");
-    portfolioList.classList.toggle("hidden", filtered.length === 0);
+    portfolioList.innerHTML = portfolios.map(renderPortfolioCard).join("");
+    portfolioList.classList.toggle("hidden", portfolios.length === 0);
   }
 
   if (portfolioCount) {
@@ -232,12 +226,6 @@ function renderPortfolios() {
   }
 
   emptyState?.classList.toggle("hidden", portfolios.length !== 0);
-
-  if (message) {
-    message.textContent = query && filtered.length === 0
-      ? `No portfolios found for “${searchInput.value.trim()}”.`
-      : "";
-  }
 }
 
 function showMessage(text) {
@@ -267,6 +255,7 @@ async function loadPortfolios() {
 
 function openBuilder(template = "simple", id = null) {
   const params = new URLSearchParams();
+
   params.set("template", template);
 
   if (id) {
@@ -293,12 +282,23 @@ document.querySelectorAll(".choose-template").forEach(button => {
   });
 });
 
-searchInput?.addEventListener("input", renderPortfolios);
-
 portfolioList?.addEventListener("click", async event => {
   const target = event.target;
 
   if (!(target instanceof Element)) {
+    return;
+  }
+
+  const viewButton = target.closest("[data-view-id]");
+
+  if (viewButton) {
+    const portfolioId = viewButton.dataset.viewId;
+
+    if (portfolioId) {
+      const params = new URLSearchParams({ id: portfolioId });
+      window.location.href = `./view-portfolio.html?${params.toString()}`;
+    }
+
     return;
   }
 
@@ -371,7 +371,7 @@ portfolioList?.addEventListener("click", async event => {
 
     if (portfolio) {
       showMessage(
-        `${portfolio.title || "Untitled portfolio"} — use Edit portfolio to make changes, or Delete to remove it.`
+        `${portfolio.title || "Untitled portfolio"} — use Edit to make changes, or Delete to remove it.`
       );
     }
   }
@@ -401,9 +401,7 @@ overlay?.addEventListener("click", () => {
 document.querySelectorAll("[data-scroll-target]").forEach(link => {
   link.addEventListener("click", event => {
     const targetId = link.dataset.scrollTarget;
-    const target = targetId
-      ? document.getElementById(targetId)
-      : null;
+    const target = targetId ? document.getElementById(targetId) : null;
 
     if (target) {
       event.preventDefault();
@@ -417,14 +415,53 @@ document.querySelectorAll("[data-scroll-target]").forEach(link => {
     }
 
     setSidebarOpen(false);
-    document.querySelector("#profile-menu")?.classList.add("hidden");
+    profileMenu?.classList.add("hidden");
   });
 });
 
-const profileMenu = document.querySelector("#profile-menu");
+function scrollToHashTarget() {
+  const targetId = decodeURIComponent(window.location.hash.slice(1));
 
-document.querySelector("#profile-button")?.addEventListener("click", () => {
+  if (!targetId) {
+    return;
+  }
+
+  const target = document.getElementById(targetId);
+
+  if (!target) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start"
+      });
+    });
+  });
+}
+
+if (document.readyState === "complete") {
+  scrollToHashTarget();
+} else {
+  window.addEventListener("load", scrollToHashTarget, { once: true });
+}
+
+const profileMenu = document.querySelector("#profile-menu");
+const profileButton = document.querySelector("#profile-button");
+
+profileButton?.addEventListener("click", event => {
+  event.stopPropagation();
+
+  const isOpening = profileMenu?.classList.contains("hidden");
+
   profileMenu?.classList.toggle("hidden");
+  profileButton.setAttribute("aria-expanded", String(Boolean(isOpening)));
 });
 
 document.addEventListener("click", event => {
@@ -436,6 +473,7 @@ document.addEventListener("click", event => {
     !target.closest("#profile-menu")
   ) {
     profileMenu?.classList.add("hidden");
+    profileButton?.setAttribute("aria-expanded", "false");
   }
 });
 
@@ -445,16 +483,19 @@ if (typeof displayName === "string" && displayName.trim()) {
   const firstName = displayName.trim().split(/\s+/)[0];
 
   const welcomeName = document.querySelector("#welcome-name");
+
   if (welcomeName) {
     welcomeName.textContent = `, ${firstName}`;
   }
 
   const profileName = document.querySelector("#profile-name");
+
   if (profileName) {
     profileName.textContent = displayName.trim();
   }
 
   const avatar = document.querySelector("#profile-avatar");
+
   if (avatar) {
     avatar.textContent = firstName.charAt(0).toUpperCase();
   }

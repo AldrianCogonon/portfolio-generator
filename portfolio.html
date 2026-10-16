@@ -1,193 +1,246 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Manage your SOYON portfolios.">
-  <title>My Portfolios — SOYON</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your SOYON portfolios, templates, and creative projects.">
+  <meta name="theme-color" content="#f8f7f4">
 
   <link rel="icon" type="image/svg+xml" href="./asset/logo/soyon-favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["Playfair Display", "serif"]
+          }
+        }
+      }
+    };
+  </script>
+
   <link rel="stylesheet" href="./src/portfolio.css">
+  <title>Portfolios | SOYON</title>
 </head>
 
-<body>
-  <header class="topbar" id="topbar">
-    <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" style="display:none">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
+<body class="min-h-screen bg-stone-50 font-sans text-slate-900 antialiased">
+  <div class="min-h-screen lg:flex">
 
-    <a class="brand" href="./index.html" aria-label="SOYON homepage">
-      <img src="./asset/logo/soyon-svg-logo-1.svg" alt="SOYON" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="brand-fallback" style="display:none">SOYON</span>
-    </a>
+    <aside
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-slate-200 bg-white px-3 py-4 transition-transform duration-200 lg:translate-x-0"
+    >
+      <div class="relative mb-3 flex h-[100px] items-center justify-center px-3">
+        <a
+          aria-label="SOYON home"
+          class="absolute left-[45%] top-1/2 -translate-x-1/2 -translate-y-1/2 "
+        >
+          <span class="logo-gradient" aria-hidden="true"></span>
+        </a>
 
-    <div class="crumb" aria-label="Breadcrumb">
-      Workspace <span>/</span> My Portfolios
-    </div>
-
-    <label class="search-wrap" aria-label="Search portfolios">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <circle cx="10.8" cy="10.8" r="6.8"/>
-        <path d="m16 16 5 5"/>
-      </svg>
-      <input id="portfolio-search" class="search" type="search" placeholder="Search your portfolios..." autocomplete="off">
-    </label>
-
-    <div class="top-actions">
-      <button class="icon-btn bell" id="notification-btn" aria-label="Notifications">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
-        </svg>
-      </button>
-
-      <button class="profile-button" id="profile-button" aria-expanded="false" aria-label="Open profile menu">
-        <span class="avatar" aria-hidden="true">AR</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="m6 9 6 6 6-6"/>
-        </svg>
-      </button>
-
-      <div class="profile-menu" id="profile-menu">
-        <button data-action="profile">My profile</button>
-        <button data-action="settings">Settings</button>
-        <button data-action="logout">Log out</button>
-      </div>
-    </div>
-  </header>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-brand-row">
-      <a href="./index.html#top" aria-label="SOYON home" class="sidebar-brand">
-        <span class="logo-gradient" aria-hidden="true"></span>
-      </a>
-
-      <button id="mobile-close" type="button" class="mobile-close" aria-label="Close navigation">
-        <svg viewBox="0 0 24 24" class="close-icon" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <path d="m6 6 12 12M18 6 6 18"/>
-        </svg>
-      </button>
-    </div>
-
-    <p class="nav-section-label">Workspace</p>
-
-    <nav aria-label="Main navigation" class="side-nav">
-      <a href="./index.html" class="nav-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
-        </svg>
-        <span>Home</span>
-      </a>
-
-      <a href="./dashboard.html" class="nav-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/>
-          <path d="M3.5 9h17M9 9v11.5"/>
-        </svg>
-        <span>Dashboard</span>
-      </a>
-
-      <a href="./portfolio.html" class="nav-link active" aria-current="page">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 7a3 3 0 0 1 3-3h4l2 2h6a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/>
-          <path d="M14 11h4"/>
-        </svg>
-        <span>Portfolios</span>
-      </a>
-
-      <a href="./dashboard.html#templates" class="nav-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-        </svg>
-        <span>Templates</span>
-      </a>
-    </nav>
-
-    <div class="nav-divider"></div>
-
-    <p class="nav-section-label">Preferences</p>
-
-    <nav aria-label="Preferences" class="side-nav">
-      <a href="./dashboard.html#account" class="nav-link">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="8" r="3.3"/>
-          <path d="M5 20c.7-3.3 3.2-5 7-5s6.3 1.7 7 5"/>
-        </svg>
-        <span>Account settings</span>
-      </a>
-    </nav>
-  </aside>
-
-  <div id="mobile-overlay" class="mobile-overlay"></div>
-
-  <main>
-    <section class="page-heading">
-      <div>
-        <h1>My Portfolios</h1>
-        <p class="subtitle">Your ideas, beautifully presented.</p>
+        <button
+          id="close-sidebar"
+          type="button"
+          class="absolute right-3 top-1/2 -translate-y-1/2 shrink-0 rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 lg:hidden"
+          aria-label="Close navigation"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18"/>
+          </svg>
+        </button>
       </div>
 
-      <button class="primary-btn" id="create-portfolio">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M12 5v14M5 12h14"/>
-        </svg>
-        Create new portfolio
-      </button>
-    </section>
+      <p class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400">
+        Workspace
+      </p>
 
-    <section class="stats" aria-label="Portfolio overview">
-      <article class="stat">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 6.5A2.5 2.5 0 0 1 5.5 4H10l2 2h6.5A2.5 2.5 0 0 1 21 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/>
+      <nav aria-label="Main navigation" class="space-y-1.5">
+        <a
+          href="./dashboard.html"
+          class="nav-link flex min-h-12 items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+        >
+          <svg width="256px" class="h-5 w-5" height="256px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Dashboard</title> <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect id="Container" x="0" y="0" width="24" height="24"> </rect> <rect id="shape-1" stroke="#030819" stroke-width="2" stroke-linecap="round" x="4" y="4" width="16" height="16" rx="2"> </rect> <line x1="4" y1="9" x2="20" y2="9" id="shape-2" stroke="#030819" stroke-width="2" stroke-linecap="round"> </line> <line x1="9" y1="10" x2="9" y2="20" id="shape-3" stroke="#030819" stroke-width="2" stroke-linecap="round"> </line> </g> </g></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <a
+          href="./portfolio.html"
+          aria-current="page"
+          class="nav-link nav-link-active flex min-h-12 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold transition"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.5" d="M18 10L13 10" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M2 6.94975C2 6.06722 2 5.62595 2.06935 5.25839C2.37464 3.64031 3.64031 2.37464 5.25839 2.06935C5.62595 2 6.06722 2 6.94975 2C7.33642 2 7.52976 2 7.71557 2.01738C8.51665 2.09229 9.27652 2.40704 9.89594 2.92051C10.0396 3.03961 10.1763 3.17633 10.4497 3.44975L11 4C11.8158 4.81578 12.2237 5.22367 12.7121 5.49543C12.9804 5.64471 13.2651 5.7626 13.5604 5.84678C14.0979 6 14.6747 6 15.8284 6H16.2021C18.8345 6 20.1506 6 21.0062 6.76946C21.0849 6.84024 21.1598 6.91514 21.2305 6.99383C22 7.84935 22 9.16554 22 11.7979V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V6.94975Z" stroke="#1C274C" stroke-width="1.5"></path> </g></svg>
+          <span>Portfolios</span>
+        </a>
+
+        <a href="./dashboard.html#templates" class="nav-link">
+         <svg viewBox="0 0 28 28" class="h-5 w-5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>grid</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-102.000000, -933.000000)" fill="#000000"> <path d="M128,941 C128,942.104 127.104,943 126,943 L122,943 C120.896,943 120,942.104 120,941 L120,937 C120,935.896 120.896,935 122,935 L126,935 C127.104,935 128,935.896 128,937 L128,941 L128,941 Z M126,933 L122,933 C119.791,933 118,934.791 118,937 L118,941 C118,943.209 119.791,945 122,945 L126,945 C128.209,945 130,943.209 130,941 L130,937 C130,934.791 128.209,933 126,933 L126,933 Z M128,957 C128,958.104 127.104,959 126,959 L122,959 C120.896,959 120,958.104 120,957 L120,953 C120,951.896 120.896,951 122,951 L126,951 C127.104,951 128,951.896 128,953 L128,957 L128,957 Z M126,949 L122,949 C119.791,949 118,950.791 118,953 L118,957 C118,959.209 119.791,961 122,961 L126,961 C128.209,961 130,959.209 130,957 L130,953 C130,950.791 128.209,949 126,949 L126,949 Z M112,941 C112,942.104 111.104,943 110,943 L106,943 C104.896,943 104,942.104 104,941 L104,937 C104,935.896 104.896,935 106,935 L110,935 C111.104,935 112,935.896 112,937 L112,941 L112,941 Z M110,933 L106,933 C103.791,933 102,934.791 102,937 L102,941 C102,943.209 103.791,945 106,945 L110,945 C112.209,945 114,943.209 114,941 L114,937 C114,934.791 112.209,933 110,933 L110,933 Z M112,957 C112,958.104 111.104,959 110,959 L106,959 C104.896,959 104,958.104 104,957 L104,953 C104,951.896 104.896,951 106,951 L110,951 C111.104,951 112,951.896 112,953 L112,957 L112,957 Z M110,949 L106,949 C103.791,949 102,950.791 102,953 L102,957 C102,959.209 103.791,961 106,961 L110,961 C112.209,961 114,959.209 114,957 L114,953 C114,950.791 112.209,949 110,949 L110,949 Z" id="grid" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
+          <span>Templates</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
+        <div class="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-white text-blue-700 shadow-sm">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/>
+            <circle cx="12" cy="12" r="4"/>
           </svg>
         </div>
-        <div>
-          <div class="stat-label">Total portfolios</div>
-          <div class="stat-value" id="stat-total">3</div>
-        </div>
-      </article>
+        <p class="font-semibold text-slate-800">Need a little inspiration?</p>
+        <p class="mt-1 text-sm leading-5 text-slate-500">
+          Explore the templates and find a style that feels like you.
+        </p>
+        <a href="./dashboard.html#templates" 
+          class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">
+          Explore templates <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </aside>
 
-      <article class="stat">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 hidden bg-slate-950/40 lg:hidden"></div>
+
+    <div class="min-w-0 flex-1 lg:ml-72">
+
+      
+    <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-stone-50/90 backdrop-blur-xl">
+      <div class="flex h-[72px] items-center gap-3 px-4 sm:px-7 lg:px-10">
+        <button id="open-sidebar" type="button" class="rounded-lg border border-slate-200 bg-white p-2 text-slate-600 hover:bg-slate-100 lg:hidden" aria-label="Open navigation">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
-        </div>
-        <div>
-          <div class="stat-label">Published</div>
-          <div class="stat-value" id="stat-published">2</div>
-        </div>
-      </article>
+        </button>
 
-      <article class="stat">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/>
-            <path d="M14 3v5h5M8 12h8M8 16h8"/>
+        <div class="hidden items-center gap-2 text-sm text-slate-500 sm:flex">
+          <span>Workspace</span>
+          <span class="text-slate-300">/</span>
+          <span class="font-semibold text-slate-800">Your Portfolios</span>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <button id="profile-button" type="button" class="flex items-center gap-2 rounded-xl p-1.5 transition hover:bg-white" aria-label="Open profile menu" aria-haspopup="true" aria-expanded="false" aria-controls="profile-menu">
+          <span id="profile-avatar" class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700"></span>
+
+          <span class="hidden text-left sm:block">
+            <span id="profile-name" class="block text-sm font-semibold text-slate-800"></span>
+            <span class="block text-xs text-slate-500">Workspace</span>
+          </span>
+
+          <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-slate-400 sm:block" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m7 10 5 5 5-5"/>
           </svg>
+        </button>
+
+        <div id="profile-menu" class="profile-menu absolute right-4 top-[62px] hidden w-48 rounded-xl border border-slate-200 bg-white p-2 shadow-xl sm:right-7 lg:right-10">
+          <button type="button" data-action="logout" class="block min-h-10 w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+            Log out
+          </button>
         </div>
-        <div>
-          <div class="stat-label">Drafts</div>
-          <div class="stat-value" id="stat-drafts">1</div>
-        </div>
-      </article>
-    </section>
+      </div>
+    </header>
 
-    <section class="portfolio-grid" id="portfolio-list" aria-label="Your portfolios"></section>
-  </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <main class="min-h-screen px-4 pb-10 pt-8 sm:px-7 lg:px-10">
+        <!-- Page heading and primary action -->
+        <section class="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="mb-2 text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600">Your workspace</p>
+            <h1 class="font-display text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Your Portfolios</h1>
+            <p class="mt-3 max-w-2xl text-base text-slate-500">
+              Manage your work and keep your professional story up to date.
+            </p>
+          </div>
 
+          <button
+            id="create-portfolio"
+            type="button"
+            class="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-100 sm:self-auto"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Create new portfolio
+          </button>
+        </section>
+
+        <!-- Summary cards -->
+        <section class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3" aria-label="Portfolio summary">
+          <article class="flex min-h-28 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <path d="M8 4V2.8h8V4M3 10h18"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-slate-500">Total portfolios</p>
+              <p id="stat-total" class="mt-1 text-2xl font-bold text-slate-900">0</p>
+            </div>
+          </article>
+
+          <article class="flex min-h-28 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="m8 12 2.5 2.5L16 9"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-slate-500">Published</p>
+              <p id="stat-published" class="mt-1 text-2xl font-bold text-slate-900">0</p>
+            </div>
+          </article>
+
+          <article class="flex min-h-28 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
+              <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                <path d="M14 2v6h6M8 13h8M8 17h6"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-slate-500">Drafts</p>
+              <p id="stat-drafts" class="mt-1 text-2xl font-bold text-slate-900">0</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- Portfolio collection -->
+        <section aria-labelledby="portfolio-section-title">
+          <div class="mb-4 flex items-center justify-between gap-4">
+            <div>
+              <h2 id="portfolio-section-title" class="font-display text-2xl font-semibold text-slate-900">All portfolios</h2>
+              <p class="mt-1 text-sm text-slate-500">Your portfolio projects in one place.</p>
+            </div>
+          </div>
+
+          <div id="portfolio-list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3"></div>
+
+          <div id="empty-state" class="mt-5 hidden rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+            <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-50 text-blue-700">
+              <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
+            <h3 class="mt-4 font-display text-xl font-semibold text-slate-900">Create your first portfolio</h3>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
+              Create a portfolio to bring your skills, experience, and projects together in one place.
+            </p>
+            <button type="button" class="create-empty-state mt-5 rounded-xl bg-blue-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-800">
+              Create your first portfolio
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./src/portfolio.js"></script>
 </body>
 </html>

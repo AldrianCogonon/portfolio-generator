@@ -408,13 +408,68 @@ function renderDocument(d = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title} — ${name}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; }
-    a { color: inherit; }
-    img { max-width: 100%; }
-    ${styles}
-  </style>
+ 
+<style>
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    margin: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .hero,
+    .avatar-placeholder,
+    .skills span,
+    a,
+    section,
+    footer {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .hero {
+      break-inside: avoid;
+    }
+  }
+
+  ${styles}
+</style>
+
 </head>
 <body>
   ${common}

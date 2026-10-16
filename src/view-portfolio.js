@@ -1,5 +1,6 @@
+
 import { portfolioStore } from "./portfolio-store.js";
-import { renderDocument } from "./portfolio-renderer.js";
+import { renderDocument } from "./portfolio-render.js";
 
 const frame = document.querySelector("#portfolio-view");
 const title = document.querySelector("#portfolio-title");
@@ -30,7 +31,7 @@ function safeFilename(value) {
 async function loadPortfolio() {
   if (!portfolioId) {
     showMessage(
-      "No portfolio ID was provided. Open a saved portfolio from My Portfolios."
+      "No portfolio ID was provided. Open a portfolio from My Portfolios."
     );
     frame.hidden = true;
     downloadButton.disabled = true;
@@ -42,7 +43,7 @@ async function loadPortfolio() {
 
     if (!portfolio) {
       showMessage(
-        "Portfolio not found in this browser. Make sure you are using the same browser where it was saved."
+        "Portfolio not found. Open it from My Portfolios."
       );
       frame.hidden = true;
       downloadButton.disabled = true;
@@ -53,7 +54,10 @@ async function loadPortfolio() {
 
     const data = {
       ...(portfolio.content || {}),
-      title: portfolio.title || portfolio.content?.title || "My Portfolio",
+      title:
+        portfolio.title ||
+        portfolio.content?.title ||
+        "My Portfolio",
       template_key:
         portfolio.template_key ||
         portfolio.content?.template_key ||
@@ -63,13 +67,16 @@ async function loadPortfolio() {
     generatedHTML = renderDocument(data);
 
     title.textContent = data.title;
-    subtitle.textContent = `Portfolio by ${data.full_name || "the author"}`;
+    subtitle.textContent =
+      `Portfolio by ${data.full_name || "the author"}`;
+
     frame.srcdoc = generatedHTML;
 
     editLink.href =
       `./portfolio-editor.html?id=${encodeURIComponent(portfolio.id)}`;
 
     document.title = `${data.title} | SOYON`;
+
     showMessage("");
     frame.hidden = false;
     downloadButton.disabled = false;
@@ -83,22 +90,73 @@ async function loadPortfolio() {
 downloadButton.addEventListener("click", () => {
   if (!generatedHTML || !currentPortfolio) return;
 
-  const blob = new Blob(
-    [generatedHTML],
-    { type: "text/html;charset=utf-8" }
-  );
+  let printWindow;
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+  try {
+    // Open synchronously during the click to avoid popup blocking.
+    printWindow = window.open("", "_blank");
 
-  link.href = url;
-  link.download = `${safeFilename(currentPortfolio.title)}.html`;
+    if (!printWindow) {
+      showMessage(
+        "Your browser blocked the PDF window. Allow pop-ups for SOYON and try again."
+      );
+      return;
+    }
 
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
+    // Use the same generated document that contains the selected
+    // template's styles, instead of printing the preview iframe.
+    printWindow.document.open();
+    printWindow.document.write(generatedHTML);
+    printWindow.document.close();
 
-  URL.revokeObjectURL(url);
+    const runPrint = async () => {
+      try {
+        if (printWindow.document.fonts?.ready) {
+          await printWindow.document.fonts.ready;
+        }
+
+        const images = Array.from(printWindow.document.images);
+
+        await Promise.all(
+          images.map(image => {
+            if (image.complete) return Promise.resolve();
+
+            return new Promise(resolve => {
+              image.addEventListener("load", resolve, { once: true });
+              image.addEventListener("error", resolve, { once: true });
+            });
+          })
+        );
+
+        printWindow.focus();
+        printWindow.print();
+
+        showMessage(
+          "In the print dialog, choose “Save as PDF” to download your portfolio."
+        );
+      } catch (error) {
+        if (!printWindow.closed) printWindow.close();
+
+        showMessage(
+          "Unable to open the PDF export dialog. Please try again."
+        );
+      }
+    };
+
+    if (printWindow.document.readyState === "complete") {
+      runPrint();
+    } else {
+      printWindow.addEventListener("load", runPrint, { once: true });
+    }
+  } catch (error) {
+    if (printWindow && !printWindow.closed) {
+      printWindow.close();
+    }
+
+    showMessage(
+      "Unable to open the PDF export dialog. Please try again."
+    );
+  }
 });
 
 loadPortfolio();

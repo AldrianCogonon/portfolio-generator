@@ -1,0 +1,20 @@
+.logo-gradient {
+  display: block !important;
+  width: 264px !important;
+  min-width: 264px !important;
+  max-width: none !important;
+  height: 92px !important;
+  flex: none !important;
+  margin: 0 !important;
+
+  background: linear-gradient(
+    115deg,
+    #7c3aed 0%,
+    #e11d48 34%,
+    #2563eb 67%,
+    #f97316 100%
+  );
+
+  -webkit-mask: url("../asset/logo/soyon-svg-logo-1.svg") center / contain no-repeat;
+  mask: url("../asset/logo/soyon-svg-logo-1.svg") center / contain no-repeat;
+}
