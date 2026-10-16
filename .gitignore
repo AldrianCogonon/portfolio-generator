@@ -1,4 +1,6 @@
-echo "node_modules/" > .gitignore
-echo ".env" >> .gitignore
-echo "dist/" >> .gitignore
-echo ".DS_Store" >> .gitignore
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+.DS_Store
