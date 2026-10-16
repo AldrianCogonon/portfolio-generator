@@ -10,9 +10,6 @@
   --line:   #8a8782;
 }
  
- 
-/* 2. BASE
-   -------------------------------------------------------------------------- */
 html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
  
 body {
@@ -25,15 +22,10 @@ body {
 [contenteditable]:focus { outline: 2px solid var(--amber); outline-offset: 2px; }
  
  
-/* 3. NAVIGATION
-   -------------------------------------------------------------------------- */
 .nav { position: sticky; top: 0; z-index: 30; background: var(--ink); color: var(--white); }
 .nav nav a { color: rgba(255, 255, 255, 0.75); }
 .nav nav a:hover { color: var(--amber); }
  
- 
-/* 4. SHEETS (page cards) AND PAGE HEADER
-   -------------------------------------------------------------------------- */
 .sheet {
   position: relative;
   padding: 1.75rem;
@@ -54,9 +46,6 @@ body {
 }
 .tag { padding: 0.15rem 0.6rem; background: var(--ink); color: var(--white); }
  
- 
-/* 5. COVER
-   -------------------------------------------------------------------------- */
 .cover { padding: 2.25rem; }
  
 .dot { position: absolute; top: 1rem; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--ink); }

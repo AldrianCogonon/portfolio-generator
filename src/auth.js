@@ -193,7 +193,6 @@ if (
     } catch (error) {
       console.error("Supabase login error:", error);
 
-      // Avoid revealing whether a particular email is registered.
       showMessage(
         message,
         "Unable to log in with those details. Check your email and password, then try again."
@@ -239,6 +238,5 @@ if (
     });
   });
 
-  // Expose these only if another script needs to open or close the modal.
   window.soyonAuthModal = { open: openAuth, close: closeAuth };
 }

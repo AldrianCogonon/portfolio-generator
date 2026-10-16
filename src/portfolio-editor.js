@@ -1,4 +1,3 @@
-
 import "./portfolio-editor.css";
 import { portfolioStore } from "./portfolio-store.js";
 import { renderDocument } from "./portfolio-render.js";
@@ -106,8 +105,6 @@ function updateUrl() {
 
   history.replaceState(null, "", `?${query.toString()}`);
 }
-
-/* Profile image UI */
 
 function updateImageUI(dataUrl = "", fileName = "") {
   if (!imagePreview || !imagePlaceholder || !imageValue) return;
@@ -256,8 +253,6 @@ removeImageButton?.addEventListener("click", () => {
   showMessage("Profile picture removed.", true);
 });
 
-/* Live preview and local autosave */
-
 function updatePreview() {
   const data = getData();
 
@@ -326,8 +321,6 @@ function queueLocalSave() {
   }, 350);
 }
 
-/* Loading */
-
 function clearForNewPortfolio() {
   currentPortfolio = null;
   portfolioId = null;
@@ -349,7 +342,6 @@ function clearForNewPortfolio() {
 
 async function loadPortfolio() {
   if (editorMode === "new") {
-    // Never restore the global editor draft when explicitly creating new.
     clearForNewPortfolio();
     return;
   }
@@ -398,8 +390,6 @@ async function loadPortfolio() {
     showMessage(`Unable to load this portfolio: ${error.message}`);
   }
 }
-
-/* Save a local draft */
 
 async function saveDraft(event) {
   event?.preventDefault();
@@ -471,7 +461,6 @@ async function saveToAccount() {
     currentPortfolio = saved;
     portfolioId = saved.id;
 
-    // A successful account save now has a real Supabase record ID.
     setEditorMode("edit");
     updateUrl();
 
@@ -494,8 +483,6 @@ async function saveToAccount() {
   }
 }
 
-/* Keep one explicit account-save button */
-
 function addExplicitSaveButton() {
   if (!actionContainer || !accountButton) return;
 
@@ -516,8 +503,6 @@ function addExplicitSaveButton() {
     saveButton.textContent = "Save Draft";
   }
 }
-
-/* Form events */
 
 form.addEventListener("input", event => {
   if (event.target === imageInput) return;

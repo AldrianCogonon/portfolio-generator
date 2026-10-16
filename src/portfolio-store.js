@@ -1,4 +1,3 @@
-// src/portfolio-store.js
 import { supabase } from "../supabase.js";
 
 const STORAGE_KEY = "soyon.portfolios.v1";
@@ -122,7 +121,6 @@ function removeLocalReferences(ids = []) {
 }
 
 export const portfolioStore = {
-  // Returns browser-local records only.
   async list() {
     return sortByUpdated(readAll());
   },
@@ -135,7 +133,6 @@ export const portfolioStore = {
 
     if (String(id).startsWith("local-")) return null;
 
-    // Never retrieve another user's record.
     const user = await getCurrentUser();
 
     const { data, error } = await supabase
@@ -151,7 +148,6 @@ export const portfolioStore = {
     return upsertLocal(normalizeRemote(data));
   },
 
-  // Used by the dashboard and portfolio collection page.
   async listForDashboard() {
     const user = await getCurrentUser();
 
@@ -193,15 +189,6 @@ export const portfolioStore = {
     return sortByUpdated([...localDrafts, ...mergedRemote]);
   },
 
-  /**
-   * Save a draft to localStorage only.
-   *
-   * If the supplied ID identifies an existing published record belonging
-   * to the signed-in user, delete that matching Supabase row first.
-   *
-   * Deletion is restricted by BOTH id and user_id. If no matching row
-   * exists, the local draft is still saved. Unrelated records are untouched.
-   */
   async saveDraft(data, id = null) {
     const now = new Date().toISOString();
     const items = readAll();
@@ -215,8 +202,6 @@ export const portfolioStore = {
 
     let remoteId = getRemoteId(existing);
 
-    // If the item isn't cached locally but its ID is not a local draft ID,
-    // check for a matching remote record owned by the current user.
     if (!existing && id && !String(id).startsWith("local-")) {
       const user = await getCurrentUser();
 
@@ -234,8 +219,6 @@ export const portfolioStore = {
       }
     }
 
-    // Delete only the current user's matching remote row.
-    // A missing matching row is not an error.
     if (remoteId) {
       const user = await getCurrentUser();
 
@@ -252,15 +235,11 @@ export const portfolioStore = {
         );
       }
 
-      // No matching row is acceptable: it may already have been removed.
-      // If a row was returned, it was the exact ID and owner we targeted.
       if (deletedRows?.length) {
         console.info("Removed the matching published portfolio record.");
       }
     }
 
-    // Update an existing local-only draft in place.
-    // A formerly published portfolio becomes a new local-only draft.
     const isExistingLocalDraft =
       existing &&
       !getRemoteId(existing) &&
@@ -293,7 +272,6 @@ export const portfolioStore = {
       };
     }
 
-    // Remove stale local mirrors of the remote item, then save the draft.
     const oldIds = [
       id,
       remoteId,
@@ -320,12 +298,8 @@ export const portfolioStore = {
     return draft;
   },
 
-  // Publish to the signed-in user's Supabase account.
-  // Existing published rows are updated; otherwise a new row is inserted.
   async saveToAccount(data, id = null) {
     const user = await getCurrentUser();
-
-    // Search local cache without creating a new remote record.
     const local = id ? findLocal(id) : null;
     const remoteId = getRemoteId(local);
 
@@ -359,8 +333,6 @@ export const portfolioStore = {
     if (result.error) throw result.error;
 
     const saved = normalizeRemote(result.data);
-
-    // Replace the local draft copy after publishing.
     return upsertLocal(
       saved,
       local && !getRemoteId(local) ? local.id : null
@@ -375,7 +347,6 @@ export const portfolioStore = {
     return this.saveToAccount(data, id);
   },
 
-  // Rename a portfolio or change its status.
   async update(id, changes = {}) {
     const item = await this.get(id);
 
@@ -437,7 +408,6 @@ export const portfolioStore = {
     return upsertLocal(updated);
   },
 
-  // Delete one portfolio. Remote deletion is always scoped to the owner.
   async remove(id) {
     const item = findLocal(id) || await this.get(id);
 

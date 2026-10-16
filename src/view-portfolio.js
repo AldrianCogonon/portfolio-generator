@@ -93,7 +93,6 @@ downloadButton.addEventListener("click", () => {
   let printWindow;
 
   try {
-    // Open synchronously during the click to avoid popup blocking.
     printWindow = window.open("", "_blank");
 
     if (!printWindow) {
@@ -103,8 +102,6 @@ downloadButton.addEventListener("click", () => {
       return;
     }
 
-    // Use the same generated document that contains the selected
-    // template's styles, instead of printing the preview iframe.
     printWindow.document.open();
     printWindow.document.write(generatedHTML);
     printWindow.document.close();
