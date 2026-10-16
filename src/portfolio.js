@@ -398,13 +398,13 @@ profileMenu?.addEventListener("click", event => {
   profileMenu.classList.remove("open");
   profileButton?.setAttribute("aria-expanded", "false");
 
-  window.location.href = "./login.html";
+  window.location.href = "./login-sign.html#login";
 });
 
 document.querySelectorAll('[data-action="templates"]').forEach(link => {
   link.addEventListener("click", event => {
     event.preventDefault();
-    window.location.href = "./templates.html";
+    window.location.href = "./dashboard.html#templates";
   });
 });
 
