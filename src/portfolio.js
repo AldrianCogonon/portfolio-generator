@@ -1,70 +1,55 @@
-const seedPortfolios = [
-  {
-    id: 1,
-    title: "Creative Resume",
-    status: "draft",
-    updated: "Updated 2 hours ago",
-    preview: "resume",
-    description: "A clean introduction to your experience and skills."
-  },
-  {
-    id: 2,
-    title: "Marketing Portfolio",
-    status: "published",
-    updated: "Updated 1 day ago",
-    preview: "marketing",
-    description: "Strategic marketing solutions for modern brands."
-  },
-  {
-    id: 3,
-    title: "Designer Portfolio",
-    status: "published",
-    updated: "Updated 3 days ago",
-    preview: "design",
-    description: "Thoughtful design and selected creative work."
-  }
-];
 
-let portfolios = loadPortfolios();
-let toastTimer;
+import { portfolioStore } from "./portfolio-store.js";
+
+const templateNames = {
+  simple: "Simple template",
+  modern: "Modern template",
+  creative: "Creative template"
+};
+
+const previewStyles = {
+  simple: {
+    wrapper: "resume",
+    initial: "S"
+  },
+  modern: {
+    wrapper: "marketing",
+    initial: "M"
+  },
+  creative: {
+    wrapper: "design",
+    initial: "C"
+  }
+};
 
 const list = document.querySelector("#portfolio-list");
 const search = document.querySelector("#portfolio-search");
 const toast = document.querySelector("#toast");
+const createButton = document.querySelector("#create-portfolio");
 
-const escapeHTML = value =>
-  String(value).replace(/[&<>"']/g, char => ({
+const totalCount = document.querySelector("#stat-total");
+const publishedCount = document.querySelector("#stat-published");
+const draftCount = document.querySelector("#stat-drafts");
+
+let portfolios = [];
+let toastTimer = null;
+
+function escapeHTML(value = "") {
+  return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
     '"': "&quot;",
     "'": "&#39;"
-  }[char]));
-
-function loadPortfolios() {
-  try {
-    const saved = localStorage.getItem("soyon-portfolios");
-
-    return saved
-      ? JSON.parse(saved)
-      : seedPortfolios.map(item => ({ ...item }));
-  } catch {
-    return seedPortfolios.map(item => ({ ...item }));
-  }
-}
-
-function save() {
-  try {
-    localStorage.setItem(
-      "soyon-portfolios",
-      JSON.stringify(portfolios)
-    );
-  } catch {
-    // Local storage may be unavailable in some browser contexts.
-  }
+  })[character]);
 }
 
 function notify(message) {
+  if (!toast) {
+    console.info(message);
+    return;
+  }
+
   toast.textContent = message;
   toast.classList.add("show");
 
@@ -72,54 +57,79 @@ function notify(message) {
 
   toastTimer = setTimeout(() => {
     toast.classList.remove("show");
-  }, 2600);
+  }, 3000);
 }
 
-function previewMarkup(type) {
-  if (type === "marketing") {
+function formatTemplate(templateKey) {
+  return templateNames[templateKey] || "Portfolio template";
+}
+
+function formatUpdatedDate(portfolio) {
+  const value = portfolio.updated_at || portfolio.created_at;
+
+  if (!value) {
+    return "Not yet saved";
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Recently updated";
+  }
+
+  return date.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function getTemplateKey(portfolio) {
+  const key =
+    portfolio.template_key ||
+    portfolio.content?.template_key ||
+    "simple";
+
+  return Object.hasOwn(previewStyles, key) ? key : "simple";
+}
+
+/* Preview cards use the same template keys as the dashboard. */
+function previewMarkup(templateKey) {
+  const preview = previewStyles[templateKey] || previewStyles.simple;
+
+  if (templateKey === "modern") {
     return `
       <div class="preview marketing">
-        <div class="micro">JORDAN SMITH</div>
-
-        <div class="marketing-title">
-          Marketing<br>Portfolio
-        </div>
-
+        <div class="micro">SOYON PORTFOLIO</div>
+        <div class="marketing-title">My<br>Portfolio</div>
         <div class="marketing-copy">
-          Strategic marketing solutions<br>
-          for modern brands.
+          Experience, skills<br>and selected work.
         </div>
-
         <div class="building"></div>
-
         <div class="marketing-foot">
-          <span>5+<br><small>Years Experience</small></span>
-          <span>25+<br><small>Projects Completed</small></span>
-          <span>12<br><small>Happy Clients</small></span>
+          <span>01<br><small>Experience</small></span>
+          <span>02<br><small>Projects</small></span>
+          <span>03<br><small>Skills</small></span>
         </div>
       </div>
     `;
   }
 
-  if (type === "design") {
+  if (templateKey === "creative") {
     return `
       <div class="preview design">
         <div class="design-nav">
-          <b>TAYLOR KIM</b>
-          <span>Work　 About　 Contact</span>
+          <b>MY PORTFOLIO</b>
+          <span>Work　 About</span>
         </div>
-
         <div class="design-title">
-          Design<br>
-          creates<br>
-          <em>opportunities.</em>
+          Creative<br>
+          work and<br>
+          <em>ideas.</em>
         </div>
-
         <div class="design-desc">
-          A visual designer focused on creating meaningful
-          brand experiences.
+          A selection of skills, projects and experiences.
         </div>
-
         <div class="plant-scene">
           <div class="plant-pot"></div>
         </div>
@@ -131,24 +141,20 @@ function previewMarkup(type) {
     <div class="preview resume">
       <div class="resume-page">
         <div class="resume-left">
-          <div class="mini-name">Alex Rivera</div>
-          <div class="mini-role">Software Developer</div>
+          <div class="mini-name">My Portfolio</div>
+          <div class="mini-role">Professional Profile</div>
           <div class="portrait"></div>
-
           <div class="mini-section">About Me</div>
           <div class="mini-lines"></div>
           <div class="mini-lines"></div>
           <div class="mini-lines" style="width:65%"></div>
         </div>
-
         <div class="resume-right">
           <div class="mini-section">Experience</div>
           <div class="mini-lines"></div>
           <div class="mini-lines" style="width:75%"></div>
-
           <div class="mini-section">Education</div>
           <div class="mini-lines"></div>
-
           <div class="mini-section">Skills</div>
           <div class="mini-lines" style="width:75%"></div>
         </div>
@@ -157,27 +163,31 @@ function previewMarkup(type) {
   `;
 }
 
-function cardMarkup(item) {
-  const status =
-    item.status === "published" ? "Published" : "Draft";
+function cardMarkup(portfolio) {
+  const id = String(portfolio.id);
+  const title = portfolio.title || "Untitled portfolio";
+  const templateKey = getTemplateKey(portfolio);
+
+  const isPublished = portfolio.status === "published";
+  const statusClass = isPublished ? "published" : "draft";
+  const statusLabel = isPublished ? "Published" : "Draft";
 
   return `
-    <article class="portfolio-card" data-id="${item.id}">
-      ${previewMarkup(item.preview)}
+    <article class="portfolio-card" data-id="${escapeHTML(id)}">
+      ${previewMarkup(templateKey)}
 
       <div class="card-head">
         <div class="card-title-row">
-          <h2 class="card-title">
-            ${escapeHTML(item.title)}
-          </h2>
+          <h2 class="card-title">${escapeHTML(title)}</h2>
 
           <button
             class="more-btn"
+            type="button"
             data-action="menu"
-            aria-label="More options for ${escapeHTML(item.title)}"
+            aria-label="More options for ${escapeHTML(title)}"
             aria-expanded="false"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <circle cx="12" cy="5" r="1.7"/>
               <circle cx="12" cy="12" r="1.7"/>
               <circle cx="12" cy="19" r="1.7"/>
@@ -186,40 +196,38 @@ function cardMarkup(item) {
         </div>
 
         <div class="card-menu">
-          <button data-action="rename">Rename</button>
-
-          <button data-action="toggle-status">
-            ${item.status === "published"
-              ? "Move to drafts"
-              : "Publish portfolio"}
-          </button>
-
-          <button data-action="duplicate">Duplicate</button>
-          <button data-action="delete">Delete</button>
+          <button type="button" data-action="rename">Rename</button>
+          <button type="button" data-action="duplicate">Duplicate</button>
+          <button type="button" data-action="delete">Delete</button>
         </div>
       </div>
 
-      <span class="status ${item.status}">
-        ${status}
-      </span>
+      <span class="status ${statusClass}">${statusLabel}</span>
 
       <div class="updated">
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.7" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
           <path d="M12 7v5l3 2"/>
         </svg>
-
-        ${escapeHTML(item.updated)}
+        Updated ${escapeHTML(formatUpdatedDate(portfolio))}
       </div>
 
-      <button class="edit-btn" data-action="edit">
-        <svg viewBox="0 0 24 24">
+      <button
+        class="edit-btn"
+        type="button"
+        data-action="edit"
+        data-edit-id="${escapeHTML(id)}"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.7" aria-hidden="true">
           <path d="m14 5 5 5M4 20l4.5-1 11-11a2.1 2.1 0 0 0-3-3l-11 11z"/>
         </svg>
 
         <span>Edit portfolio</span>
 
-        <svg class="arrow" viewBox="0 0 24 24">
+        <svg class="arrow" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.7" aria-hidden="true">
           <path d="M4 12h15m-6-6 6 6-6 6"/>
         </svg>
       </button>
@@ -227,107 +235,245 @@ function cardMarkup(item) {
   `;
 }
 
-/* Render portfolio cards and statistics */
+/* Same editor routing pattern used by dashboard.js. */
+function openBuilder(template = "simple", id = null) {
+  const params = new URLSearchParams();
+  params.set("template", template);
+
+  if (id !== null && id !== undefined && String(id).trim()) {
+    params.set("id", String(id));
+    params.set("mode", "edit");
+  } else {
+    params.set("mode", "new");
+  }
+
+  window.location.href =
+    `./portfolio-editor.html?${params.toString()}`;
+}
+
+function createPortfolio() {
+  openBuilder("simple");
+}
 
 function render() {
-  const query = search.value.trim().toLowerCase();
+  if (!list) return;
 
-  const filtered = portfolios.filter(portfolio =>
-    portfolio.title.toLowerCase().includes(query)
-  );
+  const query = (search?.value || "").trim().toLowerCase();
 
-  document.querySelector("#stat-total").textContent =
-    String(portfolios.length).padStart(2, "0");
+  const filtered = portfolios.filter(portfolio => {
+    const title = portfolio.title || "Untitled portfolio";
+    const template = formatTemplate(getTemplateKey(portfolio));
 
-  document.querySelector("#stat-published").textContent =
-    String(
+    return `${title} ${template} ${portfolio.status || "draft"}`
+      .toLowerCase()
+      .includes(query);
+  });
+
+  if (totalCount) {
+    totalCount.textContent = String(portfolios.length);
+  }
+
+  if (publishedCount) {
+    publishedCount.textContent = String(
       portfolios.filter(item => item.status === "published").length
-    ).padStart(2, "0");
+    );
+  }
 
-  document.querySelector("#stat-drafts").textContent =
-    String(
-      portfolios.filter(item => item.status === "draft").length
-    ).padStart(2, "0");
+  if (draftCount) {
+    draftCount.textContent = String(
+      portfolios.filter(item => item.status !== "published").length
+    );
+  }
 
-  list.innerHTML = filtered.length
-    ? filtered.map(cardMarkup).join("")
-    : `
-      <div class="empty-state">
-        <h2>
-          ${query
-            ? "No portfolios found"
-            : "Your portfolio space is ready"}
-        </h2>
+  if (filtered.length) {
+    list.innerHTML = filtered.map(cardMarkup).join("");
+    return;
+  }
 
-        <p>
-          ${query
+  list.innerHTML = `
+    <div class="empty-state">
+      <h2>${query ? "No portfolios found" : "Your portfolio space is ready"}</h2>
+      <p>
+        ${
+          query
             ? "Try another search term."
-            : "Create a portfolio to start showcasing your work."}
-        </p>
-
-        ${query
+            : "Create a portfolio to start showcasing your skills and work."
+        }
+      </p>
+      ${
+        query
           ? ""
           : `
-            <button class="primary-btn" data-action="create">
+            <button class="primary-btn" type="button" data-action="create">
               <span aria-hidden="true">＋</span>
               Create portfolio
             </button>
-          `}
+          `
+      }
+    </div>
+  `;
+}
+
+function showLoadError(error) {
+  console.error("Unable to load portfolios:", error);
+
+  if (list) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <h2>Unable to load portfolios</h2>
+        <p>${escapeHTML(error.message || "Please try again.")}</p>
+        <button class="primary-btn" type="button" data-action="retry">
+          Try again
+        </button>
       </div>
     `;
+  }
+
+  notify("Unable to load your portfolios. Please try again.");
 }
 
-/* Create a portfolio */
+/* Use the same store method as dashboard.js. */
+async function loadPortfolios() {
+  if (list) {
+    list.innerHTML = `
+      <div class="empty-state">
+        <p>Loading your portfolios…</p>
+      </div>
+    `;
+  }
 
-function createPortfolio() {
-  const title = prompt(
-    "Give your new portfolio a name:",
-    "Untitled Portfolio"
+  try {
+    portfolios = await portfolioStore.listForDashboard();
+    render();
+  } catch (error) {
+    showLoadError(error);
+  }
+}
+
+function findPortfolio(id) {
+  return portfolios.find(
+    item => String(item.id) === String(id)
   );
+}
 
-  if (title === null) {
+function closeCardMenus() {
+  document.querySelectorAll(".card-menu.open").forEach(menu => {
+    menu.classList.remove("open");
+
+    const button = menu.parentElement
+      ?.querySelector('[data-action="menu"]');
+
+    button?.setAttribute("aria-expanded", "false");
+  });
+}
+
+async function renamePortfolio(portfolio) {
+  const oldTitle = portfolio.title || "Untitled portfolio";
+  const newTitle = window.prompt("Rename portfolio:", oldTitle);
+
+  if (newTitle === null) return;
+
+  const title = newTitle.trim();
+
+  if (!title) {
+    notify("Portfolio name cannot be empty.");
     return;
   }
 
-  if (!title.trim()) {
-    notify("Please enter a portfolio name.");
-    return;
-  }
+  if (title === oldTitle) return;
 
-  const item = {
-    id: Date.now(),
-    title: title.trim(),
-    status: "draft",
-    updated: "Updated just now",
-    preview: "resume",
-    description: "Your new portfolio."
+  const data = {
+    title,
+    template_key: getTemplateKey(portfolio),
+    content: {
+      ...(portfolio.content || {}),
+      title,
+      template_key: getTemplateKey(portfolio)
+    }
   };
 
-  portfolios.unshift(item);
+  try {
+    let saved;
 
-  save();
+    if (portfolio.is_remote || portfolio.remote_id) {
+      // Update the account record through the same account store method.
+      saved = await portfolioStore.saveToAccount(data, portfolio.id);
+    } else {
+      // Keep browser-only drafts local until the owner chooses Save to Account.
+      saved = await portfolioStore.saveDraft(data, portfolio.id);
+    }
 
-  search.value = "";
+    portfolios = portfolios.map(item =>
+      String(item.id) === String(portfolio.id) ? saved : item
+    );
 
-  render();
-
-  notify("Portfolio created.");
+    render();
+    notify("Portfolio renamed.");
+  } catch (error) {
+    console.error("Unable to rename portfolio:", error);
+    notify(`Unable to rename portfolio: ${error.message}`);
+  }
 }
 
-document
-  .querySelector("#create-portfolio")
-  .addEventListener("click", createPortfolio);
+async function duplicatePortfolio(portfolio) {
+  const title = `${portfolio.title || "Untitled portfolio"} (Copy)`;
 
-search.addEventListener("input", render);
+  const data = {
+    title,
+    template_key: getTemplateKey(portfolio),
+    content: {
+      ...(portfolio.content || {}),
+      title,
+      template_key: getTemplateKey(portfolio)
+    }
+  };
 
-/* Portfolio card actions */
+  try {
+    // Duplicate as a local draft; it is not published or shared.
+    const duplicate = await portfolioStore.saveDraft(data);
 
-list.addEventListener("click", event => {
-  const button = event.target.closest("[data-action]");
-
-  if (!button) {
-    return;
+    portfolios = [duplicate, ...portfolios];
+    render();
+    notify("Portfolio duplicated as a local draft.");
+  } catch (error) {
+    console.error("Unable to duplicate portfolio:", error);
+    notify(`Unable to duplicate portfolio: ${error.message}`);
   }
+}
+
+async function deletePortfolio(portfolio) {
+  const title = portfolio.title || "Untitled portfolio";
+
+  const confirmed = window.confirm(
+    `Delete "${title}"? This action cannot be undone.`
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await portfolioStore.remove(portfolio.id);
+
+    portfolios = portfolios.filter(
+      item => String(item.id) !== String(portfolio.id)
+    );
+
+    render();
+    notify("Portfolio deleted.");
+  } catch (error) {
+    console.error("Unable to delete portfolio:", error);
+    notify(`Unable to delete portfolio: ${error.message}`);
+  }
+}
+
+/* Main portfolio-card actions. */
+list?.addEventListener("click", async event => {
+  const target = event.target;
+
+  if (!(target instanceof Element)) return;
+
+  const button = target.closest("[data-action]");
+
+  if (!button) return;
 
   const action = button.dataset.action;
 
@@ -336,210 +482,124 @@ list.addEventListener("click", event => {
     return;
   }
 
-  const card = button.closest(".portfolio-card");
-
-  if (!card) {
+  if (action === "retry") {
+    await loadPortfolios();
     return;
   }
 
-  const id = Number(card.dataset.id);
-  const item = portfolios.find(portfolio => portfolio.id === id);
+  const card = button.closest(".portfolio-card");
 
-  if (!item) {
+  if (!card) return;
+
+  const portfolio = findPortfolio(card.dataset.id);
+
+  if (!portfolio) {
+    notify("This portfolio could not be found. Refresh the page and try again.");
     return;
   }
 
   if (action === "menu") {
     const menu = card.querySelector(".card-menu");
-    const open = !menu.classList.contains("open");
+    const willOpen = !menu?.classList.contains("open");
 
-    document
-      .querySelectorAll(".card-menu.open")
-      .forEach(openMenu => {
-        openMenu.classList.remove("open");
+    closeCardMenus();
 
-        const menuButton =
-          openMenu.parentElement.querySelector('[data-action="menu"]');
-
-        menuButton?.setAttribute("aria-expanded", "false");
-      });
-
-    menu.classList.toggle("open", open);
-
-    button.setAttribute("aria-expanded", String(open));
-
+    menu?.classList.toggle("open", willOpen);
+    button.setAttribute("aria-expanded", String(willOpen));
     return;
   }
 
-  card.querySelector(".card-menu")?.classList.remove("open");
+  closeCardMenus();
+
+  if (action === "edit") {
+    openBuilder(getTemplateKey(portfolio), portfolio.id);
+    return;
+  }
 
   if (action === "rename") {
-    const title = prompt("Rename portfolio:", item.title);
+    await renamePortfolio(portfolio);
+    return;
+  }
 
-    if (title === null) {
-      return;
-    }
+  if (action === "duplicate") {
+    await duplicatePortfolio(portfolio);
+    return;
+  }
 
-    if (!title.trim()) {
-      notify("Name cannot be empty.");
-      return;
-    }
-
-    item.title = title.trim();
-    item.updated = "Updated just now";
-
-    save();
-    render();
-
-    notify("Portfolio renamed.");
-  } else if (action === "toggle-status") {
-    item.status =
-      item.status === "published" ? "draft" : "published";
-
-    item.updated = "Updated just now";
-
-    save();
-    render();
-
-    notify(
-      item.status === "published"
-        ? "Portfolio marked as published."
-        : "Portfolio moved to drafts."
-    );
-  } else if (action === "duplicate") {
-    const copy = {
-      ...item,
-      id: Date.now(),
-      title: `${item.title} (Copy)`,
-      status: "draft",
-      updated: "Updated just now"
-    };
-
-    portfolios.unshift(copy);
-
-    save();
-    render();
-
-    notify("Portfolio duplicated as a draft.");
-  } else if (action === "delete") {
-    const confirmed = confirm(
-      `Delete "${item.title}"? This cannot be undone.`
-    );
-
-    if (confirmed) {
-      portfolios = portfolios.filter(
-        portfolio => portfolio.id !== id
-      );
-
-      save();
-      render();
-
-      notify("Portfolio deleted.");
-    }
-  } else if (action === "edit") {
-    notify("Portfolio editor integration is not connected yet.");
+  if (action === "delete") {
+    await deletePortfolio(portfolio);
   }
 });
+
+createButton?.addEventListener("click", createPortfolio);
+search?.addEventListener("input", render);
 
 document.addEventListener("click", event => {
+  if (!(event.target instanceof Element)) return;
+
   if (!event.target.closest(".card-head")) {
-    document.querySelectorAll(".card-menu.open").forEach(menu => {
-      menu.classList.remove("open");
-
-      const menuButton =
-        menu.parentElement.querySelector('[data-action="menu"]');
-
-      menuButton?.setAttribute("aria-expanded", "false");
-    });
-  }
-
-  if (
-    !event.target.closest(".profile-button") &&
-    !event.target.closest(".profile-menu")
-  ) {
-    document.querySelector("#profile-menu").classList.remove("open");
-
-    document
-      .querySelector("#profile-button")
-      .setAttribute("aria-expanded", "false");
+    closeCardMenus();
   }
 });
 
+/* Keep the existing mobile navigation controls working. */
+const sidebar = document.querySelector("#sidebar");
+const overlay = document.querySelector("#mobile-overlay");
+const menuToggle = document.querySelector("#menu-toggle");
+const mobileClose = document.querySelector("#mobile-close");
+
+function closeSidebar() {
+  sidebar?.classList.remove("open");
+  overlay?.classList.remove("show");
+  menuToggle?.setAttribute("aria-expanded", "false");
+}
+
+menuToggle?.addEventListener("click", () => {
+  sidebar?.classList.add("open");
+  overlay?.classList.add("show");
+  menuToggle.setAttribute("aria-expanded", "true");
+});
+
+mobileClose?.addEventListener("click", closeSidebar);
+overlay?.addEventListener("click", closeSidebar);
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeSidebar();
+    closeCardMenus();
+    document.querySelector("#profile-menu")?.classList.remove("open");
+    document.querySelector("#profile-button")?.setAttribute("aria-expanded", "false");
+  }
+});
+
+/* Existing profile menu and notification interactions. */
 const profileButton = document.querySelector("#profile-button");
 const profileMenu = document.querySelector("#profile-menu");
 
-profileButton.addEventListener("click", () => {
-  const open = !profileMenu.classList.contains("open");
-
-  profileMenu.classList.toggle("open", open);
-
-  profileButton.setAttribute("aria-expanded", String(open));
+profileButton?.addEventListener("click", () => {
+  const isOpen = profileMenu?.classList.toggle("open") || false;
+  profileButton.setAttribute("aria-expanded", String(isOpen));
 });
 
-profileMenu.addEventListener("click", event => {
+profileMenu?.addEventListener("click", event => {
+  if (!(event.target instanceof Element)) return;
+
   const button = event.target.closest("button[data-action]");
 
-  if (!button) {
-    return;
-  }
+  if (!button) return;
 
   profileMenu.classList.remove("open");
+  profileButton?.setAttribute("aria-expanded", "false");
 
-  profileButton.setAttribute("aria-expanded", "false");
-
-  const action = button.dataset.action;
-
-  if (action === "logout") {
-    if (confirm("Log out of SOYON?")) {
-      notify("Connect this action to your authentication flow.");
-    }
+  if (button.dataset.action === "logout") {
+    notify("Connect logout to your SOYON authentication flow.");
   } else {
-    notify(`${button.textContent} is not connected yet.`);
+    notify(`${button.textContent.trim()} is not connected yet.`);
   }
 });
 
-document
-  .querySelector("#notification-btn")
-  .addEventListener("click", () => {
-    notify("You're all caught up.");
-  });
-
-const sidebar = document.querySelector("#sidebar");
-const overlay = document.querySelector("#mobile-overlay");
-const toggle = document.querySelector("#menu-toggle");
-
-function closeNav() {
-  sidebar.classList.remove("open");
-  overlay.classList.remove("show");
-
-  toggle.setAttribute("aria-expanded", "false");
-}
-
-toggle.addEventListener("click", () => {
-  sidebar.classList.add("open");
-  overlay.classList.add("show");
-
-  toggle.setAttribute("aria-expanded", "true");
+document.querySelector("#notification-btn")?.addEventListener("click", () => {
+  notify("You're all caught up.");
 });
 
-document
-  .querySelector("#mobile-close")
-  .addEventListener("click", closeNav);
-
-overlay.addEventListener("click", closeNav);
-
-window.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeNav();
-
-    profileMenu.classList.remove("open");
-
-    profileButton.setAttribute("aria-expanded", "false");
-
-    document.querySelectorAll(".card-menu.open").forEach(menu => {
-      menu.classList.remove("open");
-    });
-  }
-});
-
-render();
+loadPortfolios();
