@@ -284,7 +284,7 @@ function showMessage(text) {
 }
 
 function openBuilder(template = "simple") {
-  const destination = new URL("./builder.html", window.location.href);
+  const destination = new URL("./portfolio-editor.html", window.location.href);
   destination.searchParams.set("template", template);
   window.location.href = destination.toString();
 }

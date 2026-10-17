@@ -1,6 +1,6 @@
 import "./portfolio-editor.css";
 import { portfolioStore } from "./portfolio-store.js";
-import { renderDocument } from "./portfolio-renderer.js";
+import { renderDocument } from "./portfolio-render.js";
 
 const form = document.querySelector("#portfolio-form");
 const iframe = document.querySelector("#portfolio-preview");
@@ -85,6 +85,13 @@ async function loadPortfolio() {
       } catch {
         // Ignore invalid draft data.
       }
+    }
+
+    const chosen = params.get("template");
+
+    if (["simple", "modern", "creative"].includes(chosen)) {
+      form.elements.namedItem("template_key").value = chosen;
+      updatePreview();
     }
 
     showMessage(
