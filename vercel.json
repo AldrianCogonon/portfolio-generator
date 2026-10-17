@@ -1,6 +1,10 @@
-
 {
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/login",
+      "destination": "/login-sign.html"
+    },
     {
       "source": "/dashboard",
       "destination": "/dashboard.html"
@@ -16,10 +20,6 @@
     {
       "source": "/view-portfolio",
       "destination": "/view-portfolio.html"
-    },
-    {
-      "source": "/login-sign",
-      "destination": "/login-sign.html"
     },
     {
       "source": "/reset-password",
