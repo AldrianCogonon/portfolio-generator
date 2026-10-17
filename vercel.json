@@ -1,0 +1,41 @@
+
+{
+  "rewrites": [
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    },
+    {
+      "source": "/portfolio-editor",
+      "destination": "/portfolio-editor.html"
+    },
+    {
+      "source": "/view-portfolio",
+      "destination": "/view-portfolio.html"
+    },
+    {
+      "source": "/login-sign",
+      "destination": "/login-sign.html"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "/reset-password.html"
+    },
+    {
+      "source": "/simple",
+      "destination": "/simple.html"
+    },
+    {
+      "source": "/modern",
+      "destination": "/modern.html"
+    },
+    {
+      "source": "/creative",
+      "destination": "/creative.html"
+    }
+  ]
+}
