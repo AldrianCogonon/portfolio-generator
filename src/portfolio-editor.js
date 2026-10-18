@@ -38,6 +38,7 @@ const fields = [
   "phone",
   "address",
   "profile_image",
+  "cover_image",
   "about",
   "education",
   "skills",
@@ -389,6 +390,7 @@ async function setProjectImages(entries) {
 
   writeProjectImages(images);
   renderProjectImages();
+  updateCoverUI(data.cover_image || "");
   updatePreview();
 }
 
@@ -469,6 +471,70 @@ projectImagesBulk?.addEventListener("change", async () => {
   } catch (error) {
     showMessage(error.message);
   }
+});
+
+/* ---------- Cover banner (used by the Creative template) ---------- */
+
+const coverInput = document.querySelector("#cover_image_file");
+const coverPreview = document.querySelector("#cover-image-preview");
+const coverPlaceholder = document.querySelector("#cover-image-placeholder");
+const coverValue = document.querySelector("#cover_image");
+const coverName = document.querySelector("#cover-image-name");
+const removeCoverButton = document.querySelector("#remove-cover-image");
+
+const coverImageOptions = {
+  maxDimension: 1400,
+  quality: 0.8,
+  maxLength: 1_800_000
+};
+
+function updateCoverUI(dataUrl = "", fileName = "") {
+  if (!coverPreview || !coverPlaceholder || !coverValue) return;
+
+  coverValue.value = dataUrl;
+
+  if (dataUrl) {
+    coverPreview.src = dataUrl;
+    coverPreview.hidden = false;
+    coverPlaceholder.hidden = true;
+
+    if (coverName) coverName.textContent = fileName || "Cover banner selected";
+    if (removeCoverButton) removeCoverButton.hidden = false;
+  } else {
+    coverPreview.removeAttribute("src");
+    coverPreview.hidden = true;
+    coverPlaceholder.hidden = false;
+
+    if (coverName) coverName.textContent = "No banner selected";
+    if (removeCoverButton) removeCoverButton.hidden = true;
+  }
+}
+
+coverInput?.addEventListener("change", async () => {
+  const file = coverInput.files?.[0];
+
+  if (!file) return;
+
+  try {
+    showMessage("Preparing your cover banner…", true);
+
+    const dataUrl = await resizeImage(file, coverImageOptions);
+
+    updateCoverUI(dataUrl, file.name);
+    updatePreview();
+
+    showMessage("Cover banner updated. Save to Account when you're ready.", true);
+  } catch (error) {
+    showMessage(error.message);
+  } finally {
+    coverInput.value = "";
+  }
+});
+
+removeCoverButton?.addEventListener("click", () => {
+  updateCoverUI();
+  updatePreview();
+  showMessage("Cover banner removed.", true);
 });
 
 function updatePreview() {

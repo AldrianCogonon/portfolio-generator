@@ -266,7 +266,92 @@ function openBuilder(template = "simple", id = null) {
 
   location.href = `./portfolio-editor.html?${params.toString()}`;
 }
+function confirmDeletePortfolio(portfolioTitle) {
+  document.querySelector("#delete-confirmation-dialog")?.remove();
 
+  return new Promise(resolve => {
+    const overlay = document.createElement("div");
+    overlay.id = "delete-confirmation-dialog";
+    overlay.style.cssText = `
+      position:fixed;inset:0;z-index:9999;display:flex;
+      align-items:center;justify-content:center;padding:16px;
+      background:rgba(15,23,42,.45);
+    `;
+
+    overlay.innerHTML = `
+      <section role="alertdialog" aria-modal="true"
+        aria-labelledby="delete-dialog-title"
+        aria-describedby="delete-dialog-description"
+        style="box-sizing:border-box;width:100%;max-width:420px;
+          padding:24px;background:#fff;border:1px solid #e2e8f0;
+          border-radius:16px;box-shadow:0 24px 60px rgba(15,23,42,.2);
+          color:#0f172a;font-family:inherit;">
+        <div aria-hidden="true" style="display:grid;place-items:center;
+          width:44px;height:44px;border-radius:12px;background:#eff6ff;
+          color:#1d4ed8;font-size:22px;margin-bottom:16px;">!</div>
+        <h2 id="delete-dialog-title"
+          style="margin:0;font-size:19px;font-weight:700;color:#0f172a;">
+          Delete portfolio?
+        </h2>
+        <p id="delete-dialog-description"
+          style="margin:10px 0 0;color:#475569;font-size:14px;line-height:1.6;">
+          Are you sure you want to delete
+          <strong data-dialog-portfolio style="color:#1e293b;"></strong>?
+          This action cannot be undone.
+        </p>
+        <div style="display:flex;justify-content:flex-end;gap:10px;
+          flex-wrap:wrap;margin-top:24px;">
+          <button type="button" data-dialog-cancel
+            style="padding:10px 16px;border:1px solid #cbd5e1;
+              border-radius:10px;background:#fff;color:#334155;
+              font:inherit;font-size:14px;font-weight:600;cursor:pointer;">
+            Cancel
+          </button>
+          <button type="button" data-dialog-confirm
+            style="padding:10px 16px;border:1px solid #1d4ed8;
+              border-radius:10px;background:#2563eb;color:#fff;
+              font:inherit;font-size:14px;font-weight:600;cursor:pointer;">
+            Delete portfolio
+          </button>
+        </div>
+      </section>`;
+
+    overlay.querySelector("[data-dialog-portfolio]").textContent =
+      `"${portfolioTitle}"`;
+
+    const cancel = overlay.querySelector("[data-dialog-cancel]");
+    const confirm = overlay.querySelector("[data-dialog-confirm]");
+    let finished = false;
+
+    function finish(result) {
+      if (finished) return;
+      finished = true;
+      document.removeEventListener("keydown", onKeydown);
+      overlay.remove();
+      resolve(result);
+    }
+
+    function onKeydown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        finish(false);
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        (document.activeElement === cancel ? confirm : cancel).focus();
+      }
+    }
+
+    cancel.addEventListener("click", () => finish(false));
+    confirm.addEventListener("click", () => finish(true));
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) finish(false);
+    });
+
+    document.addEventListener("keydown", onKeydown);
+    document.body.appendChild(overlay);
+    cancel.focus();
+  });
+}
 document.querySelector("#create-portfolio")?.addEventListener("click", () => {
   openBuilder("simple");
 });

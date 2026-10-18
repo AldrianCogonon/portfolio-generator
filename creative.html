@@ -1,190 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Creative Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/creative.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Portfolio Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/creative.css">
 </head>
-<body class="font-mono text-ink">
-<!-- TIP: click any text to edit it. To keep changes, edit the text in this file. -->
+<body>
 
-<!-- NAV -->
-<header class="nav">
-  <div class="max-w-5xl mx-auto px-4 h-12 flex items-center justify-between">
-    <a href="#home" class="font-display font-bold tracking-widest text-sm">CALLIE KENSHI</a>
-    <nav class="hidden md:flex gap-5 text-[11px] uppercase tracking-wider">
-      <a href="#about">About</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#connect">Links</a><a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+<main class="wrap">
 
-<main class="max-w-5xl mx-auto px-4 py-10 space-y-10">
-
-<!-- COVER -->
-<section id="home" class="sheet cover">
-  <i class="dot dot-l"></i><i class="dot dot-r"></i>
-  <h1 class="cover-title">CALLIE<br>KENSHI</h1>
-  <div class="cover-art">
-    <span class="arrow arrow-l">&#9664;</span><span class="arrow arrow-r">&#9654;</span>
-    <svg class="squiggle sq-1" viewBox="0 0 60 60" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M6 54 20 8M20 40l8-24M34 50l14-30"/></svg>
-    <svg class="squiggle sq-2" viewBox="0 0 80 40" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M2 10c10-8 12 8 22 0s12 8 22 0 12 8 22 0M2 24c10-8 12 8 22 0s12 8 22 0 12 8 22 0"/></svg>
-    <div class="cover-circle"><!-- Replace profile.svg with your picture --><img src="profile.svg" alt="Profile picture" /></div>
-    <img class="cover-badge" src="profile.svg" alt="Profile picture" />
-  </div>
-  <div class="cover-bar"><span>SELECTED</span><span>2026-10</span></div>
-  <div class="cover-row bg-white">Aspiring Web Developer</div>
-  <div class="cover-row">BY</div>
-  <div class="cover-row bg-ink text-white">CALLIE KENSHI</div>
-</section>
-
-<!-- ABOUT + TABLE OF CONTENTS -->
-<section id="about" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 02</span><span>CREATIVE PORTFOLIO</span></div>
-  <div class="grid md:grid-cols-2 gap-8 mt-6">
-    <div>
-      <div class="flex items-center gap-4">
-        <img class="avatar" src="profile.svg" alt="Profile picture" />
-        <h2 class="h-display">ABOUT<br>ME</h2>
+  <div class="top">
+    <!-- PROFILE -->
+    <section class="card profile">
+      <div class="banner" data-field="cover_image">
+        <div class="sticky" data-field="title">UI/UX Designer &amp; Frontend Developer</div>
+        <div class="handwritten" aria-hidden="true" data-field="skills_top">Design<br>Build<br>Create</div>
       </div>
-      <p class="mt-5 text-xs leading-relaxed">I'm a passionate and motivated individual with a strong interest in technology and design. I enjoy creating simple and user-friendly solutions that solve real problems. I'm always eager to learn new skills and grow both personally and professionally.</p>
-      <div class="tbl mt-5">
-        <div class="tbl-head amber"><span>TRAITS</span><span>&#9679;</span></div>
-        <div class="tbl-row"><span>Problem Solver</span></div>
-        <div class="tbl-row"><span>Creative Thinker</span></div>
-        <div class="tbl-row"><span>Fast Learner</span></div>
-        <div class="tbl-row"><span>Always Learning</span></div>
+
+      <div class="avatar-ring">
+        <div class="avatar" data-field="profile_image">AM</div>
       </div>
+
+      <div class="profile-body">
+        <h1 class="profile-name" data-field="full_name">Alex Morgan</h1>
+        <p class="profile-handle" data-field="handle">morgan.dev</p>
+        <p class="profile-about" data-field="about">
+          I'm a passionate UI/UX designer and frontend developer with a love
+          for creating clean, functional, and visually engaging digital experiences.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <aside class="card contacts">
+      <h2>Contacts</h2>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+        <span data-field="email">alex@morgan.dev</span>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <span data-field="address">San Francisco, CA</span>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>
+        <span data-field="social_links">morgan.dev</span>
+      </div>
+    </aside>
+  </div>
+
+  <!-- PROJECTS (image + title + description per card) -->
+  <section class="card projects">
+    <h2 class="heading">Projects</h2>
+    <span class="squiggle" aria-hidden="true"></span>
+
+    <div class="grid" data-field="projects">
+      <article class="project">
+        <div class="project-img"><span aria-hidden="true">01</span></div>
+        <h3>Lume App</h3>
+        <p>A wellness app focused on mental health and mindfulness.</p>
+      </article>
+      <article class="project">
+        <div class="project-img"><span aria-hidden="true">02</span></div>
+        <h3>NextGen Website</h3>
+        <p>A modern landing page for a tech startup.</p>
+      </article>
+      <article class="project">
+        <div class="project-img"><span aria-hidden="true">03</span></div>
+        <h3>Brand Identity</h3>
+        <p>Created a fresh brand identity for a lifestyle company.</p>
+      </article>
     </div>
-    <div>
-      <div class="flex items-center justify-between">
-        <h2 class="h-display">TABLE<br>OF<br>CONTENTS</h2>
-        <div class="stat"><b>08</b><small>SECTIONS</small></div>
-      </div>
-      <div class="tbl mt-5">
-        <div class="tbl-head"><span>INTRODUCTION</span><span>PAGE</span></div>
-        <a class="tbl-row" href="#info"><span>Personal Information</span><span>03</span></a>
-        <a class="tbl-row" href="#education"><span>Educational Background</span><span>04</span></a>
-        <a class="tbl-row" href="#skills"><span>Skills</span><span>05</span></a>
-        <a class="tbl-row" href="#projects"><span>Projects</span><span>06</span></a>
-        <a class="tbl-row" href="#experience"><span>Work Experience</span><span>07</span></a>
-        <a class="tbl-row" href="#connect"><span>Social Media / Links</span><span>08</span></a>
-        <a class="tbl-row" href="#contact"><span>Contact</span><span>09</span></a>
-      </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="card section">
+    <div class="section-head">
+      <span class="icon-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg></span>
+      <h2>Education</h2>
     </div>
-  </div>
-</section>
-
-<!-- PERSONAL INFORMATION -->
-<section id="info" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 03</span><span>CREATIVE PORTFOLIO</span></div>
-  <div class="grid md:grid-cols-[1fr_auto] gap-8 mt-6 items-start">
-    <div>
-      <span class="chip">CHAPTER 01</span>
-      <h2 class="h-display big mt-3">GET TO<br>KNOW ME</h2>
-      <div class="tbl mt-6">
-        <div class="tbl-head amber"><span>DETAIL</span><span>INFORMATION</span></div>
-        <div class="tbl-row"><span>FULL NAME</span><span>Callie Kenshi</span></div>
-        <div class="tbl-row"><span>EMAIL</span><span>calliekenshi@gmail.com</span></div>
-        <div class="tbl-row"><span>CONTACT NUMBER</span><span>+63 912 345 6789</span></div>
-        <div class="tbl-row"><span>ADDRESS</span><span>Quezon City, Metro Manila</span></div>
-      </div>
+    <div class="entries" data-field="education">
+      <article class="entry">
+        <div class="date">2020 – 2024</div>
+        <h3>Bachelor of Science in Computer Science</h3>
+        <div class="org">University of California, Berkeley</div>
+        <p class="text">Focused on web technologies and software engineering.</p>
+      </article>
+      <article class="entry">
+        <div class="date">2016 – 2020</div>
+        <h3>High School Diploma</h3>
+        <div class="org">Riverside High School</div>
+        <p class="text">Graduated with honors.</p>
+      </article>
     </div>
-    <div class="art-block"><div class="ring-dark"><img src="profile.svg" alt="Profile picture" /></div></div>
-  </div>
-</section>
+  </section>
 
-<!-- EDUCATION -->
-<section id="education" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 04</span><span>CREATIVE PORTFOLIO</span></div>
-  <span class="chip mt-6">CHAPTER 02</span>
-  <h2 class="h-display big mt-3">EDUCATIONAL<br>BACKGROUND</h2>
-  <ul class="list-dots mt-6">
-    <li><b>Bachelor of Science in Information Technology</b><span>University of the Philippines</span><em>2020 - 2024</em></li>
-    <li><b>Senior High School</b><span>Sta. Ana National High School</span><em>2018 - 2020</em></li>
-    <li><b>Junior High School</b><span>Sta. Ana National High School</span><em>2014 - 2018</em></li>
-  </ul>
-</section>
+  <!-- WORK EXPERIENCE -->
+  <section class="card section">
+    <div class="section-head">
+      <span class="icon-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>
+      <h2>Work Experience</h2>
+    </div>
+    <div class="entries" data-field="experience">
+      <article class="entry">
+        <div class="date">2021 – Present</div>
+        <h3>UI/UX Designer &amp; Frontend Developer</h3>
+        <div class="org">Creative Studio</div>
+        <p class="text">Developed responsive web applications.</p>
+      </article>
+      <article class="entry">
+        <div class="date">2020 – 2021</div>
+        <h3>Web Development Intern</h3>
+        <div class="org">BrightTech</div>
+        <p class="text">Assisted in building and maintaining web applications.</p>
+      </article>
+    </div>
+  </section>
 
-<!-- SKILLS -->
-<section id="skills" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 05</span><span>CREATIVE PORTFOLIO</span></div>
-  <div class="flex items-center justify-between mt-6">
-    <div><span class="chip">CHAPTER 03</span><h2 class="h-display big mt-3">SKILLS</h2></div>
-    <div class="stat"><b>12</b><small>SKILLS</small></div>
-  </div>
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-6">
-    <div class="skill"><i></i><span>HTML</span></div>
-    <div class="skill"><i></i><span>CSS</span></div>
-    <div class="skill"><i></i><span>JavaScript</span></div>
-    <div class="skill"><i></i><span>PHP</span></div>
-    <div class="skill"><i></i><span>Laravel</span></div>
-    <div class="skill"><i></i><span>MySQL</span></div>
-    <div class="skill"><i></i><span>Git &amp; GitHub</span></div>
-    <div class="skill"><i></i><span>Figma</span></div>
-    <div class="skill"><i></i><span>Communication</span></div>
-    <div class="skill"><i></i><span>Problem Solving</span></div>
-    <div class="skill"><i></i><span>Teamwork</span></div>
-    <div class="skill"><i></i><span>Time Management</span></div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="sheet sheet-amber">
-  <div class="page-head"><span class="tag">PAGE 06</span><span>CREATIVE PORTFOLIO</span></div>
-  <span class="chip chip-ink mt-6">CHAPTER 04</span>
-  <h2 class="h-display big mt-3">SELECTED<br>PROJECTS</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
-    <article class="project"><div class="shot shot-peach"></div><span class="chip">PROJECT 01</span><h3>Student Task Scheduler</h3><p>A simple task management system built to organize schedules and track deadlines.</p><a class="btn" href="#">VIEW PROJECT &#8599;</a></article>
-    <article class="project"><div class="shot shot-violet"></div><span class="chip">PROJECT 02</span><h3>Portfolio Website</h3><p>A personal portfolio website to showcase my skills, projects and experience.</p><a class="btn" href="#">VIEW PROJECT &#8599;</a></article>
-    <article class="project"><div class="shot shot-mint"></div><span class="chip">PROJECT 03</span><h3>Boarding House Reservation System</h3><p>A reservation system for boarding houses with online booking and admin tools.</p><a class="btn" href="#">VIEW PROJECT &#8599;</a></article>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 07</span><span>CREATIVE PORTFOLIO</span></div>
-  <span class="chip mt-6">CHAPTER 05</span>
-  <h2 class="h-display big mt-3">WORK<br>EXPERIENCE</h2>
-  <div class="tbl mt-6">
-    <div class="tbl-head"><span>POSITION / COMPANY</span><span>YEARS</span></div>
-    <div class="tbl-row job"><div><b>Freelance Web Developer</b><small>Self-employed. Built responsive websites for small businesses.</small></div><span>2023 - Present</span></div>
-    <div class="tbl-row job"><div><b>IT Support Intern</b><small>Sample Company Inc. Handled troubleshooting and network setup.</small></div><span>2022 - 2023</span></div>
-    <div class="tbl-row job"><div><b>Part-time Graphic Designer</b><small>Sample Studio. Designed posts and posters for the team.</small></div><span>2021 - 2022</span></div>
-  </div>
-</section>
-
-<!-- SOCIAL / WEBSITE LINKS -->
-<section id="connect" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 08</span><span>CREATIVE PORTFOLIO</span></div>
-  <span class="chip mt-6">CHAPTER 06</span>
-  <h2 class="h-display big mt-3">LET'S<br>CONNECT</h2>
-  <div class="tbl mt-6">
-    <div class="tbl-head amber"><span>PLATFORM</span><span>LINK</span></div>
-    <a class="tbl-row" href="https://github.com/" target="_blank" rel="noopener"><span>GITHUB</span><span>github.com/calliekenshi</span></a>
-    <a class="tbl-row" href="https://linkedin.com/" target="_blank" rel="noopener"><span>LINKEDIN</span><span>linkedin.com/in/calliekenshi</span></a>
-    <a class="tbl-row" href="https://facebook.com/" target="_blank" rel="noopener"><span>FACEBOOK</span><span>facebook.com/calliekenshi</span></a>
-    <a class="tbl-row" href="mailto:calliekenshi@gmail.com"><span>EMAIL</span><span>calliekenshi@gmail.com</span></a>
-  </div>
-</section>
-
-<!-- CONTACT (opens the visitor's email app; change the address in action) -->
-<section id="contact" class="sheet">
-  <div class="page-head"><span class="tag">PAGE 09</span><span>CREATIVE PORTFOLIO</span></div>
-  <span class="chip mt-6">CHAPTER 07</span>
-  <h2 class="h-display big mt-3">GET IN<br>TOUCH</h2>
-  <form action="mailto:calliekenshi@gmail.com" method="post" enctype="text/plain" class="mt-6 grid sm:grid-cols-2 gap-4">
-    <div><label class="lbl" for="cn">NAME</label><input id="cn" name="Name" class="inp" required /></div>
-    <div><label class="lbl" for="ce">EMAIL</label><input id="ce" name="Email" type="email" class="inp" required /></div>
-    <div class="sm:col-span-2"><label class="lbl" for="cm">MESSAGE</label><textarea id="cm" name="Message" rows="4" class="inp" required></textarea></div>
-    <button type="submit" class="btn btn-wide sm:col-span-2">SEND MESSAGE</button>
-  </form>
-</section>
+  <!-- OPTIONAL: certifications, languages, interests -->
+  <section class="card extras">
+    <div><h3>Certifications</h3><p data-field="certifications"></p></div>
+    <div><h3>Languages</h3><p data-field="languages"></p></div>
+    <div><h3>Interests</h3><p data-field="interests"></p></div>
+  </section>
 
 </main>
 
-<footer class="foot">&copy; 2026 <span>CALLIE KENSHI</span> &mdash; CREATIVE PORTFOLIO</footer>
 </body>
 </html>

@@ -1865,6 +1865,468 @@ ${MODERN_CSS}
 }
 
 /* =========================================================
+   CREATIVE TEMPLATE
+   One-page profile layout: banner + avatar, contacts, project
+   cards, education and experience. All content comes from the
+   editor fields (cover_image is the optional banner photo).
+   Uses the same line formats as the Simple template.
+   ========================================================= */
+
+const CREATIVE_CSS = String.raw`/* =========================================================
+   CREATIVE TEMPLATE
+   Single-page profile layout: banner + avatar, contacts,
+   project card grid, education and experience cards.
+   The same stylesheet is inlined by renderCreativeDocument()
+   in portfolio-render.js (the editor preview is an iframe).
+   ========================================================= */
+
+:root {
+  --ink: #0e1a3f;
+  --body: #2a3558;
+  --muted: #7b8bb0;
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --line: #e8ecf5;
+  --accent: #7c5cf0;
+  --icon-bg: #e4e7fb;
+  --sticky: #fff27a;
+  --font: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --hand: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+h1, h2, h3 { line-height: 1.2; }
+
+.wrap {
+  display: grid;
+  gap: 22px;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(20, 35, 80, 0.05);
+}
+
+.empty { color: var(--muted); font-size: 13px; font-style: italic; }
+
+/* ---------- Top row: profile + contacts ---------- */
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 24px;
+  align-items: start;
+}
+
+.profile { position: relative; overflow: hidden; padding-bottom: 28px; }
+
+.banner {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, .55) 0 90px, transparent 91px),
+    linear-gradient(135deg, #5eb6f2 0%, #9bd4f8 55%, #d9eefc 100%);
+}
+
+.banner img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+
+.sticky {
+  position: absolute;
+  top: 44px;
+  left: 36px;
+  max-width: 230px;
+  padding: 8px 18px;
+  background: var(--sticky);
+  color: #3a3410;
+  font-family: var(--hand);
+  font-size: 23px;
+  line-height: 1.15;
+  transform: rotate(-9deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+  overflow-wrap: anywhere;
+}
+
+.handwritten {
+  position: absolute;
+  right: 26px;
+  bottom: 20px;
+  color: #fff27a;
+  font-family: var(--hand);
+  font-size: 26px;
+  line-height: 1.1;
+  text-align: left;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .25);
+  transform: rotate(-9deg);
+}
+
+.avatar-ring {
+  position: absolute;
+  top: 168px;
+  left: 18px;
+  width: 146px;
+  height: 146px;
+  padding: 5px;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, #ff5fa2, #ff9a3d, #ffd23d, #b45cff, #ff5fa2);
+}
+
+.avatar {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  background: var(--icon-bg);
+  color: var(--accent);
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile-body { padding: 20px 30px 0 196px; min-height: 120px; }
+.profile-name { font-size: 29px; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.profile-handle { margin-top: 2px; color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
+.profile-about { margin-top: 16px; color: var(--body); font-size: 15px; line-height: 1.65; overflow-wrap: anywhere; white-space: pre-line; }
+
+.contacts { padding: 24px 26px 26px; }
+.contacts h2 { margin-bottom: 14px; font-size: 22px; font-weight: 800; }
+.contact-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; min-width: 0; font-size: 14px; }
+.contact-row svg { flex: 0 0 22px; width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.contact-row span, .contact-row a { min-width: 0; overflow-wrap: anywhere; }
+
+/* ---------- Projects ---------- */
+.projects { padding: 28px 28px 30px; }
+
+.heading { font-size: 36px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.squiggle { display: block; width: 74px; height: 6px; margin: 8px 0 24px 2px; border-radius: 6px; background: var(--accent); transform: rotate(-4deg); }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+
+.project { padding: 12px 12px 22px; min-width: 0; border: 1px solid var(--line); border-radius: 16px; background: #fff; break-inside: avoid; }
+
+.project-img {
+  display: grid;
+  aspect-ratio: 16 / 9;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #e4e7fb, #fbe3ef);
+  color: #b9b4e8;
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.project-img img { width: 100%; height: 100%; object-fit: cover; }
+.project h3 { margin: 16px 4px 6px; font-size: 17px; font-weight: 700; overflow-wrap: anywhere; }
+.project p { margin: 0 4px; color: var(--muted); font-size: 13.5px; line-height: 1.55; overflow-wrap: anywhere; }
+.project .tech { margin-top: 8px; font-size: 11.5px; font-weight: 600; color: var(--accent); }
+.project .link { display: inline-block; margin: 8px 4px 0; font-size: 12px; font-weight: 700; color: var(--accent); }
+
+/* ---------- Education & experience ---------- */
+.section { padding: 24px 28px 28px; }
+.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.section-head h2 { font-size: 23px; font-weight: 800; letter-spacing: -.01em; }
+
+.icon-badge { display: grid; flex: 0 0 42px; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: var(--icon-bg); }
+.icon-badge svg { width: 21px; height: 21px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.entries { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-left: 56px; row-gap: 22px; }
+.entry { min-width: 0; padding-right: 24px; break-inside: avoid; }
+.entry:nth-child(even) { padding-right: 0; padding-left: 36px; border-left: 1px solid var(--line); }
+.entry .date { color: var(--muted); font-size: 12px; }
+.entry h3 { font-size: 14px; font-weight: 700; overflow-wrap: anywhere; }
+.entry .org { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.entry p.text { margin-top: 10px; color: var(--muted); font-size: 12.5px; line-height: 1.6; overflow-wrap: anywhere; white-space: pre-line; }
+.entry ul { margin: 10px 0 0 16px; color: var(--muted); font-size: 12.5px; line-height: 1.6; }
+.entry li { overflow-wrap: anywhere; }
+
+.extras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding: 22px 28px; }
+.extras:empty { display: none; }
+.extras h3 { margin-bottom: 6px; font-size: 13px; font-weight: 800; }
+.extras p { color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+
+.skills { display: flex; flex-wrap: wrap; gap: 8px; margin-left: 56px; }
+.skill { padding: 5px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fafbff; font-size: 12.5px; font-weight: 600; }
+
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-left: 56px; }
+.links a { padding: 7px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 12.5px; font-weight: 600; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .top { grid-template-columns: minmax(0, 1fr); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 580px) {
+  .wrap { padding: 16px 12px 40px; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .banner { height: 190px; }
+  .avatar-ring { top: 134px; left: 20px; width: 118px; height: 118px; }
+  .profile-body { padding: 82px 22px 0; }
+  .entries { margin-left: 0; grid-template-columns: minmax(0, 1fr); }
+  .entry, .entry:nth-child(even) { padding: 0; border-left: 0; }
+  .skills, .links { margin-left: 0; }
+  .extras { grid-template-columns: minmax(0, 1fr); }
+  .heading { font-size: 30px; }
+}
+
+/* ---------- Print / PDF ---------- */
+@page { size: A4; margin: 10mm; }
+
+@media print {
+  body { background: #fff; }
+  .wrap { max-width: none; padding: 0; gap: 14px; }
+  .card { box-shadow: none; }
+  .top { grid-template-columns: minmax(0, 1fr) 230px; }
+  .card, .project, .entry { break-inside: avoid; }
+}
+`;
+
+const CREATIVE_ICONS = {
+  mail: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>`,
+  pin: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>`,
+  globe: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>`,
+  phone: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h3l2 5-2 2a15 15 0 0 0 6 6l2-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>`,
+  cap: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6"/></svg>`,
+  bag: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>`,
+  star: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg>`,
+  link: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>`
+};
+
+function renderCreativeDocument(d = {}) {
+  const name = d.full_name || "Your Name";
+  const role = String(d.title || "").trim();
+
+  const about = String(d.about || "").trim();
+  const education = parseSimpleEntries(d.education);
+  const experience = parseSimpleEntries(d.experience);
+  const projects = parseSimpleProjects(d.projects);
+  const projectImages = parseImageList(d.project_images);
+  const skills = splitSkills(d.skills);
+
+  const email = String(d.email || "").trim();
+  const phone = String(d.phone || "").trim();
+  const address = String(d.address || "").trim();
+  const socialLinks = parseSimpleLinks(d.social_links, email);
+  const otherLinks = socialLinks.filter(link => link.kind !== "email");
+
+  const certifications = lines(d.certifications);
+  const languages = lines(d.languages);
+  const interests = lines(d.interests);
+
+  const profileSrc = safeImageSource(d.profile_image);
+  const coverSrc = safeImageSource(d.cover_image);
+
+  const website = otherLinks.find(link => link.kind === "web" && link.url) || null;
+  const handle = otherLinks.find(link => link.display) || null;
+
+  /* ---------- Banner + profile ---------- */
+  const bannerMarkup = `
+    <div class="banner">
+      ${coverSrc
+        ? `<img src="${escapeHTML(coverSrc)}" alt="" onerror="this.style.display='none'">`
+        : ""}
+      ${role ? `<div class="sticky">${escapeHTML(role)}</div>` : ""}
+      ${skills.length
+        ? `<div class="handwritten" aria-hidden="true">${skills.slice(0, 3).map(escapeHTML).join("<br>")}</div>`
+        : ""}
+    </div>
+  `;
+
+  const avatarMarkup = profileSrc
+    ? `<img src="${escapeHTML(profileSrc)}" alt="${escapeHTML(name)}" onerror="this.style.display='none'">`
+    : escapeHTML(getInitials(name));
+
+  const contactRow = (icon, text, href = "") => text
+    ? `<div class="contact-row">${CREATIVE_ICONS[icon]}${href
+        ? `<a href="${escapeHTML(href)}"${/^https?:/i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : ""}>${escapeHTML(text)}</a>`
+        : `<span>${escapeHTML(text)}</span>`}</div>`
+    : "";
+
+  const contactsMarkup = [
+    contactRow("mail", email, email ? `mailto:${email}` : ""),
+    contactRow("phone", phone, phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : ""),
+    contactRow("pin", address),
+    contactRow("globe", website ? website.display : "", website ? website.url : "")
+  ].join("");
+
+  /* ---------- Projects ---------- */
+  const projectsMarkup = projects.length
+    ? projects.map((project, index) => {
+        const url = safeUrl(project.url);
+        const src = projectImages[index] || "";
+        const tech = Array.isArray(project.technologies)
+          ? project.technologies.join(", ")
+          : String(project.technologies || "");
+
+        return `
+          <article class="project">
+            <div class="project-img">
+              ${src
+                ? `<img src="${escapeHTML(src)}" alt="${escapeHTML(project.title)} preview" onerror="this.style.display='none'">`
+                : `<span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>`}
+            </div>
+            <h3>${escapeHTML(project.title)}</h3>
+            ${project.description ? `<p>${escapeHTML(project.description)}</p>` : ""}
+            ${tech ? `<p class="tech">${escapeHTML(tech)}</p>` : ""}
+            ${url
+              ? `<a class="link" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">View project ↗</a>`
+              : ""}
+          </article>
+        `;
+      }).join("")
+    : `<p class="empty">Your projects will appear here when added.</p>`;
+
+  /* ---------- Education / experience ---------- */
+  const entryMarkup = entries => entries.map(entry => `
+    <article class="entry">
+      ${entry.date ? `<div class="date">${escapeHTML(entry.date)}</div>` : ""}
+      ${entry.title ? `<h3>${escapeHTML(entry.title)}</h3>` : ""}
+      ${entry.subtitle ? `<div class="org">${escapeHTML(entry.subtitle)}</div>` : ""}
+      ${entry.description ? `<p class="text">${escapeHTML(entry.description)}</p>` : ""}
+      ${entry.bullets.length
+        ? `<ul>${entry.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join("")}</ul>`
+        : ""}
+    </article>
+  `).join("");
+
+  const sectionCard = (icon, title, body) => `
+    <section class="card section">
+      <div class="section-head">
+        <span class="icon-badge">${CREATIVE_ICONS[icon]}</span>
+        <h2>${escapeHTML(title)}</h2>
+      </div>
+      ${body}
+    </section>
+  `;
+
+  const educationCard = sectionCard(
+    "cap",
+    "Education",
+    education.length
+      ? `<div class="entries">${entryMarkup(education)}</div>`
+      : `<p class="empty" style="margin-left:56px">Education details will appear here when added.</p>`
+  );
+
+  const experienceCard = sectionCard(
+    "bag",
+    "Work Experience",
+    experience.length
+      ? `<div class="entries">${entryMarkup(experience)}</div>`
+      : `<p class="empty" style="margin-left:56px">Experience details will appear here when added.</p>`
+  );
+
+  const skillsCard = skills.length
+    ? sectionCard(
+        "star",
+        "Skills",
+        `<div class="skills">${skills.map(skill => `<span class="skill">${escapeHTML(skill)}</span>`).join("")}</div>`
+      )
+    : "";
+
+  const linksCard = otherLinks.length
+    ? sectionCard(
+        "link",
+        "Links & Profiles",
+        `<div class="links">${otherLinks.map(link => link.url
+          ? `<a href="${escapeHTML(link.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(link.label)}</a>`
+          : `<span>${escapeHTML(link.label)}</span>`).join("")}</div>`
+      )
+    : "";
+
+  const extraBlock = (title, items) => items.length
+    ? `<div><h3>${escapeHTML(title)}</h3><p>${items.map(escapeHTML).join("<br>")}</p></div>`
+    : "";
+
+  const extrasMarkup = [
+    extraBlock("Certifications", certifications),
+    extraBlock("Languages", languages),
+    extraBlock("Interests", interests)
+  ].join("");
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHTML(`${name} | Portfolio`)}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+${CREATIVE_CSS}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <div class="top">
+      <section class="card profile">
+        ${bannerMarkup}
+        <div class="avatar-ring"><div class="avatar">${avatarMarkup}</div></div>
+
+        <div class="profile-body">
+          <h1 class="profile-name">${escapeHTML(name)}</h1>
+          ${handle ? `<p class="profile-handle">${escapeHTML(handle.display)}</p>` : ""}
+          <p class="profile-about">${about
+            ? escapeHTML(about)
+            : `<span class="empty">Your introduction will appear here when you add it in the portfolio editor.</span>`}</p>
+        </div>
+      </section>
+
+      <aside class="card contacts">
+        <h2>Contacts</h2>
+        ${contactsMarkup || `<p class="empty">Add your contact details in the portfolio editor.</p>`}
+      </aside>
+    </div>
+
+    <section class="card projects">
+      <h2 class="heading">Projects</h2>
+      <span class="squiggle" aria-hidden="true"></span>
+      <div class="grid">${projectsMarkup}</div>
+    </section>
+
+    ${educationCard}
+    ${experienceCard}
+    ${skillsCard}
+    ${linksCard}
+
+    ${extrasMarkup ? `<section class="card extras">${extrasMarkup}</section>` : ""}
+
+  </main>
+</body>
+</html>`;
+}
+
+/* =========================================================
    MODERN + CREATIVE TEMPLATES
    Keep their existing shared layout and template styles.
    ========================================================= */
@@ -2304,6 +2766,10 @@ function renderDocument(d = {}) {
 
   if (template === "modern") {
     return renderModernDocument(d);
+  }
+
+  if (template === "creative") {
+    return renderCreativeDocument(d);
   }
 
   return renderLegacyDocument({
