@@ -15,6 +15,18 @@ const forms = {
   signup: $("#signup-form"),
 };
 
+const DUPLICATE_ACCOUNT_MESSAGE =
+  "Unable to complete registration\nPlease check your information or try logging in if you already have an account.";
+
+/* Supabase reports an existing email as "User already registered".
+   Show a neutral message instead so the form doesn't confirm which emails have accounts. */
+function isDuplicateAccountError(error) {
+  return (
+    error?.code === "user_already_exists" ||
+    /already\s+(been\s+)?registered|already\s+exists/i.test(error?.message || "")
+  );
+}
+
 function showNotice(form, message, success = false) {
   const notice = form.querySelector(".notice");
 
@@ -162,7 +174,9 @@ forms.signup.addEventListener("submit", async (event) => {
 
     showNotice(
       form,
-      error?.message || "We couldn't create your account. Please try again."
+      isDuplicateAccountError(error)
+        ? DUPLICATE_ACCOUNT_MESSAGE
+        : error?.message || "We couldn't create your account. Please try again."
     );
   } finally {
     setBusy(form, false);

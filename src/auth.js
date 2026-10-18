@@ -156,9 +156,15 @@ if (
       }
     } catch (error) {
       console.error("Supabase sign-up error:", error);
+      const duplicate =
+        error?.code === "user_already_exists" ||
+        /already\s+(been\s+)?registered|already\s+exists/i.test(error?.message || "");
+
       showMessage(
         message,
-        error?.message || "We couldn't create your account. Please try again."
+        duplicate
+          ? "Unable to complete registration. Please check your information or try logging in if you already have an account."
+          : error?.message || "We couldn't create your account. Please try again."
       );
     } finally {
       setBusy(button, false, "Creating account…", "Create free account");
