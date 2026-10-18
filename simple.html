@@ -1,153 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>clean Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/simple.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Portfolio Template</title>
+  <link rel="stylesheet" href="./src/simple.css">
 </head>
-
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <!-- PROFILE PICTURE: replace src with your own photo, e.g. src="images/me.jpg" -->
-      <img class="avatar"
-           src="https://api.dicebear.com/7.x/initials/svg?seed=Sierra%20Smith&backgroundColor=ffffff&textColor=1d4ed8"
-           alt="Profile picture of Sierra Smith" />
-
-      <div class="hero-text">
-        <h1 class="name">Sierra Smith</h1>
-        <p class="role">BS Information Technology Student</p>
-
-        <ul class="contact-list">
-          <li class="contact-item">
-            <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-            <a href="mailto:sierra.smith@email.com">sierra.smith@email.com</a>
-          </li>
-          <li class="contact-item">
-            <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
-            <a href="tel:+639123456789">+63 912 345 6789</a>
-          </li>
-          <li class="contact-item">
-            <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
-            <span>123 Mabini Street, Lahug, Cebu City, Philippines</span>
-          </li>
-        </ul>
+  <main id="paper">
+    <section class="page cover">
+      <h1 class="cover-title">Portfolio</h1>
+      <h2 class="cover-name" data-field="full_name">Your Name</h2>
+      <p class="cover-role" data-field="title">Professional title</p>
+      <div class="cover-photo photo-placeholder" data-field="profile_image" role="img" aria-label="Profile photo"></div>
+      <div class="contact-panel">
+        <div class="field"><span>Email</span><span data-field="email"></span></div>
+        <div class="field"><span>Phone</span><span data-field="phone"></span></div>
+        <div class="field"><span>Location</span><span data-field="address"></span></div>
       </div>
-    </div>
-  </header>
+      <footer class="foot"><span class="foot-rule"></span><span>01 / 05</span></footer>
+    </section>
 
-  <div class="page">
+    <section class="page bg-left">
+      <div class="sub">Profile / Education</div>
+      <div class="cols">
+        <div class="col-about">
+          <h2 class="heading">About me</h2>
+          <div class="rule"></div>
+          <p class="about" data-field="about"></p>
+        </div>
+        <div class="col-main">
+          <h2 class="heading">Education</h2>
+          <div class="rule"></div>
+          <div data-field="education"></div>
+        </div>
+      </div>
+      <footer class="foot"><span class="foot-rule"></span><span>02 / 05</span></footer>
+    </section>
 
-    <!-- ============ MAIN COLUMN ============ -->
-    <main class="main">
+    <section class="page">
+      <div class="strip"><div class="vert">Skills &amp; Experience</div></div>
+      <div class="content">
+        <div class="block">
+          <div class="sub">Capabilities</div>
+          <h2 class="heading">Skills</h2>
+          <div class="rule"></div>
+          <div class="chips" data-field="skills"></div>
+        </div>
+        <div class="block">
+          <div class="sub">Career</div>
+          <h2 class="heading">Experience</h2>
+          <div class="rule"></div>
+          <div data-field="experience"></div>
+        </div>
+      </div>
+      <footer class="foot"><span class="foot-rule"></span><span>03 / 05</span></footer>
+    </section>
 
-      <section class="card">
-        <h2 class="section-title">About me</h2>
-        <p>
-          I'm a third-year Information Technology student who enjoys turning ideas into simple, useful
-          websites and apps. I like clean design, clear code, and learning by building real projects.
-          I'm looking for an internship where I can grow as a web developer.
+    <section class="page projects-page">
+      <div class="sub">Selected work</div>
+      <h2 class="heading">Projects</h2>
+      <div class="rule"></div>
+      <div class="content-wide" data-field="projects"></div>
+      <footer class="foot"><span class="foot-rule"></span><span>04 / 05</span></footer>
+    </section>
+
+    <section class="page links-page">
+      <div class="links-panel">
+        <div class="sub">Links &amp; Profiles</div>
+        <h2 class="heading">Links &amp; Profiles</h2>
+        <div class="rule"></div>
+        <p class="links-intro">
+          A collection of professional profiles and selected online destinations.
         </p>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Educational background</h2>
-        <div class="entry">
-          <p class="entry-date">2023 – Present</p>
-          <h3 class="entry-title">Bachelor of Science in Information Technology</h3>
-          <p class="entry-sub">University of Cebu</p>
-        </div>
-        <div class="entry">
-          <p class="entry-date">2021 – 2023</p>
-          <h3 class="entry-title">Senior High School · STEM</h3>
-          <p class="entry-sub">Cebu City National Science High School</p>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Work experience</h2>
-        <div class="entry">
-          <p class="entry-date">Jun 2025 – Aug 2025</p>
-          <h3 class="entry-title">IT Intern</h3>
-          <p class="entry-sub">Cebu Tech Solutions, Inc.</p>
-          <ul class="bullet-list">
-            <li>Built and fixed pages for the company website.</li>
-            <li>Helped test new features and reported bugs.</li>
-          </ul>
-        </div>
-        <div class="entry">
-          <p class="entry-date">2024 – 2025</p>
-          <h3 class="entry-title">Student Assistant</h3>
-          <p class="entry-sub">University of Cebu · Computer Laboratory</p>
-          <ul class="bullet-list">
-            <li>Set up lab computers and helped students with software.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-grid">
-          <article class="project">
-            <h3 class="entry-title">Barangay Services Website</h3>
-            <p class="project-desc">Residents read announcements and request documents online.</p>
-            <p class="project-tech">HTML, CSS, JavaScript</p>
-            <a class="project-link" href="#">View project</a>
-          </article>
-          <article class="project">
-            <h3 class="entry-title">Study Planner App</h3>
-            <p class="project-desc">Plan weekly classes and deadlines in one place.</p>
-            <p class="project-tech">JavaScript, Local Storage</p>
-            <a class="project-link" href="#">View project</a>
-          </article>
-          <article class="project">
-            <h3 class="entry-title">Inventory System</h3>
-            <p class="project-desc">Track stock with add, edit, delete, and a report page.</p>
-            <p class="project-tech">Python, SQLite</p>
-            <a class="project-link" href="#">View project</a>
-          </article>
-        </div>
-      </section>
-    </main>
-
-    <!-- ============ SIDE COLUMN ============ -->
-    <aside class="side">
-
-      <section class="card">
-        <h2 class="section-title">Skills</h2>
-        <div class="chip-list">
-          <span class="chip">HTML &amp; CSS</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">Python</span>
-          <span class="chip">Figma</span>
-          <span class="chip">Git &amp; GitHub</span>
-          <span class="chip">Teamwork</span>
-          <span class="chip">Communication</span>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Links</h2>
-        <ul class="link-list">
-          <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://facebook.com/yourusername" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://yourwebsite.com" target="_blank" rel="noopener">yourwebsite.com</a></li>
-        </ul>
-      </section>
-
-      <!-- ADDITIONAL INFORMATION (optional) -->
-      <section class="card">
-        <h2 class="section-title">Additional information</h2>
-        <p><strong>Languages:</strong> English, Filipino, Cebuano</p>
-        <p><strong>Certification:</strong> Responsive Web Design, freeCodeCamp (2025)</p>
-        <p><strong>Interests:</strong> Web design, photography, basketball</p>
-      </section>
-    </aside>
-  </div>
-
-  <footer class="footer">&copy; 2026 Sierra Smith</footer>
+        <div class="links-list" data-field="social_links"></div>
+      </div>
+      <footer class="foot"><span class="foot-rule"></span><span>05 / 05</span></footer>
+    </section>
+  </main>
 </body>
 </html>

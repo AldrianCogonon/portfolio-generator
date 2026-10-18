@@ -8,6 +8,146 @@
   <title>Portfolio Editor | SOYON</title>
   <link rel="stylesheet" href="./src/portfolio-editor.css">
   <link rel="stylesheet" href="./src/index.css">
+  <style>
+    .project-builder-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .project-builder-heading label {
+      margin: 0;
+    }
+
+    .project-editor-list {
+      display: grid;
+      gap: 14px;
+      margin: 12px 0;
+    }
+
+    .project-editor-card {
+      padding: 16px;
+      border: 1px solid #e4e1dd;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .project-editor-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .project-editor-card__header strong {
+      font-size: 14px;
+    }
+
+    .project-editor-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 150px;
+      gap: 12px;
+    }
+
+    .project-editor-fields {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .project-editor-fields label {
+      display: block;
+      margin: 0 0 5px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .project-editor-fields input,
+    .project-editor-fields textarea {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .project-editor-fields textarea {
+      min-height: 72px;
+      resize: vertical;
+    }
+
+    .project-image-picker {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .project-image-preview {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 1px dashed #d5d0ca;
+      border-radius: 8px;
+      background: #f7f5f2;
+      color: #77716d;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .project-image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-image-actions {
+      display: grid;
+      gap: 6px;
+    }
+
+    .project-image-actions .button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .project-image-input {
+      display: none;
+    }
+
+    .project-remove-button {
+      color: #a63d3d;
+    }
+
+    .project-editor-empty {
+      padding: 18px;
+      border: 1px dashed #d5d0ca;
+      border-radius: 10px;
+      color: #77716d;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .project-editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-image-picker {
+        grid-template-columns: 100px minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .project-image-preview {
+        aspect-ratio: 1;
+      }
+
+      .project-builder-heading {
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="app-shell">
@@ -18,11 +158,11 @@
 
       <nav class="topbar-actions" aria-label="Main navigation">
         <button
-            id="generate-button"
-            class="button button-dark"
-            type="button"
+          id="generate-button"
+          class="button button-dark"
+          type="button"
         >
-            Open portfolio
+          Open portfolio
         </button>
         <a href="./dashboard.html" class="nav-link">Dashboard</a>
         <a href="./portfolio.html" class="nav-link">My portfolios</a>
@@ -158,7 +298,6 @@
 
           <fieldset class="form-section">
             <legend>About you</legend>
-
             <label for="about">About me</label>
             <textarea
               id="about"
@@ -199,18 +338,38 @@
               placeholder="Design, communication, HTML, teamwork..."
             ></textarea>
 
-            <label for="projects">Projects</label>
+            <div class="project-builder-heading">
+              <label>Projects</label>
+              <button
+                id="add-project-button"
+                class="button button-secondary"
+                type="button"
+              >
+                + Add project
+              </button>
+            </div>
+
+            <p class="field-hint">
+              Add a title, short description, optional technologies and link,
+              plus an image for each project.
+            </p>
+
+            <div
+              id="project-list"
+              class="project-editor-list"
+              aria-live="polite"
+            ></div>
+
             <textarea
               id="projects"
               name="projects"
-              rows="5"
-              placeholder="Project name, what you created, and your contribution — one item per line"
+              hidden
+              aria-hidden="true"
             ></textarea>
           </fieldset>
 
           <fieldset class="form-section">
             <legend>Social links</legend>
-
             <label for="social_links">Social media or website links</label>
             <textarea
               id="social_links"

@@ -203,7 +203,6 @@ function renderPortfolioCard(portfolio) {
 }
 
 function renderPortfolios() {
-  // Search has been removed, so show every portfolio returned by the store.
   if (portfolioList) {
     portfolioList.innerHTML = portfolios.map(renderPortfolioCard).join("");
     portfolioList.classList.toggle("hidden", portfolios.length === 0);
