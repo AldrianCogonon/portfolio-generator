@@ -1,154 +1,92 @@
-:root {
-    color-scheme: light;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #19212d;
-    background: #f5f6f8;
-    font-synthesis: none;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
 }
 
-* {
-    box-sizing: border-box;
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --ink: #2b2e33;
+  --muted: #8a8f98;
+  --line: #e5e7eb;
+  --field-border: #dfe2e6;
+  --accent: #2f6bff;
 }
+
+html, body { height: 100%; }
 
 body {
-    min-width: 320px;
-    min-height: 100vh;
-    margin: 0;
+  background: #e9ebee;
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
 }
 
-.page {
-    display: grid;
-    min-height: 100vh;
-    padding: 32px 20px;
-    place-items: center;
+button { cursor: pointer; }
+
+.right-panel { background: #ffffff; }
+
+.field {
+  background: #ffffff;
+  border: 1px solid var(--field-border);
+  color: var(--ink);
+}
+.field::placeholder { color: var(--muted); opacity: .7; }
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 107, 255, .15);
 }
 
-.account {
-    width: min(100%, 420px);
-    padding: 36px;
-    border: 1px solid #e7e9ee;
-    border-radius: 16px;
-    background: #fff;
-    box-shadow: 0 16px 48px rgb(24 35 52 / 8%);
+.tab { color: var(--muted); border-color: transparent; font-weight: 500; }
+.tab.active,
+.tab[aria-selected="true"] { color: var(--ink); border-color: var(--accent); font-weight: 600; }
+
+.muted { color: var(--muted); }
+.line-border { border-color: var(--line); }
+
+/* ---------- Additions that wire the new UI to the existing login logic ---------- */
+
+/* Eyebrow text follows the selected tab (login-sign.js is unchanged). */
+.eyebrow::before { content: "Good to see you"; }
+body:has(#signup-tab[aria-selected="true"]) .eyebrow::before { content: "Start for free"; }
+
+/* Forms toggled with the [hidden] attribute by login-sign.js */
+.form[hidden] { display: none; }
+
+/* Submit button: label is plain text (login-sign.js swaps it while busy), arrow is drawn in CSS */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+}
+.submit-btn::after {
+  content: "";
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 10h14M11 4l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.submit-btn:hover { filter: brightness(1.1); }
+.submit-btn:active { filter: brightness(.95); }
+.submit-btn:disabled { cursor: progress; filter: none; opacity: .7; }
+
+.submit-btn:focus-visible,
+.tab:focus-visible,
+.close-btn:focus-visible {
+  outline: 3px solid rgba(47, 107, 255, .35);
+  outline-offset: 2px;
 }
 
-.brand {
-    margin: 0 0 28px;
-    color: #19212d;
-    font-size: 1rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-align: center;
-}
-
-h1 {
-    margin: 0;
-    font-size: 1.7rem;
-    letter-spacing: -0.04em;
-    text-align: center;
-}
-
-.intro {
-    margin: 10px 0 26px;
-    color: #707987;
-    font-size: 0.95rem;
-    text-align: center;
-}
-
-.switcher {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    margin-bottom: 24px;
-    padding: 4px;
-    border-radius: 10px;
-    background: #f1f3f6;
-}
-
-.switcher button {
-    min-height: 42px;
-    border: 0;
-    border-radius: 7px;
-    background: transparent;
-    color: #687282;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.switcher button[aria-selected="true"] {
-    background: #fff;
-    color: #19212d;
-    box-shadow: 0 1px 4px rgb(24 35 52 / 12%);
-}
-
-.form {
-    display: grid;
-    gap: 17px;
-}
-
-.form[hidden] {
-    display: none;
-}
-
-label {
-    display: grid;
-    gap: 8px;
-    color: #303949;
-    font-size: 0.88rem;
-    font-weight: 600;
-}
-
-input {
-    width: 100%;
-    min-height: 46px;
-    padding: 0 13px;
-    border: 1px solid #d9dee6;
-    border-radius: 8px;
-    background: #fff;
-    color: #19212d;
-    font: inherit;
-    font-size: 0.95rem;
-}
-
-input::placeholder {
-    color: #9aa2ae;
-}
-
-input:focus-visible,
-button:focus-visible {
-    outline: 3px solid rgb(49 102 171 / 30%);
-    outline-offset: 2px;
-}
-
-.submit {
-    min-height: 48px;
-    margin-top: 3px;
-    border: 0;
-    border-radius: 8px;
-    background: #203b5a;
-    color: #fff;
-    cursor: pointer;
-    font: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-}
-
-.submit:hover {
-    background: #172d46;
-}
-
+/* Status message under each form (text and colour are set by login-sign.js) */
 .notice {
-    min-height: 1.25em;
-    margin: 0;
-    color: #596577;
-    font-size: 0.85rem;
-    text-align: center;
-}
-
-@media (max-width: 480px) {
-    .account {
-        padding: 28px 22px;
-    }
+  min-height: 1.5em;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
 }
