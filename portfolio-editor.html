@@ -8,146 +8,6 @@
   <title>Portfolio Editor | SOYON</title>
   <link rel="stylesheet" href="./src/portfolio-editor.css">
   <link rel="stylesheet" href="./src/index.css">
-  <style>
-    .project-builder-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 4px;
-    }
-
-    .project-builder-heading label {
-      margin: 0;
-    }
-
-    .project-editor-list {
-      display: grid;
-      gap: 14px;
-      margin: 12px 0;
-    }
-
-    .project-editor-card {
-      padding: 16px;
-      border: 1px solid #e4e1dd;
-      border-radius: 12px;
-      background: #fff;
-    }
-
-    .project-editor-card__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .project-editor-card__header strong {
-      font-size: 14px;
-    }
-
-    .project-editor-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 150px;
-      gap: 12px;
-    }
-
-    .project-editor-fields {
-      display: grid;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .project-editor-fields label {
-      display: block;
-      margin: 0 0 5px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .project-editor-fields input,
-    .project-editor-fields textarea {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .project-editor-fields textarea {
-      min-height: 72px;
-      resize: vertical;
-    }
-
-    .project-image-picker {
-      display: grid;
-      align-content: start;
-      gap: 8px;
-    }
-
-    .project-image-preview {
-      display: grid;
-      place-items: center;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border: 1px dashed #d5d0ca;
-      border-radius: 8px;
-      background: #f7f5f2;
-      color: #77716d;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    .project-image-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .project-image-actions {
-      display: grid;
-      gap: 6px;
-    }
-
-    .project-image-actions .button {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .project-image-input {
-      display: none;
-    }
-
-    .project-remove-button {
-      color: #a63d3d;
-    }
-
-    .project-editor-empty {
-      padding: 18px;
-      border: 1px dashed #d5d0ca;
-      border-radius: 10px;
-      color: #77716d;
-      font-size: 13px;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      .project-editor-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project-image-picker {
-        grid-template-columns: 100px minmax(0, 1fr);
-        align-items: center;
-      }
-
-      .project-image-preview {
-        aspect-ratio: 1;
-      }
-
-      .project-builder-heading {
-        align-items: flex-start;
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="app-shell">
@@ -158,11 +18,11 @@
 
       <nav class="topbar-actions" aria-label="Main navigation">
         <button
-          id="generate-button"
-          class="button button-dark"
-          type="button"
+            id="generate-button"
+            class="button button-dark"
+            type="button"
         >
-          Open portfolio
+            Open portfolio
         </button>
         <a href="./dashboard.html" class="nav-link">Dashboard</a>
         <a href="./portfolio.html" class="nav-link">My portfolios</a>
@@ -298,6 +158,7 @@
 
           <fieldset class="form-section">
             <legend>About you</legend>
+
             <label for="about">About me</label>
             <textarea
               id="about"
@@ -315,16 +176,23 @@
               id="education"
               name="education"
               rows="4"
-              placeholder="School, course, dates, achievements — one item per line"
+              placeholder="Bachelor of Computer Science | University of Technology | 2018 – 2022&#10;Web Development Bootcamp | Code Academy | 2022 – 2023"
             ></textarea>
+            <p class="field-hint">
+              One item per line: <strong>Title | School | Dates</strong>
+            </p>
 
             <label for="experience">Work experience</label>
             <textarea
               id="experience"
               name="experience"
               rows="4"
-              placeholder="Role, organization, dates, and responsibilities — one item per line"
+              placeholder="Frontend Developer | Tech Solutions Inc. | 2021 – Present&#10;- Built responsive web applications with React&#10;- Improved performance and accessibility"
             ></textarea>
+            <p class="field-hint">
+              <strong>Role | Company | Dates</strong>, then start a line with
+              “-” to add a bullet point under that role.
+            </p>
           </fieldset>
 
           <fieldset class="form-section">
@@ -338,45 +206,81 @@
               placeholder="Design, communication, HTML, teamwork..."
             ></textarea>
 
-            <div class="project-builder-heading">
-              <label>Projects</label>
-              <button
-                id="add-project-button"
-                class="button button-secondary"
-                type="button"
-              >
-                + Add project
-              </button>
-            </div>
-
-            <p class="field-hint">
-              Add a title, short description, optional technologies and link,
-              plus an image for each project.
-            </p>
-
-            <div
-              id="project-list"
-              class="project-editor-list"
-              aria-live="polite"
-            ></div>
-
+            <label for="projects">Projects</label>
             <textarea
               id="projects"
               name="projects"
-              hidden
-              aria-hidden="true"
+              rows="5"
+              placeholder="E-Commerce Platform | A modern store built with React and Node.js | React, Node.js | https://example.com&#10;Task Manager App | Organize tasks and track progress"
             ></textarea>
+            <p class="field-hint">
+              One project per line:
+              <strong>Name | Description | Technologies | Link</strong>.
+              Everything after the name is optional.
+            </p>
+
+            <label>Project images</label>
+
+            <div class="project-images">
+              <div class="project-images-toolbar">
+                <p class="field-hint">
+                  Each project above gets one image slot, in the same order.
+                  You can pick several images at once to fill empty slots.
+                </p>
+
+                <label
+                  for="project_images_bulk"
+                  class="button button-secondary upload-button"
+                >
+                  Add images
+                </label>
+              </div>
+
+              <div
+                id="project-images-list"
+                class="project-images-list"
+                aria-live="polite"
+              ></div>
+            </div>
+
+            <input
+              id="project_images_bulk"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              multiple
+              hidden
+            >
+
+            <input
+              id="project_image_file"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              hidden
+            >
+
+            <input
+              id="project_images"
+              name="project_images"
+              type="hidden"
+              value="[]"
+            >
           </fieldset>
 
           <fieldset class="form-section">
             <legend>Social links</legend>
+
             <label for="social_links">Social media or website links</label>
             <textarea
               id="social_links"
               name="social_links"
               rows="4"
-              placeholder="GitHub: https://github.com/yourname&#10;Website: https://example.com"
+              placeholder="LinkedIn: linkedin.com/in/yourname&#10;GitHub: https://github.com/yourname&#10;Behance: behance.net/yourname"
             ></textarea>
+            <p class="field-hint">
+              One per line: <strong>Label: link</strong>. LinkedIn, GitHub,
+              Behance and X get their own icon. Your email is added
+              automatically.
+            </p>
           </fieldset>
 
           <fieldset class="form-section">

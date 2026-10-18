@@ -7,76 +7,155 @@
   <link rel="stylesheet" href="./src/simple.css">
 </head>
 <body>
-  <main id="paper">
+  <div id="paper">
+
+    <!-- PAGE 1: COVER -->
     <section class="page cover">
       <h1 class="cover-title">Portfolio</h1>
-      <h2 class="cover-name" data-field="full_name">Your Name</h2>
-      <p class="cover-role" data-field="title">Professional title</p>
-      <div class="cover-photo photo-placeholder" data-field="profile_image" role="img" aria-label="Profile photo"></div>
+      <h2 class="cover-name" data-field="full_name"></h2>
+      <p class="cover-role" data-field="title"></p>
+
+      <div
+        class="cover-photo photo-placeholder"
+        data-field="profile_image"
+        role="img"
+        aria-label="Profile photo"
+      ></div>
+
       <div class="contact-panel">
-        <div class="field"><span>Email</span><span data-field="email"></span></div>
-        <div class="field"><span>Phone</span><span data-field="phone"></span></div>
-        <div class="field"><span>Location</span><span data-field="address"></span></div>
+        <div class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <div>
+            <span class="field-label">Email</span>
+            <span data-field="email"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h3l2 5-2 2a15 15 0 0 0 6 6l2-2 5 2v3a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>
+          <div>
+            <span class="field-label">Phone</span>
+            <span data-field="phone"></span>
+          </div>
+        </div>
+
+        <div class="field">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div>
+            <span class="field-label">Location</span>
+            <span data-field="address"></span>
+          </div>
+        </div>
       </div>
-      <footer class="foot"><span class="foot-rule"></span><span>01 / 05</span></footer>
+
+      <footer class="foot"><span>01 / 05</span></footer>
     </section>
 
-    <section class="page bg-left">
-      <div class="sub">Profile / Education</div>
+    <!-- PAGE 2: ABOUT AND EDUCATION -->
+    <section class="page p2">
       <div class="cols">
         <div class="col-about">
+          <p class="sub">Profile / Education</p>
           <h2 class="heading">About me</h2>
           <div class="rule"></div>
           <p class="about" data-field="about"></p>
         </div>
+
         <div class="col-main">
+          <p class="sub" aria-hidden="true">&nbsp;</p>
           <h2 class="heading">Education</h2>
           <div class="rule"></div>
           <div data-field="education"></div>
         </div>
       </div>
-      <footer class="foot"><span class="foot-rule"></span><span>02 / 05</span></footer>
+
+      <footer class="foot"><span>02 / 05</span></footer>
     </section>
 
-    <section class="page">
-      <div class="strip"><div class="vert">Skills &amp; Experience</div></div>
-      <div class="content">
-        <div class="block">
-          <div class="sub">Capabilities</div>
-          <h2 class="heading">Skills</h2>
-          <div class="rule"></div>
-          <div class="chips" data-field="skills"></div>
-        </div>
-        <div class="block">
-          <div class="sub">Career</div>
-          <h2 class="heading">Experience</h2>
-          <div class="rule"></div>
-          <div data-field="experience"></div>
-        </div>
+    <!-- PAGE 3: SKILLS AND EXPERIENCE -->
+    <section class="page p3">
+      <div class="strip" aria-hidden="true">
+        <span class="vert">Skills &amp; Experience</span>
       </div>
-      <footer class="foot"><span class="foot-rule"></span><span>03 / 05</span></footer>
+
+      <section class="block">
+        <p class="sub">Capabilities</p>
+        <h2 class="heading">Skills</h2>
+        <div class="rule"></div>
+        <div class="chips" data-field="skills"></div>
+      </section>
+
+      <section class="block">
+        <p class="sub">Career</p>
+        <h2 class="heading">Experience</h2>
+        <div class="rule"></div>
+        <div data-field="experience"></div>
+      </section>
+
+      <footer class="foot"><span>03 / 05</span></footer>
     </section>
 
-    <section class="page projects-page">
-      <div class="sub">Selected work</div>
+    <!-- PAGE 4: PROJECTS (each project: image + card) -->
+    <section class="page">
+      <p class="sub">Selected work</p>
       <h2 class="heading">Projects</h2>
       <div class="rule"></div>
+
       <div class="content-wide" data-field="projects"></div>
-      <footer class="foot"><span class="foot-rule"></span><span>04 / 05</span></footer>
+
+      <footer class="foot"><span>04 / 05</span></footer>
     </section>
 
-    <section class="page links-page">
+    <!-- PAGE 5: LINKS & PROFILES AND ADDITIONAL INFORMATION -->
+    <section class="page p5">
       <div class="links-panel">
-        <div class="sub">Links &amp; Profiles</div>
+        <p class="sub">Links &amp; Profiles</p>
         <h2 class="heading">Links &amp; Profiles</h2>
         <div class="rule"></div>
+
         <p class="links-intro">
           A collection of professional profiles and selected online destinations.
         </p>
+
         <div class="links-list" data-field="social_links"></div>
+
+        <div class="extras">
+          <div class="extra-block">
+            <h3>Certifications</h3>
+            <p data-field="certifications"></p>
+          </div>
+
+          <div class="extra-block">
+            <h3>Languages</h3>
+            <p data-field="languages"></p>
+          </div>
+
+          <div class="extra-block">
+            <h3>Interests</h3>
+            <p data-field="interests"></p>
+          </div>
+        </div>
       </div>
-      <footer class="foot"><span class="foot-rule"></span><span>05 / 05</span></footer>
+
+      <footer class="foot"><span>05 / 05</span></footer>
     </section>
-  </main>
+
+  </div>
+
+  <script>
+    function scalePaper() {
+      const paper = document.getElementById("paper");
+
+      if (!paper) return;
+
+      paper.style.zoom = Math.min(
+        1,
+        (document.documentElement.clientWidth - 28) / 794
+      );
+    }
+
+    window.addEventListener("resize", scalePaper);
+    scalePaper();
+  </script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap");
 
 /* --------------------------------------------------
@@ -895,5 +894,115 @@ input:invalid:not(:placeholder-shown) {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+
+/* Project image slots */
+
+.project-images {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.project-images-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.project-images-toolbar .field-hint {
+  margin: 0;
+}
+
+.project-images-toolbar .button {
+  flex: 0 0 auto;
+}
+
+.project-images-list {
+  display: grid;
+  gap: 10px;
+}
+
+.project-image-empty {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.project-image-slot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.project-image-thumb {
+  display: grid;
+  flex: 0 0 84px;
+  width: 84px;
+  height: 60px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project-image-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-image-info {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
+}
+
+.project-image-info strong,
+.project-image-info small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-image-info small {
+  color: var(--text-secondary);
+}
+
+.project-image-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.project-image-actions .button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .project-images-toolbar,
+  .project-image-slot {
+    flex-wrap: wrap;
+  }
+
+  .project-image-actions {
+    width: 100%;
   }
 }

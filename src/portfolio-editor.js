@@ -44,6 +44,10 @@ const fields = [
   "projects",
   "experience",
   "social_links",
+  "project_images",
+  "certifications",
+  "languages",
+  "interests",
   "template_key"
 ];
 
@@ -168,7 +172,10 @@ function loadImage(source) {
   });
 }
 
-async function resizeImage(file) {
+async function resizeImage(
+  file,
+  { maxDimension = 800, quality = 0.82, maxLength = 2_500_000 } = {}
+) {
   const maxInputSize = 12 * 1024 * 1024;
 
   if (!file.type.startsWith("image/")) {
@@ -181,8 +188,6 @@ async function resizeImage(file) {
 
   const source = await readFileAsDataURL(file);
   const image = await loadImage(source);
-  const maxDimension = 800;
-
   const scale = Math.min(
     1,
     maxDimension / Math.max(image.naturalWidth, image.naturalHeight)
@@ -201,9 +206,9 @@ async function resizeImage(file) {
 
   context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-  const dataUrl = canvas.toDataURL("image/jpeg", 0.82);
+  const dataUrl = canvas.toDataURL("image/jpeg", quality);
 
-  if (dataUrl.length > 2_500_000) {
+  if (dataUrl.length > maxLength) {
     throw new Error(
       "This image is still too large to save reliably. Choose a smaller image."
     );
@@ -253,6 +258,219 @@ removeImageButton?.addEventListener("click", () => {
   showMessage("Profile picture removed.", true);
 });
 
+/* ---------- Project images (one slot per project line) ---------- */
+
+const projectImagesList = document.querySelector("#project-images-list");
+const projectImagesField = document.querySelector("#project_images");
+const projectImageInput = document.querySelector("#project_image_file");
+const projectImagesBulk = document.querySelector("#project_images_bulk");
+const projectsField = document.querySelector("#projects");
+
+const projectImageOptions = {
+  maxDimension: 720,
+  quality: 0.8,
+  maxLength: 1_200_000
+};
+
+let projectImageTarget = -1;
+
+function getProjectTitles() {
+  return (projectsField?.value || "")
+    .split(/\n+/)
+    .map(line => line.split("|")[0].trim())
+    .filter(Boolean);
+}
+
+function readProjectImages() {
+  try {
+    const list = JSON.parse(projectImagesField?.value || "[]");
+
+    return Array.isArray(list)
+      ? list.map(item => (typeof item === "string" ? item : ""))
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeProjectImages(list) {
+  const trimmed = [...list];
+
+  while (trimmed.length && !trimmed[trimmed.length - 1]) trimmed.pop();
+
+  if (projectImagesField) projectImagesField.value = JSON.stringify(trimmed);
+}
+
+function renderProjectImages() {
+  if (!projectImagesList) return;
+
+  const titles = getProjectTitles();
+  const images = readProjectImages();
+
+  projectImagesList.replaceChildren();
+
+  if (!titles.length) {
+    const empty = document.createElement("p");
+
+    empty.className = "project-image-empty";
+    empty.textContent =
+      "Add a project in the Projects box above and its image slot will appear here.";
+
+    projectImagesList.append(empty);
+    return;
+  }
+
+  titles.forEach((title, index) => {
+    const src = images[index] || "";
+    const slot = document.createElement("div");
+
+    slot.className = "project-image-slot";
+
+    const thumb = document.createElement("div");
+
+    thumb.className = "project-image-thumb";
+
+    if (src) {
+      const img = document.createElement("img");
+
+      img.src = src;
+      img.alt = `${title} preview`;
+      thumb.append(img);
+    } else {
+      thumb.textContent = String(index + 1).padStart(2, "0");
+    }
+
+    const info = document.createElement("div");
+
+    info.className = "project-image-info";
+
+    const strong = document.createElement("strong");
+    const small = document.createElement("small");
+
+    strong.textContent = title;
+    small.textContent = src ? "Image added" : "No image yet";
+    info.append(strong, small);
+
+    const actions = document.createElement("div");
+
+    actions.className = "project-image-actions";
+
+    const choose = document.createElement("button");
+
+    choose.type = "button";
+    choose.className = "button button-secondary";
+    choose.dataset.action = "choose";
+    choose.dataset.index = String(index);
+    choose.textContent = src ? "Replace" : "Choose image";
+    actions.append(choose);
+
+    if (src) {
+      const remove = document.createElement("button");
+
+      remove.type = "button";
+      remove.className = "button button-secondary";
+      remove.dataset.action = "remove";
+      remove.dataset.index = String(index);
+      remove.textContent = "Remove";
+      actions.append(remove);
+    }
+
+    slot.append(thumb, info, actions);
+    projectImagesList.append(slot);
+  });
+}
+
+async function setProjectImages(entries) {
+  const images = readProjectImages();
+
+  for (const [index, file] of entries) {
+    images[index] = await resizeImage(file, projectImageOptions);
+  }
+
+  writeProjectImages(images);
+  renderProjectImages();
+  updatePreview();
+}
+
+projectImagesList?.addEventListener("click", event => {
+  const button = event.target.closest("button[data-action]");
+
+  if (!button) return;
+
+  const index = Number(button.dataset.index);
+
+  if (button.dataset.action === "choose") {
+    projectImageTarget = index;
+    projectImageInput.value = "";
+    projectImageInput.click();
+    return;
+  }
+
+  const images = readProjectImages();
+
+  images[index] = "";
+  writeProjectImages(images);
+  renderProjectImages();
+  updatePreview();
+  showMessage("Project image removed.", true);
+});
+
+projectImageInput?.addEventListener("change", async () => {
+  const file = projectImageInput.files?.[0];
+
+  if (!file || projectImageTarget < 0) return;
+
+  try {
+    showMessage("Preparing project image…", true);
+    await setProjectImages([[projectImageTarget, file]]);
+    showMessage("Project image updated.", true);
+  } catch (error) {
+    showMessage(error.message);
+  } finally {
+    projectImageInput.value = "";
+  }
+});
+
+projectImagesBulk?.addEventListener("change", async () => {
+  const files = Array.from(projectImagesBulk.files || []);
+
+  projectImagesBulk.value = "";
+
+  if (!files.length) return;
+
+  const titles = getProjectTitles();
+
+  if (!titles.length) {
+    showMessage("Add at least one project first, then add images.");
+    return;
+  }
+
+  const images = readProjectImages();
+  const emptySlots = titles
+    .map((_, index) => index)
+    .filter(index => !images[index]);
+
+  const targets = emptySlots.length
+    ? emptySlots
+    : titles.map((_, index) => index);
+
+  const entries = files.slice(0, targets.length).map((file, i) => [targets[i], file]);
+
+  try {
+    showMessage("Preparing project images…", true);
+    await setProjectImages(entries);
+
+    showMessage(
+      files.length > entries.length
+        ? `Added ${entries.length} image(s). ${files.length - entries.length} extra file(s) had no project to match — add more projects first.`
+        : `Added ${entries.length} project image(s).`,
+      true
+    );
+  } catch (error) {
+    showMessage(error.message);
+  }
+});
+
 function updatePreview() {
   const data = getData();
 
@@ -280,12 +498,17 @@ function fillForm(data = {}) {
 
     if (element instanceof RadioNodeList) {
       element.value = data[key] || initialTemplate;
+    } else if (key === "project_images") {
+      element.value = Array.isArray(data[key])
+        ? JSON.stringify(data[key])
+        : (data[key] || "[]");
     } else {
       element.value = data[key] || "";
     }
   });
 
   updateImageUI(data.profile_image || "", data.profile_image_name || "");
+  renderProjectImages();
 
   if (iframe) {
     iframe.srcdoc = renderDocument(getData());
@@ -505,12 +728,15 @@ function addExplicitSaveButton() {
 }
 
 form.addEventListener("input", event => {
-  if (event.target === imageInput) return;
+  if (event.target.type === "file") return;
+
+  if (event.target === projectsField) renderProjectImages();
+
   updatePreview();
 });
 
 form.addEventListener("change", event => {
-  if (event.target === imageInput) return;
+  if (event.target.type === "file") return;
   updatePreview();
 });
 
