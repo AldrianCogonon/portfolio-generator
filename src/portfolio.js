@@ -1,4 +1,3 @@
-
 import { portfolioStore } from "./portfolio-store.js";
 import { supabase } from "../supabase.js";
 
@@ -32,9 +31,9 @@ const previewStyles = {
     label: "text-slate-600"
   },
   modern: {
-    wrapper: "bg-slate-900", page: "bg-slate-800",
-    accent: "bg-blue-300", secondary: "bg-slate-600",
-    label: "text-blue-200"
+    wrapper: "bg-rose-50", page: "bg-white",
+    accent: "bg-[#741f42]", secondary: "bg-rose-100",
+    label: "text-[#741f42]"
   },
   creative: {
     wrapper: "bg-indigo-50", page: "bg-white",
@@ -223,7 +222,7 @@ function renderPreview(templateKey) {
 
   return `
     <div class="flex aspect-[16/9] items-center justify-center overflow-hidden rounded-xl ${style.wrapper} p-4 sm:p-5">
-      <div class="w-full max-w-[250px] ${style.page} ${modern ? "p-4 text-white" : "p-4 shadow-sm"}">
+      <div class="w-full max-w-[250px] ${style.page} ${modern ? "p-4 shadow-sm" : "p-4 shadow-sm"}">
         <div class="mb-3 flex items-center justify-between gap-3">
           <div class="h-2 w-2/5 rounded ${style.accent}"></div>
           <div class="h-1 w-1/5 rounded ${style.secondary}"></div>
@@ -231,7 +230,7 @@ function renderPreview(templateKey) {
         <div class="mb-2 h-2.5 w-4/5 rounded ${style.accent}"></div>
         <div class="mb-1 h-1 w-full rounded ${style.secondary}"></div>
         <div class="h-1 w-3/4 rounded ${style.secondary}"></div>
-        <div class="my-3 border-t ${modern ? "border-slate-600" : "border-stone-200"}"></div>
+        <div class="my-3 border-t ${modern ? "border-rose-200" : "border-stone-200"}"></div>
         <div class="grid grid-cols-[1fr_.75fr] gap-3">
           <div class="space-y-1.5">
             <div class="h-1.5 w-3/4 rounded ${style.accent}"></div>

@@ -1164,6 +1164,707 @@ function renderSimpleDocument(d = {}) {
 }
 
 /* =========================================================
+   MODERN TEMPLATE
+   Multi-page portfolio document (maroon + blush palette).
+   Pages are built from the editor fields and numbered
+   dynamically, so empty sections never leave blank pages.
+   Uses the same line formats as the Simple template.
+   ========================================================= */
+
+const MODERN_CSS = String.raw`/* =========================================================
+   MODERN TEMPLATE
+   Multi-page portfolio document: maroon + blush palette.
+   The same stylesheet is inlined by renderModernDocument()
+   in portfolio-render.js (the editor preview is an iframe).
+   ========================================================= */
+
+/* 1. GENERAL STYLES */
+:root {
+  --maroon: #741f42;
+  --burgundy: #8d3157;
+  --pink: #d8a7b9;
+  --light-pink: #f3e8ed;
+  --light-gray: #f4f5f7;
+  --dark: #20252d;
+  --gray: #68717d;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--dark);
+  background: #dfe1e5;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; overflow-wrap: anywhere; }
+h1, h2, h3 { line-height: 1.2; }
+p { color: var(--gray); font-size: 13px; }
+
+/* 2. PORTFOLIO DOCUMENT */
+.portfolio {
+  max-width: 1550px;
+  margin: 25px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.page {
+  background: var(--white);
+  min-width: 0;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e6e6e9;
+  box-shadow: 0 7px 20px rgba(25, 25, 35, 0.09);
+  display: flex;
+  flex-direction: column;
+}
+
+.page > * { flex-shrink: 0; }
+.page-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.page-number { color: var(--maroon); font-size: 15px; font-weight: 800; }
+.page-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+.header-line { height: 1px; background: #d7d7dc; flex: 1; }
+.page-count { color: var(--gray); font-size: 9px; white-space: nowrap; }
+
+.eyebrow { color: var(--maroon); font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
+.section-title { font-size: 29px; margin: 8px 0 18px; letter-spacing: -1px; overflow-wrap: anywhere; }
+.accent { color: var(--maroon); }
+.small-title { font-size: 15px; margin-bottom: 8px; }
+.muted { color: var(--gray); }
+.empty { color: var(--gray); font-size: 11px; font-style: italic; line-height: 1.8; }
+
+/* 3. COVER PAGE */
+.cover { grid-row: span 2; min-height: 970px; padding: 35px; }
+
+.cover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 9px;
+  height: 110px;
+  background: var(--maroon);
+}
+
+.cover-top { font-size: 11px; letter-spacing: 3px; line-height: 1.8; margin-bottom: 45px; text-transform: uppercase; }
+
+.cover h1 {
+  font-size: clamp(42px, 4vw, 65px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.cover-subtitle { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; overflow-wrap: anywhere; }
+.cover-intro { margin-top: 45px; max-width: 190px; font-size: 13px; overflow-wrap: anywhere; }
+
+.cover-photo {
+  width: 100%;
+  height: 340px;
+  margin-top: 30px;
+  overflow: hidden;
+  background: var(--light-pink);
+  border-radius: 150px 150px 5px 5px;
+}
+
+.cover-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+.avatar-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: var(--maroon);
+  font-size: 64px;
+  font-weight: 800;
+}
+
+.cover-bottom { margin-top: auto; padding-top: 28px; }
+.cover-line { width: 45px; height: 2px; background: var(--maroon); margin-bottom: 14px; }
+.cover-bottom p { font-size: 10px; letter-spacing: 2px; color: var(--maroon); font-weight: 700; text-transform: uppercase; }
+
+/* 4. ABOUT ME */
+.about-page { min-height: 470px; }
+.about-page .section-title { font-size: 31px; }
+.about-description { margin-bottom: 14px; overflow-wrap: anywhere; }
+.personal-info { background: #f7f2f4; padding: 18px; margin-top: 18px; border-radius: 8px; }
+.info-item { display: flex; align-items: flex-start; gap: 12px; margin-top: 13px; }
+
+.info-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--maroon);
+  border-radius: 50%;
+  font-size: 13px;
+}
+
+.info-item strong { font-size: 11px; display: block; }
+.info-item p { font-size: 10px; overflow-wrap: anywhere; }
+
+/* 5. EDUCATION AND SKILLS */
+.education-page { min-height: 510px; }
+.subheading { display: flex; align-items: center; gap: 12px; margin: 4px 0 20px; }
+.subheading-icon { font-size: 25px; color: var(--maroon); }
+.education-list { border-left: 2px solid var(--maroon); margin-left: 13px; padding-left: 20px; }
+.education-item { position: relative; margin-bottom: 24px; }
+
+.education-item::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--maroon);
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.education-item strong { font-size: 11px; display: block; overflow-wrap: anywhere; }
+.education-item p { font-size: 10px; margin-top: 3px; overflow-wrap: anywhere; }
+
+.date-tag {
+  display: inline-block;
+  background: var(--light-pink);
+  color: var(--maroon);
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.skill-card { background: #f5f3f5; padding: 13px 2px; text-align: center; border-radius: 6px; min-width: 0; }
+.skill-card span { display: block; color: var(--maroon); font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.skill-card p { font-size: 8.5px; color: var(--dark); overflow-wrap: break-word; }
+
+/* 6. PROJECT GALLERY */
+.projects-page { min-height: 510px; }
+
+.project-card {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: 15px;
+  align-items: center;
+  background: #f7f7f8;
+  padding: 12px;
+  border: 1px solid #ececef;
+  border-radius: 8px;
+  margin-bottom: 13px;
+  break-inside: avoid;
+}
+
+.project-card > div { min-width: 0; }
+.project-image { min-height: 105px; background: #eee7eb; border-radius: 5px; overflow: hidden; }
+.project-image img { display: block; width: 100%; height: 105px; object-fit: cover; }
+
+.project-image-empty {
+  display: grid;
+  height: 105px;
+  place-items: center;
+  color: var(--pink);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.project-card h3 { font-size: 11px; margin-bottom: 6px; overflow-wrap: anywhere; }
+.project-card p { font-size: 10px; line-height: 1.5; margin-bottom: 7px; overflow-wrap: anywhere; }
+.project-link { display: inline-block; margin-bottom: 7px; color: var(--maroon); font-size: 10px; font-weight: 700; text-decoration: underline; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { display: inline-block; padding: 3px 7px; border-radius: 4px; background: #eadce3; color: var(--maroon); font-size: 9px; font-weight: 700; }
+
+/* 7. WORK EXPERIENCE */
+.experience-page { min-height: 435px; }
+.experience-list { border-left: 2px solid var(--maroon); margin-left: 8px; padding-left: 20px; }
+.experience-item { position: relative; margin-bottom: 26px; }
+
+.experience-item::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 7px;
+  height: 10px;
+  width: 10px;
+  background: var(--maroon);
+  border-radius: 50%;
+}
+
+.experience-item h3 { font-size: 12px; margin: 5px 0; overflow-wrap: anywhere; }
+.experience-item p, .experience-item li { font-size: 10px; overflow-wrap: anywhere; }
+.experience-item ul { padding-left: 15px; }
+
+.quote { margin-top: auto; padding: 20px 10px; text-align: center; font-size: 17px; font-style: italic; color: var(--maroon); }
+
+/* 8. SOCIAL MEDIA */
+.social-page { min-height: 435px; }
+.social-page .section-title { font-size: 31px; }
+.social-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 24px 0 18px; }
+.social-card { display: block; padding: 18px 8px; text-align: center; background: #f7f4f6; border: 1px solid #ece5e9; border-radius: 8px; min-width: 0; }
+
+.social-icon {
+  width: 43px;
+  height: 43px;
+  margin: 0 auto 8px;
+  display: grid;
+  place-items: center;
+  background: var(--maroon);
+  color: white;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.social-card strong { display: block; font-size: 11px; overflow-wrap: anywhere; }
+.social-card p { font-size: 9px; overflow-wrap: anywhere; }
+.thanks { margin-top: auto; padding: 22px 12px; text-align: center; background: var(--light-pink); border-radius: 8px; }
+.thanks h3 { color: var(--maroon); margin-bottom: 5px; }
+
+/* 9. PROJECT DETAILS */
+.details-page { min-height: 435px; }
+.project-feature { display: grid; grid-template-columns: 1.2fr 1fr; gap: 15px; align-items: start; }
+.project-feature img { display: block; width: 100%; border-radius: 6px; border: 1px solid #e3e3e7; }
+.project-feature p { font-size: 10px; overflow-wrap: anywhere; }
+.details-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 22px; }
+.details-columns h3 { font-size: 12px; margin-bottom: 8px; }
+.details-columns ul { padding-left: 17px; }
+.details-columns li { font-size: 10px; margin-bottom: 5px; overflow-wrap: anywhere; }
+
+.project-button {
+  display: inline-block;
+  background: var(--maroon);
+  color: white;
+  padding: 10px 18px;
+  margin-top: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 5px;
+}
+
+/* 10. CONTACT PAGE */
+.contact-page { min-height: 435px; }
+.contact-page .section-title { font-size: 32px; }
+.contact-card { background: #f7f7f8; border: 1px solid #e7e7eb; padding: 6px 16px 18px; border-radius: 8px; margin-top: 15px; }
+.contact-footer { margin-top: 18px; }
+.contact-footer p { margin: 8px 0; font-size: 10px; overflow-wrap: anywhere; }
+
+.send-button:hover, .project-button:hover { background: var(--burgundy); }
+
+/* 11. RESPONSIVE DESIGN */
+@media (max-width: 1150px) {
+  .portfolio { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cover { grid-row: span 2; }
+}
+
+@media (max-width: 650px) {
+  .portfolio { grid-template-columns: 1fr; padding: 0 12px; margin: 12px auto; gap: 14px; }
+  .page, .cover { grid-row: auto; min-height: auto; padding: 25px; }
+  .cover-photo { height: 360px; }
+  .cover-bottom { margin-top: 35px; }
+  .project-card { grid-template-columns: 40% 1fr; }
+  .section-title { font-size: 27px; }
+}
+
+/* 12. PRINT AS DOCUMENT / PDF */
+@page { size: A4; margin: 0; }
+
+@media print {
+  body { background: white; }
+  .portfolio { display: block; max-width: none; margin: 0; padding: 0; }
+
+  .page {
+    width: 210mm;
+    min-height: 296mm;
+    margin: 0;
+    padding: 15mm;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .page:last-child { break-after: auto; page-break-after: auto; }
+  .cover { padding: 22mm; }
+  .cover-photo { height: 105mm; }
+  .project-button { color: white !important; }
+  a { text-decoration: none; }
+  .project-link { text-decoration: underline; }
+}
+`;
+
+function modernSkillSymbol(skill) {
+  const text = String(skill || "").trim();
+  const words = text.split(/[\s/&+-]+/).filter(Boolean);
+
+  if (words.length > 1) {
+    return words.slice(0, 3).map(word => word[0]).join("").toUpperCase();
+  }
+
+  return text.length <= 3 ? text.toUpperCase() : text.charAt(0).toUpperCase();
+}
+
+function modernSplitName(name) {
+  const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+
+  if (!parts.length) return { first: "Your", last: "Name" };
+  if (parts.length === 1) return { first: parts[0], last: "" };
+
+  return { first: parts.slice(0, -1).join(" "), last: parts[parts.length - 1] };
+}
+
+function modernTitleMarkup(text) {
+  const { first, last } = modernSplitName(text);
+
+  return last
+    ? `${escapeHTML(first)} <span class="accent">${escapeHTML(last)}</span>`
+    : escapeHTML(first);
+}
+
+function modernSocialSymbol(kind) {
+  return {
+    linkedin: "in",
+    github: "GH",
+    behance: "Bē",
+    x: "X",
+    email: "✉"
+  }[kind] || "↗";
+}
+
+function renderModernDocument(d = {}) {
+  const name = d.full_name || "Your Name";
+  const role = d.title || "Professional Portfolio";
+
+  const about = String(d.about || "").trim();
+  const education = parseSimpleEntries(d.education);
+  const experience = parseSimpleEntries(d.experience);
+  const projects = parseSimpleProjects(d.projects);
+  const projectImages = parseImageList(d.project_images);
+  const skills = splitSkills(d.skills);
+
+  const email = String(d.email || "").trim();
+  const phone = String(d.phone || "").trim();
+  const address = String(d.address || "").trim();
+  const socialLinks = parseSimpleLinks(d.social_links, email);
+
+  const profileSrc = safeImageSource(d.profile_image);
+  const { first, last } = modernSplitName(name);
+
+  const aboutLines = lines(about);
+  const intro = (aboutLines[0] || "")
+    .split(/(?<=[.!?])\s+/)[0]
+    .slice(0, 140);
+
+  /* ---------- Cover ---------- */
+  const photoMarkup = profileSrc
+    ? `<img src="${escapeHTML(profileSrc)}" alt="${escapeHTML(name)} profile photo" onerror="this.style.display='none'">`
+    : `<div class="avatar-placeholder" aria-label="Profile image placeholder">${escapeHTML(getInitials(name))}</div>`;
+
+  const cover = `
+    <section class="page cover" id="home">
+      <div class="cover-top">Portfolio<br>${new Date().getFullYear()}</div>
+
+      <h1>${escapeHTML(first)}${last ? `<br><span class="accent">${escapeHTML(last)}</span>` : ""}</h1>
+
+      <div class="cover-subtitle">${escapeHTML(role)}</div>
+
+      ${intro ? `<p class="cover-intro">${escapeHTML(intro)}</p>` : ""}
+
+      <div class="cover-photo">${photoMarkup}</div>
+
+      <div class="cover-bottom">
+        <div class="cover-line"></div>
+        <p>${escapeHTML(name)}</p>
+        <p>Personal Portfolio</p>
+      </div>
+    </section>
+  `;
+
+  /* ---------- Section bodies ---------- */
+  const infoItem = (icon, label, value, href = "") => value
+    ? `
+      <div class="info-item">
+        <div class="info-icon">${icon}</div>
+        <div>
+          <strong>${escapeHTML(label)}</strong>
+          <p>${href
+            ? `<a href="${escapeHTML(href)}">${escapeHTML(value)}</a>`
+            : escapeHTML(value)}</p>
+        </div>
+      </div>
+    `
+    : "";
+
+  const personalInfo = [
+    infoItem("♟", "Full Name", name),
+    infoItem("✉", "Email", email, email ? `mailto:${email}` : ""),
+    infoItem("☎", "Contact Number", phone, phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : ""),
+    infoItem("⌖", "Address", address)
+  ].join("");
+
+  const entryDetail = entry => `
+    ${entry.description ? `<p>${escapeHTML(entry.description)}</p>` : ""}
+    ${entry.bullets.length
+      ? `<ul>${entry.bullets.map(b => `<li>${escapeHTML(b)}</li>`).join("")}</ul>`
+      : ""}
+  `;
+
+  const educationMarkup = education.length
+    ? education.map(entry => `
+        <div class="education-item">
+          ${entry.date ? `<span class="date-tag">${escapeHTML(entry.date)}</span>` : ""}
+          ${entry.title ? `<strong>${escapeHTML(entry.title)}</strong>` : ""}
+          ${entry.subtitle ? `<p>${escapeHTML(entry.subtitle)}</p>` : ""}
+          ${entryDetail(entry)}
+        </div>
+      `).join("")
+    : `<p class="empty">Education details will appear here when added.</p>`;
+
+  const skillsMarkup = skills.length
+    ? skills.map(skill => `
+        <div class="skill-card"><span>${escapeHTML(modernSkillSymbol(skill))}</span><p>${escapeHTML(skill)}</p></div>
+      `).join("")
+    : `<p class="empty">Add skills in the portfolio editor.</p>`;
+
+  const projectsMarkup = projects.length
+    ? projects.map((project, index) => {
+        const url = safeUrl(project.url);
+        const src = projectImages[index] || "";
+        const tags = splitSkills(project.technologies);
+
+        return `
+          <div class="project-card">
+            <div class="project-image">
+              ${src
+                ? `<img src="${escapeHTML(src)}" alt="${escapeHTML(project.title)} preview" onerror="this.style.display='none'">`
+                : `<div class="project-image-empty" aria-hidden="true">${String(index + 1).padStart(2, "0")}</div>`}
+            </div>
+            <div>
+              <h3>${escapeHTML(project.title)}</h3>
+              ${project.description ? `<p>${escapeHTML(project.description)}</p>` : ""}
+              ${url
+                ? `<a class="project-link" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">View project ↗</a>`
+                : ""}
+              ${tags.length
+                ? `<div class="tags">${tags.map(t => `<span class="tag">${escapeHTML(t)}</span>`).join("")}</div>`
+                : ""}
+            </div>
+          </div>
+        `;
+      }).join("")
+    : `<p class="empty">Your projects will appear here when added.</p>`;
+
+  const experienceMarkup = experience.length
+    ? experience.map(entry => `
+        <div class="experience-item">
+          ${entry.date ? `<span class="date-tag">${escapeHTML(entry.date)}</span>` : ""}
+          ${entry.title ? `<h3>${escapeHTML(entry.title)}</h3>` : ""}
+          ${entry.subtitle ? `<p class="muted">${escapeHTML(entry.subtitle)}</p>` : ""}
+          ${entryDetail(entry)}
+        </div>
+      `).join("")
+    : `<p class="empty">Experience details will appear here when added.</p>`;
+
+  const socialMarkup = socialLinks.length
+    ? socialLinks.map(link => {
+        const inner = `
+          <div class="social-icon">${escapeHTML(modernSocialSymbol(link.kind))}</div>
+          <strong>${escapeHTML(link.label)}</strong>
+          ${link.display ? `<p>${escapeHTML(link.display)}</p>` : ""}
+        `;
+
+        return link.url
+          ? `<a class="social-card" href="${escapeHTML(link.url)}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+          : `<div class="social-card">${inner}</div>`;
+      }).join("")
+    : `<p class="empty">Add social links in the portfolio editor to display them here.</p>`;
+
+  /* ---------- Numbered pages ---------- */
+  const pages = [
+    {
+      id: "about",
+      label: "About Me",
+      cls: "about-page",
+      body: `
+        <p class="eyebrow">Personal Introduction</p>
+        <h2 class="section-title">Hello,<br>I'm ${modernTitleMarkup(name)}</h2>
+        ${aboutLines.length
+          ? aboutLines.map(line => `<p class="about-description">${escapeHTML(line)}</p>`).join("")
+          : `<p class="empty">Your introduction will appear here when you add it in the portfolio editor.</p>`}
+        ${personalInfo
+          ? `<div class="personal-info"><h3 class="small-title accent">Personal Information</h3>${personalInfo}</div>`
+          : ""}
+      `
+    },
+    {
+      id: "education",
+      label: "Education & Skills",
+      cls: "education-page",
+      body: `
+        <div class="subheading"><span class="subheading-icon">♧</span><h3>Education</h3></div>
+        <div class="education-list">${educationMarkup}</div>
+
+        <div class="subheading" style="margin-top: 22px;"><span class="subheading-icon">⚙</span><h3>Skills</h3></div>
+        <div class="skills-grid">${skillsMarkup}</div>
+      `
+    },
+    {
+      id: "projects",
+      label: "My Projects",
+      cls: "projects-page",
+      body: projectsMarkup
+    },
+    {
+      id: "experience",
+      label: "Work Experience",
+      cls: "experience-page",
+      body: `
+        <div class="experience-list">${experienceMarkup}</div>
+        <div class="quote">“Growth comes from<br>consistent effort.”</div>
+      `
+    },
+    {
+      id: "social",
+      label: "Social Media & Links",
+      cls: "social-page",
+      body: `
+        <p class="eyebrow">Stay Connected</p>
+        <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+        <p>Feel free to reach out or follow me on my social media accounts to see more of my work and updates.</p>
+        <div class="social-grid">${socialMarkup}</div>
+        <div class="thanks"><h3>Thanks for visiting!</h3><p>Keep learning. Keep creating. Keep growing.</p></div>
+      `
+    }
+  ];
+
+  /* Featured project page (first project) — only when a project exists */
+  if (projects.length) {
+    const project = projects[0];
+    const url = safeUrl(project.url);
+    const src = projectImages[0] || "";
+    const tech = splitSkills(project.technologies);
+    const others = projects.slice(1).map(item => item.title);
+
+    pages.push({
+      id: "project-details",
+      label: "Project Details",
+      cls: "details-page",
+      body: `
+        <h2 class="section-title">${modernTitleMarkup(project.title)}</h2>
+        <div class="cover-line"></div>
+
+        <div class="project-feature">
+          ${src ? `<img src="${escapeHTML(src)}" alt="${escapeHTML(project.title)} preview" onerror="this.style.display='none'">` : ""}
+          ${project.description ? `<p>${escapeHTML(project.description)}</p>` : ""}
+        </div>
+
+        <div class="details-columns">
+          <div>
+            <h3>Technologies Used</h3>
+            ${tech.length
+              ? `<ul>${tech.map(t => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`
+              : `<p class="empty">Add technologies after the description in the Projects box.</p>`}
+          </div>
+
+          <div>
+            <h3>${others.length ? "More Projects" : "Project Link"}</h3>
+            ${others.length
+              ? `<ul>${others.map(t => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`
+              : url
+                ? `<p>${escapeHTML(linkDisplay(url))}</p>`
+                : `<p class="empty">No link added.</p>`}
+          </div>
+        </div>
+
+        ${url
+          ? `<div><a class="project-button" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">View Project &nbsp; →</a></div>`
+          : ""}
+      `
+    });
+  }
+
+  /* Contact page */
+  const contactItems = [
+    infoItem("✉", "Email", email, email ? `mailto:${email}` : ""),
+    infoItem("☎", "Contact Number", phone, phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : ""),
+    infoItem("⌖", "Location", address)
+  ].join("");
+
+  const profileNames = socialLinks
+    .filter(link => link.kind !== "email")
+    .map(link => escapeHTML(link.label))
+    .join(" &nbsp; | &nbsp; ");
+
+  pages.push({
+    id: "contact",
+    label: "Contact",
+    cls: "contact-page",
+    body: `
+      <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
+      <p>Have a project in mind or just want to say hello? I'd love to hear from you!</p>
+
+      ${contactItems
+        ? `<div class="contact-card">${contactItems}</div>`
+        : `<p class="empty" style="margin-top:15px">Add your contact details in the portfolio editor.</p>`}
+
+      ${profileNames
+        ? `<div class="contact-footer"><p class="accent">${profileNames}</p></div>`
+        : ""}
+    `
+  });
+
+  const pagesMarkup = pages.map((page, index) => `
+    <section class="page ${page.cls}" id="${page.id}">
+      <div class="page-header">
+        <span class="page-number">${String(index + 1).padStart(2, "0")}</span>
+        <span class="page-label">${escapeHTML(page.label)}</span>
+        <span class="header-line"></span>
+        <span class="page-count">Page ${index + 2}</span>
+      </div>
+      ${page.body}
+    </section>
+  `).join("");
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHTML(`${name} | Personal Portfolio`)}</title>
+  <style>
+${MODERN_CSS}
+  </style>
+</head>
+<body>
+  <main class="portfolio">
+    ${cover}
+    ${pagesMarkup}
+  </main>
+</body>
+</html>`;
+}
+
+/* =========================================================
    MODERN + CREATIVE TEMPLATES
    Keep their existing shared layout and template styles.
    ========================================================= */
@@ -1599,6 +2300,10 @@ function renderDocument(d = {}) {
 
   if (template === "simple") {
     return renderSimpleDocument(d);
+  }
+
+  if (template === "modern") {
+    return renderModernDocument(d);
   }
 
   return renderLegacyDocument({

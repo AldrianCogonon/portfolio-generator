@@ -1,218 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Modern Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/modern.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Portfolio Template</title>
+  <link rel="stylesheet" href="./src/modern.css">
 </head>
-<body class="font-sans text-plum-900 bg-plum-50">
+<body>
 
-  <!-- TIP: click any text on the page to edit it. To keep changes, edit the text in this file. -->
+<main class="portfolio">
 
-  <header class="nav">
-    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-      <a href="#home" class="font-bold text-sm">Callie Kenshi</a>
-      <nav class="hidden md:flex items-center gap-6 text-xs font-medium">
-        <a href="#home">Home</a><a href="#about">About</a><a href="#education">Education</a>
-        <a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a>
-      </nav>
-      <a href="#contact" class="btn-primary">Contact Me</a>
+  <!-- COVER PAGE -->
+  <section class="page cover" id="home">
+    <div class="cover-top">Portfolio<br>2026</div>
+
+    <h1 data-field="full_name">Callie<br><span class="accent">Kenshi</span></h1>
+    <div class="cover-subtitle" data-field="title">Web Developer | Designer | Problem Solver</div>
+
+    <p class="cover-intro" data-field="about_summary">
+      Turning ideas into functional and meaningful digital experiences.
+    </p>
+
+    <div class="cover-photo" data-field="profile_image">
+      <div class="avatar-placeholder" aria-label="Profile image placeholder">CK</div>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="max-w-6xl mx-auto px-5 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="text-plum-100 text-xl">Hi, I'm</p>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Callie <span class="text-plum-500">Kenshi</span></h1>
-        <p class="text-plum-100 text-sm mt-3">Aspiring Web Developer | Creative Thinker | Lifelong Learner</p>
-        <p class="text-plum-100/80 text-sm mt-4 max-w-md">I build simple, clean, and functional digital experiences. Welcome to my portfolio!</p>
-        <div class="flex flex-wrap gap-3 mt-7">
-          <a href="#projects" class="btn-primary">View My Projects</a>
-          <a href="#contact" class="btn-outline">Contact Me</a>
-        </div>
-        <div class="flex gap-3 mt-7">
-        <a class="social-dot" href="https://github.com/" target="_blank" rel="noopener" title="GitHub">GI</a>
-        <a class="social-dot" href="https://linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">LI</a>
-        <a class="social-dot" href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook">FA</a>
-        </div>
+    <div class="cover-bottom">
+      <div class="cover-line"></div>
+      <p data-field="full_name">Callie Kenshi</p>
+      <p>Personal Portfolio</p>
+    </div>
+  </section>
+
+  <!-- PAGE 2: ABOUT ME -->
+  <section class="page about-page" id="about">
+    <div class="page-header">
+      <span class="page-number">01</span>
+      <span class="page-label">About Me</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 2</span>
+    </div>
+
+    <p class="eyebrow">Personal Introduction</p>
+    <h2 class="section-title">Hello,<br>I'm <span class="accent" data-field="full_name">Callie Kenshi</span></h2>
+
+    <div data-field="about">
+      <p class="about-description">
+        I am a passionate and motivated individual with a strong interest in
+        technology and design. I enjoy creating simple and user-friendly
+        solutions that solve real problems.
+      </p>
+    </div>
+
+    <div class="personal-info">
+      <h3 class="small-title accent">Personal Information</h3>
+
+      <div class="info-item">
+        <div class="info-icon">♟</div>
+        <div><strong>Full Name</strong><p data-field="full_name">Callie Kenshi</p></div>
       </div>
-      <div class="flex justify-center">
-        <!-- Replace profile.svg with your own picture, e.g. src="me.jpg" -->
-        <div class="hero-blob"><img src="profile.svg" alt="Profile picture" /></div>
+      <div class="info-item">
+        <div class="info-icon">✉</div>
+        <div><strong>Email</strong><p data-field="email">calliekenshi@gmail.com</p></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">☎</div>
+        <div><strong>Contact Number</strong><p data-field="phone">+63 912 345 6789</p></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⌖</div>
+        <div><strong>Address</strong><p data-field="address">Quezon City, Metro Manila</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="eyebrow">About Me</p>
-        <h2 class="text-3xl font-bold">Hello, I'm <span class="text-plum-600">Callie Kenshi</span></h2>
-        <p class="mt-4 text-sm text-plum-900/70 leading-relaxed">I'm a passionate and motivated individual with a strong interest in technology and design. I enjoy creating simple and user-friendly solutions that solve real problems. I'm always eager to learn new skills and grow both personally and professionally.</p>
+  <!-- PAGE 3: EDUCATION AND SKILLS -->
+  <section class="page education-page" id="education">
+    <div class="page-header">
+      <span class="page-number">02</span>
+      <span class="page-label">Education &amp; Skills</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 3</span>
+    </div>
+
+    <div class="subheading"><span class="subheading-icon">♧</span><h3>Education</h3></div>
+
+    <div class="education-list" data-field="education">
+      <div class="education-item">
+        <span class="date-tag">2020 – 2024</span>
+        <strong>Bachelor of Science in Information Technology</strong>
+        <p>University of the Philippines</p>
       </div>
-      <div class="note-card"><span class="text-4xl text-plum-700">&ldquo;</span><p class="font-script text-2xl text-plum-700 -mt-2">Small steps create big progress.</p></div>
+      <div class="education-item">
+        <span class="date-tag">2017 – 2020</span>
+        <strong>Senior High School</strong>
+        <p>San Isidro National High School</p>
+      </div>
+    </div>
+
+    <div class="subheading" style="margin-top: 22px;"><span class="subheading-icon">⚙</span><h3>Skills</h3></div>
+
+    <div class="skills-grid" data-field="skills">
+      <div class="skill-card"><span>H</span><p>HTML</p></div>
+      <div class="skill-card"><span>CSS</span><p>CSS</p></div>
+      <div class="skill-card"><span>J</span><p>JavaScript</p></div>
+      <div class="skill-card"><span>PHP</span><p>PHP</p></div>
     </div>
   </section>
 
-  <!-- PERSONAL INFO -->
-  <section id="info" class="section section-alt">
-    <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-[1fr_auto] gap-10 items-center">
-      <div>
-        <p class="eyebrow">Personal Information</p>
-        <h2 class="text-3xl font-bold">Get to Know Me</h2>
-        <dl class="mt-6 space-y-5">
-        <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" class="w-4 h-4" fill="#6b1d4a"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z"/></svg></span><div><dt>Full Name</dt><dd>Callie Kenshi</dd></div></div>
-        <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" class="w-4 h-4" fill="#6b1d4a"><path d="M3 5h18v14H3V5Zm2 2 7 5 7-5"/></svg></span><div><dt>Email</dt><dd>calliekenshi@gmail.com</dd></div></div>
-        <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" class="w-4 h-4" fill="#6b1d4a"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1L6.6 10.8Z"/></svg></span><div><dt>Contact Number</dt><dd>+63 912 345 6789</dd></div></div>
-        <div class="info-row"><span class="info-ico"><svg viewBox="0 0 24 24" class="w-4 h-4" fill="#6b1d4a"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></span><div><dt>Address</dt><dd>123 Sample St., Brgy. Sta. Ana, Quezon City, Metro Manila</dd></div></div>
-        </dl>
-      </div>
-      <div class="polaroid"><img src="profile.svg" alt="Profile picture" /><span class="font-script text-xl text-plum-700">Good vibes only.</span></div>
+  <!-- PAGE 4: MY PROJECTS (image + details per project) -->
+  <section class="page projects-page" id="projects">
+    <div class="page-header">
+      <span class="page-number">03</span>
+      <span class="page-label">My Projects</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 4</span>
     </div>
-  </section>
 
-  <!-- EDUCATION -->
-  <section id="education" class="section">
-    <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
-      <div>
-        <p class="eyebrow">Education</p>
-        <h2 class="text-3xl font-bold">Educational Background</h2>
-        <div class="timeline mt-6">
-        <div class="tl-item">
-          <p class="tl-year">2020 - 2024</p>
-          <p class="tl-title">Bachelor of Science in Information Technology</p>
-          <p class="tl-sub">University of the Philippines</p>
-          
+    <div data-field="projects">
+      <div class="project-card">
+        <div class="project-image">
+          <img src="https://placehold.co/600x400/f1e6eb/741f42?text=Student+Task+Reminder" alt="Student Task Reminder project preview">
         </div>
-        <div class="tl-item">
-          <p class="tl-year">2018 - 2020</p>
-          <p class="tl-title">Senior High School</p>
-          <p class="tl-sub">Sta. Ana National High School</p>
-          
-        </div>
-        </div>
-      </div>
-      <div class="hidden md:flex flex-col items-center text-plum-700">
-        <svg viewBox="0 0 64 64" class="w-40 h-40" fill="currentColor"><path d="M32 10 2 24l30 14 24-11.2V42h4V24L32 10Z"/><path d="M14 36v10c0 4 8 8 18 8s18-4 18-8V36L32 44 14 36Z"/></svg>
-        <p class="font-script text-2xl">Learn. Grow. Achieve.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="section section-alt">
-    <div class="max-w-6xl mx-auto px-5">
-      <p class="eyebrow">Skills</p>
-      <h2 class="text-3xl font-bold">My Skills</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-6">
-        <div class="skill-tile"><div class="skill-ico">HT</div><span>HTML</span></div>
-        <div class="skill-tile"><div class="skill-ico">CS</div><span>CSS</span></div>
-        <div class="skill-tile"><div class="skill-ico">JA</div><span>JavaScript</span></div>
-        <div class="skill-tile"><div class="skill-ico">PH</div><span>PHP</span></div>
-        <div class="skill-tile"><div class="skill-ico">LA</div><span>Laravel</span></div>
-        <div class="skill-tile"><div class="skill-ico">MY</div><span>MySQL</span></div>
-        <div class="skill-tile"><div class="skill-ico">GI</div><span>Git &amp; GitHub</span></div>
-        <div class="skill-tile"><div class="skill-ico">FI</div><span>Figma</span></div>
-        <div class="skill-tile"><div class="skill-ico">CO</div><span>Communication</span></div>
-        <div class="skill-tile"><div class="skill-ico">PR</div><span>Problem Solving</span></div>
-        <div class="skill-tile"><div class="skill-ico">TE</div><span>Teamwork</span></div>
-        <div class="skill-tile"><div class="skill-ico">TI</div><span>Time Management</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-    <div class="max-w-6xl mx-auto px-5">
-      <p class="eyebrow">Projects</p>
-      <h2 class="text-3xl font-bold">My Projects</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        <article class="project-card">
-          <img class="project-img" src="profile.svg" alt="Project screenshot" />
-          <div class="project-body">
-            <h3>Student Task Scheduler</h3>
-            <p>A simple task management system built to organize schedules and track deadlines.</p>
-            <a class="btn-primary self-start" href="#">View Project</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <img class="project-img" src="profile.svg" alt="Project screenshot" />
-          <div class="project-body">
-            <h3>Portfolio Website</h3>
-            <p>A personal portfolio website to showcase my skills, projects and experience.</p>
-            <a class="btn-primary self-start" href="#">View Project</a>
-          </div>
-        </article>
-        <article class="project-card">
-          <img class="project-img" src="profile.svg" alt="Project screenshot" />
-          <div class="project-body">
-            <h3>Boarding House Reservation System</h3>
-            <p>A reservation system for boarding houses with online booking and admin tools.</p>
-            <a class="btn-primary self-start" href="#">View Project</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience" class="section section-alt">
-    <div class="max-w-6xl mx-auto px-5">
-      <p class="eyebrow">Where I've Worked</p>
-      <h2 class="text-3xl font-bold">My Work <span class="text-plum-600">Experience</span></h2>
-      <div class="timeline mt-6 max-w-3xl">
-        <div class="tl-item">
-          <p class="tl-year">2023 - Present</p>
-          <p class="tl-title">Freelance Web Developer</p>
-          <p class="tl-sub">Self-employed</p>
-          <p class="tl-sub mt-1">Built responsive websites for small businesses.</p>
-        </div>
-        <div class="tl-item">
-          <p class="tl-year">2022 - 2023</p>
-          <p class="tl-title">IT Support Intern</p>
-          <p class="tl-sub">Sample Company Inc.</p>
-          <p class="tl-sub mt-1">Handled troubleshooting and basic network setup.</p>
+        <div>
+          <h3>Student Task Reminder</h3>
+          <p>A simple task management system built with Laravel.</p>
+          <div class="tags"><span class="tag">Laravel</span><span class="tag">MySQL</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONNECT -->
-  <section id="connect" class="section">
-    <div class="max-w-6xl mx-auto px-5 text-center">
-      <p class="eyebrow">Social Media / Website Links</p>
-      <h2 class="text-3xl font-bold">Let's Connect</h2>
-      <p class="text-sm text-plum-900/60 mt-2">Feel free to reach out or follow me on my social media accounts.</p>
-      <div class="flex flex-wrap justify-center gap-8 mt-8">
-        <a class="social-item" href="https://github.com/" target="_blank" rel="noopener"><span class="ring">GI</span>GitHub</a>
-        <a class="social-item" href="https://linkedin.com/" target="_blank" rel="noopener"><span class="ring">LI</span>LinkedIn</a>
-        <a class="social-item" href="https://facebook.com/" target="_blank" rel="noopener"><span class="ring">FA</span>Facebook</a>
+  <!-- PAGE 5: WORK EXPERIENCE -->
+  <section class="page experience-page" id="experience">
+    <div class="page-header">
+      <span class="page-number">04</span>
+      <span class="page-label">Work Experience</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 5</span>
+    </div>
+
+    <div class="experience-list" data-field="experience">
+      <div class="experience-item">
+        <span class="date-tag">2024 – Present</span>
+        <h3>Freelance Web Developer</h3>
+        <ul>
+          <li>Build and maintain simple web applications.</li>
+          <li>Assist clients with basic website updates and bug fixes.</li>
+        </ul>
       </div>
-      <p class="font-script text-2xl text-plum-700 mt-8">Thanks for visiting! ♥</p>
+    </div>
+
+    <div class="quote">“Growth comes from<br>consistent effort.”</div>
+  </section>
+
+  <!-- PAGE 6: SOCIAL MEDIA AND LINKS -->
+  <section class="page social-page" id="social">
+    <div class="page-header">
+      <span class="page-number">05</span>
+      <span class="page-label">Social Media &amp; Links</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 6</span>
+    </div>
+
+    <p class="eyebrow">Stay Connected</p>
+    <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+    <p>Feel free to reach out or follow me on my social media accounts to see more of my work and updates.</p>
+
+    <div class="social-grid" data-field="social_links">
+      <a class="social-card" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">GH</div><strong>GitHub</strong><p>github.com/calliekenshi</p>
+      </a>
+      <a class="social-card" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon">in</div><strong>LinkedIn</strong><p>linkedin.com/in/calliekenshi</p>
+      </a>
+    </div>
+
+    <div class="thanks">
+      <h3>Thanks for visiting!</h3>
+      <p>Keep learning. Keep creating. Keep growing.</p>
     </div>
   </section>
 
-  <!-- CONTACT (opens the visitor's email app; change the address below) -->
-  <section id="contact" class="section section-alt">
-    <div class="max-w-3xl mx-auto px-5">
-      <p class="eyebrow">Contact</p>
-      <h2 class="text-3xl font-bold">Get in Touch</h2>
-      <p class="text-sm text-plum-900/60 mt-2">Have a project in mind or just want to say hi? Send me a message.</p>
-      <form action="mailto:calliekenshi@gmail.com" method="post" enctype="text/plain" class="mt-6 grid sm:grid-cols-2 gap-4">
-        <div><label class="lbl" for="cn">Name</label><input id="cn" name="Name" class="inp" placeholder="Your name" required /></div>
-        <div><label class="lbl" for="ce">Email</label><input id="ce" name="Email" type="email" class="inp" placeholder="you@email.com" required /></div>
-        <div class="sm:col-span-2"><label class="lbl" for="cm">Message</label><textarea id="cm" name="Message" rows="4" class="inp" placeholder="Write your message" required></textarea></div>
-        <button type="submit" class="btn-primary sm:col-span-2 py-3">Send Message</button>
-      </form>
+  <!-- PAGE 7: PROJECT DETAILS (first project) -->
+  <section class="page details-page" id="project-details">
+    <div class="page-header">
+      <span class="page-number">06</span>
+      <span class="page-label">Project Details</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 7</span>
+    </div>
+
+    <h2 class="section-title">Student Task <span class="accent">Reminder</span></h2>
+    <div class="cover-line"></div>
+
+    <div class="project-feature">
+      <img src="https://placehold.co/650x420/f1e6eb/741f42?text=Student+Task+Reminder+System" alt="Student Task Reminder application preview">
+      <p>This project is a simple task management system built with Laravel.</p>
+    </div>
+
+    <div class="details-columns">
+      <div><h3>Technologies Used</h3><ul><li>Laravel</li><li>MySQL</li></ul></div>
+      <div><h3>More Projects</h3><ul><li>Portfolio Website</li></ul></div>
+    </div>
+
+    <div><a class="project-button" href="#projects">View Project &nbsp; →</a></div>
+  </section>
+
+  <!-- PAGE 8: CONTACT -->
+  <section class="page contact-page" id="contact">
+    <div class="page-header">
+      <span class="page-number">07</span>
+      <span class="page-label">Contact</span>
+      <span class="header-line"></span>
+      <span class="page-count">Page 8</span>
+    </div>
+
+    <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
+    <p>Have a project in mind or just want to say hello? I'd love to hear from you!</p>
+
+    <div class="contact-card">
+      <div class="info-item">
+        <div class="info-icon">✉</div>
+        <div><strong>Email</strong><p data-field="email">calliekenshi@gmail.com</p></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">☎</div>
+        <div><strong>Contact Number</strong><p data-field="phone">+63 912 345 6789</p></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⌖</div>
+        <div><strong>Location</strong><p data-field="address">Quezon City, Metro Manila</p></div>
+      </div>
     </div>
   </section>
 
-  <footer class="bg-plum-900 text-plum-100 text-xs text-center py-6">&copy; 2026 <span>Callie Kenshi</span>. All rights reserved.</footer>
+</main>
+
 </body>
 </html>

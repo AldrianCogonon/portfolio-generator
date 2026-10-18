@@ -485,11 +485,12 @@ input:invalid:not(:placeholder-shown) {
 
 .modern-swatch {
   background:
-    linear-gradient(#93c5fd 0 0) 12% 24% / 45% 5px no-repeat,
-    linear-gradient(#475569 0 0) 12% 36% / 72% 3px no-repeat,
-    linear-gradient(#475569 0 0) 12% 45% / 62% 3px no-repeat,
-    linear-gradient(#475569 0 0) 12% 54% / 68% 3px no-repeat,
-    #0f172a;
+    linear-gradient(#741f42 0 0) 12% 24% / 45% 5px no-repeat,
+    linear-gradient(#d8a7b9 0 0) 12% 36% / 72% 3px no-repeat,
+    linear-gradient(#e7d3db 0 0) 12% 45% / 62% 3px no-repeat,
+    linear-gradient(#e7d3db 0 0) 12% 54% / 68% 3px no-repeat,
+    linear-gradient(#f3e8ed 0 0) 78% 74% / 26% 30% no-repeat,
+    #fff;
 }
 
 .creative-swatch {
