@@ -1,6 +1,10 @@
 import "./portfolio-editor.css";
 import { portfolioStore } from "./portfolio-store.js";
 import { renderDocument } from "./portfolio-render.js";
+import { fillTemplateSkeletons } from "./template-skeleton.js";
+import "./template-skeleton.css";
+
+fillTemplateSkeletons();
 
 const form = document.querySelector("#portfolio-form");
 const iframe = document.querySelector("#portfolio-preview");

@@ -1,5 +1,7 @@
 import "./index.css";
 import { portfolioStore } from "./portfolio-store.js";
+import { renderTemplateSkeleton, fillTemplateSkeletons } from "./template-skeleton.js";
+import "./template-skeleton.css";
 
 const templateNames = {
   simple: "Simple template",
@@ -30,6 +32,8 @@ const previewStyles = {
     label: "text-indigo-700"
   }
 };
+
+fillTemplateSkeletons();
 
 const portfolioList = document.querySelector("#portfolio-list");
 const portfolioCount = document.querySelector("#stat-total");
@@ -90,35 +94,9 @@ function formatTemplate(templateKey) {
 }
 
 function renderPreview(templateKey) {
-  const style = previewStyles[templateKey] || previewStyles.simple;
-  const modern = templateKey === "modern";
-  const creative = templateKey === "creative";
-
   return `
-    <div class="flex aspect-[16/9] items-center justify-center overflow-hidden rounded-xl ${style.wrapper} p-4 sm:p-5">
-      <div class="w-full max-w-[250px] ${style.page} ${modern ? "p-4 shadow-sm" : "p-4 shadow-sm"}">
-        <div class="mb-3 flex items-center justify-between gap-3">
-          <div class="h-2 w-2/5 rounded ${style.accent}"></div>
-          <div class="h-1 w-1/5 rounded ${style.secondary}"></div>
-        </div>
-        <div class="mb-2 h-2.5 w-4/5 rounded ${style.accent}"></div>
-        <div class="mb-1 h-1 w-full rounded ${style.secondary}"></div>
-        <div class="h-1 w-3/4 rounded ${style.secondary}"></div>
-        <div class="my-3 border-t ${modern ? "border-rose-200" : "border-stone-200"}"></div>
-        <div class="grid grid-cols-[1fr_.75fr] gap-3">
-          <div class="space-y-1.5">
-            <div class="h-1.5 w-3/4 rounded ${style.accent}"></div>
-            <div class="h-1 w-full rounded ${style.secondary}"></div>
-            <div class="h-1 w-4/5 rounded ${style.secondary}"></div>
-            <div class="mt-2 h-1 w-2/3 rounded ${style.secondary}"></div>
-          </div>
-          <div class="flex min-h-12 items-center justify-center rounded ${style.secondary} ${creative ? "rotate-2" : ""}">
-            <span class="text-lg font-bold ${style.label}">
-              ${modern ? "M" : creative ? "C" : "S"}
-            </span>
-          </div>
-        </div>
-      </div>
+    <div class="flex aspect-[16/9] overflow-hidden rounded-xl border border-stone-200">
+      ${renderTemplateSkeleton(templateKey)}
     </div>`;
 }
 
@@ -266,92 +244,7 @@ function openBuilder(template = "simple", id = null) {
 
   location.href = `./portfolio-editor.html?${params.toString()}`;
 }
-function confirmDeletePortfolio(portfolioTitle) {
-  document.querySelector("#delete-confirmation-dialog")?.remove();
 
-  return new Promise(resolve => {
-    const overlay = document.createElement("div");
-    overlay.id = "delete-confirmation-dialog";
-    overlay.style.cssText = `
-      position:fixed;inset:0;z-index:9999;display:flex;
-      align-items:center;justify-content:center;padding:16px;
-      background:rgba(15,23,42,.45);
-    `;
-
-    overlay.innerHTML = `
-      <section role="alertdialog" aria-modal="true"
-        aria-labelledby="delete-dialog-title"
-        aria-describedby="delete-dialog-description"
-        style="box-sizing:border-box;width:100%;max-width:420px;
-          padding:24px;background:#fff;border:1px solid #e2e8f0;
-          border-radius:16px;box-shadow:0 24px 60px rgba(15,23,42,.2);
-          color:#0f172a;font-family:inherit;">
-        <div aria-hidden="true" style="display:grid;place-items:center;
-          width:44px;height:44px;border-radius:12px;background:#eff6ff;
-          color:#1d4ed8;font-size:22px;margin-bottom:16px;">!</div>
-        <h2 id="delete-dialog-title"
-          style="margin:0;font-size:19px;font-weight:700;color:#0f172a;">
-          Delete portfolio?
-        </h2>
-        <p id="delete-dialog-description"
-          style="margin:10px 0 0;color:#475569;font-size:14px;line-height:1.6;">
-          Are you sure you want to delete
-          <strong data-dialog-portfolio style="color:#1e293b;"></strong>?
-          This action cannot be undone.
-        </p>
-        <div style="display:flex;justify-content:flex-end;gap:10px;
-          flex-wrap:wrap;margin-top:24px;">
-          <button type="button" data-dialog-cancel
-            style="padding:10px 16px;border:1px solid #cbd5e1;
-              border-radius:10px;background:#fff;color:#334155;
-              font:inherit;font-size:14px;font-weight:600;cursor:pointer;">
-            Cancel
-          </button>
-          <button type="button" data-dialog-confirm
-            style="padding:10px 16px;border:1px solid #1d4ed8;
-              border-radius:10px;background:#2563eb;color:#fff;
-              font:inherit;font-size:14px;font-weight:600;cursor:pointer;">
-            Delete portfolio
-          </button>
-        </div>
-      </section>`;
-
-    overlay.querySelector("[data-dialog-portfolio]").textContent =
-      `"${portfolioTitle}"`;
-
-    const cancel = overlay.querySelector("[data-dialog-cancel]");
-    const confirm = overlay.querySelector("[data-dialog-confirm]");
-    let finished = false;
-
-    function finish(result) {
-      if (finished) return;
-      finished = true;
-      document.removeEventListener("keydown", onKeydown);
-      overlay.remove();
-      resolve(result);
-    }
-
-    function onKeydown(event) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        finish(false);
-      } else if (event.key === "Tab") {
-        event.preventDefault();
-        (document.activeElement === cancel ? confirm : cancel).focus();
-      }
-    }
-
-    cancel.addEventListener("click", () => finish(false));
-    confirm.addEventListener("click", () => finish(true));
-    overlay.addEventListener("click", event => {
-      if (event.target === overlay) finish(false);
-    });
-
-    document.addEventListener("keydown", onKeydown);
-    document.body.appendChild(overlay);
-    cancel.focus();
-  });
-}
 document.querySelector("#create-portfolio")?.addEventListener("click", () => {
   openBuilder("simple");
 });

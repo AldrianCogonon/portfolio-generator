@@ -1,0 +1,74 @@
+/* Skeleton thumbnails that mirror the real screen layout of each template.
+   Every shape is positioned in percentages, so the same skeleton scales to the
+   dashboard template cards, the portfolio cards and the editor template picker. */
+
+.tsk {
+  position: relative;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tsk,
+.tsk * {
+  box-sizing: border-box;
+}
+
+.tsk i {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Simple: cream paper pages side by side */
+.tsk-simple {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4%;
+  padding-left: 5%;
+  background: #ebe5db;
+}
+
+.tsk-page {
+  position: relative;
+  flex: 0 0 auto;
+  height: 90%;
+  aspect-ratio: 1 / 1.414;
+  overflow: hidden;
+  background: #faf7f2;
+  box-shadow: 0 2px 8px rgba(40, 30, 20, 0.16);
+}
+
+/* Modern: cover + four pages on the grey document canvas */
+.tsk-modern {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.6%;
+  padding: 3%;
+  background: #dfe1e5;
+}
+
+.tsk-mpage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(25, 25, 35, 0.12);
+}
+
+.tsk-mcover { grid-row: span 2; }
+
+/* Creative: soft canvas with white cards */
+.tsk-creative { background: #f4f6fb; }
+
+.tsk-creative .card {
+  border: 1px solid #e8ecf5;
+  background: #fff;
+}

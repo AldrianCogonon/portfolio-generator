@@ -339,6 +339,34 @@
           </fieldset>
 
           <fieldset class="form-section">
+            <legend>Additional information (optional)</legend>
+
+            <label for="certifications">Certifications</label>
+            <textarea
+              id="certifications"
+              name="certifications"
+              rows="2"
+              placeholder="One per line"
+            ></textarea>
+
+            <label for="languages">Languages</label>
+            <textarea
+              id="languages"
+              name="languages"
+              rows="2"
+              placeholder="English, Filipino, Cebuano — one per line"
+            ></textarea>
+
+            <label for="interests">Interests</label>
+            <textarea
+              id="interests"
+              name="interests"
+              rows="2"
+              placeholder="Photography, hiking, open source — one per line"
+            ></textarea>
+          </fieldset>
+
+          <fieldset class="form-section">
             <legend>Choose a template</legend>
             <p class="field-hint">
               Select a template to change the live preview.
@@ -352,7 +380,7 @@
                   value="simple"
                   checked
                 >
-                <span class="template-swatch simple-swatch"></span>
+                <span class="template-swatch" data-skeleton="simple"></span>
                 <strong>Simple</strong>
                 <small>Clean and professional</small>
               </label>
@@ -363,7 +391,7 @@
                   name="template_key"
                   value="modern"
                 >
-                <span class="template-swatch modern-swatch"></span>
+                <span class="template-swatch" data-skeleton="modern"></span>
                 <strong>Modern</strong>
                 <small>Dark, polished layout</small>
               </label>
@@ -374,7 +402,7 @@
                   name="template_key"
                   value="creative"
                 >
-                <span class="template-swatch creative-swatch"></span>
+                <span class="template-swatch" data-skeleton="creative"></span>
                 <strong>Creative</strong>
                 <small>Bold editorial style</small>
               </label>
