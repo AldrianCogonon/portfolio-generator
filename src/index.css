@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-hand: "Caveat", "Segoe Print", cursive;
+}
+
 .logo-gradient {
   display: block;
   width: 190px;
@@ -24,4 +28,71 @@
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
+}
+
+/* ---------- Creative-template preview in the hero ---------- */
+.squiggle-mini {
+  display: inline-block;
+  width: 36px;
+  height: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  border-radius: 4px;
+  background: #7c5cf0;
+  transform: rotate(-4deg);
+}
+
+.sticky-note {
+  position: absolute;
+  top: 24px;
+  left: 22px;
+  max-width: 190px;
+  padding: 6px 15px;
+  background: #fff27a;
+  color: #3a3410;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  line-height: 1.15;
+  transform: rotate(-9deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.handwritten {
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  color: #fff27a;
+  font-family: var(--font-hand);
+  font-size: 24px;
+  line-height: 1.1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  transform: rotate(-9deg);
+}
+
+.avatar-ring {
+  position: absolute;
+  top: -54px;
+  left: 18px;
+  width: 112px;
+  height: 112px;
+  padding: 5px;
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, #ff5fa2, #ff9a3d, #ffd23d, #b45cff, #ff5fa2);
+}
+
+.avatar-ring > div {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: #e4e7fb;
+  color: #7c5cf0;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+@media (max-width: 639px) {
+  .avatar-ring { position: relative; top: auto; left: auto; margin: -54px 0 12px; }
 }

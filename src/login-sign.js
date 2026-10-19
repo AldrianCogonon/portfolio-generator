@@ -187,3 +187,18 @@ showForm(
   window.location.hash === "#signup" ? "signup" : "login",
   false
 );
+
+/* A visitor who is already signed in doesn't need the login form again.
+   getUser() asks the server, so an expired or revoked session stays on this page
+   instead of bouncing between the login page and the dashboard. */
+(async () => {
+  try {
+    const { data, error } = await supabase.auth.getUser();
+
+    if (!error && data?.user) {
+      window.location.replace("./dashboard.html");
+    }
+  } catch (error) {
+    console.error("Unable to check the current session:", error);
+  }
+})();
