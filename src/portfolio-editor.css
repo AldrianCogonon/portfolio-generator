@@ -1050,3 +1050,22 @@ input:invalid:not(:placeholder-shown) {
   height: 100%;
   object-fit: cover;
 }
+
+.field-error {
+  margin: 6px 0 0;
+  color: #b91c1c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.field-error[hidden] {
+  display: none;
+}
+
+.field-error + label {
+  margin-top: 18px;
+}
+
+input[aria-invalid="true"] {
+  border-color: #dc2626;
+}

@@ -394,7 +394,6 @@ async function setProjectImages(entries) {
 
   writeProjectImages(images);
   renderProjectImages();
-  updateCoverUI(data.cover_image || "");
   updatePreview();
 }
 
@@ -541,6 +540,73 @@ removeCoverButton?.addEventListener("click", () => {
   showMessage("Cover banner removed.", true);
 });
 
+/* ---------- Text-only fields: Portfolio title and Full name ---------- */
+
+const TEXT_ONLY_FIELDS = ["title", "full_name"];
+const TEXT_ONLY_MESSAGE =
+  "Use letters only. Numbers and special symbols aren't allowed here.";
+
+/* Letters (any language), spaces, and the punctuation names/titles commonly use. */
+const TEXT_ONLY_VALID = /^[\p{L}\p{M}][\p{L}\p{M}\s.'’,&-]*$/u;
+const TEXT_ONLY_INVALID_CHARS = /[^\p{L}\p{M}\s.'’,&-]/gu;
+
+function getTextOnlyInputs() {
+  return TEXT_ONLY_FIELDS
+    .map(name => form.elements.namedItem(name))
+    .filter(Boolean);
+}
+
+function setTextOnlyError(input, message) {
+  const note = document.querySelector(`#${input.id}-error`);
+
+  input.setCustomValidity(message);
+  input.setAttribute("aria-invalid", message ? "true" : "false");
+
+  if (note) {
+    note.textContent = message;
+    note.hidden = !message;
+  }
+}
+
+/* Marks the field invalid (which blocks saving) when it contains anything but text. */
+function validateTextOnly(input) {
+  const value = input.value.trim();
+  const valid = !value || TEXT_ONLY_VALID.test(value);
+
+  setTextOnlyError(input, valid ? "" : TEXT_ONLY_MESSAGE);
+
+  return valid;
+}
+
+function textOnlyFieldsValid() {
+  return getTextOnlyInputs().every(validateTextOnly);
+}
+
+/* Removes numbers and symbols as the user types or pastes, keeping the cursor in place. */
+function enforceTextOnly(input) {
+  const before = input.value;
+  const caret = input.selectionStart ?? before.length;
+  const cleaned = before.replace(TEXT_ONLY_INVALID_CHARS, "");
+
+  if (cleaned !== before) {
+    const removedBeforeCaret =
+      before.slice(0, caret).length -
+      before.slice(0, caret).replace(TEXT_ONLY_INVALID_CHARS, "").length;
+
+    input.value = cleaned;
+    input.setSelectionRange(caret - removedBeforeCaret, caret - removedBeforeCaret);
+
+    setTextOnlyError(input, TEXT_ONLY_MESSAGE);
+
+    /* The offending character is gone, so the field itself is valid again. */
+    input.setCustomValidity("");
+    input.setAttribute("aria-invalid", "false");
+    return;
+  }
+
+  validateTextOnly(input);
+}
+
 function updatePreview() {
   const data = getData();
 
@@ -579,6 +645,10 @@ function fillForm(data = {}) {
 
   updateImageUI(data.profile_image || "", data.profile_image_name || "");
   renderProjectImages();
+  updateCoverUI(data.cover_image || "");
+
+  /* Older portfolios may contain numbers in these fields; flag them so they get fixed before saving. */
+  getTextOnlyInputs().forEach(validateTextOnly);
 
   if (iframe) {
     iframe.srcdoc = renderDocument(getData());
@@ -591,6 +661,13 @@ function queueLocalSave() {
   clearTimeout(autosaveTimer);
 
   autosaveTimer = setTimeout(() => {
+    if (!textOnlyFieldsValid()) {
+      showMessage(
+        "Draft not saved: the portfolio title and full name must contain letters only."
+      );
+      return;
+    }
+
     saveInProgress = saveInProgress
       .then(async () => {
         const saved = await portfolioStore.saveDraft(
@@ -799,6 +876,10 @@ function addExplicitSaveButton() {
 
 form.addEventListener("input", event => {
   if (event.target.type === "file") return;
+
+  if (TEXT_ONLY_FIELDS.includes(event.target.name) && !event.isComposing) {
+    enforceTextOnly(event.target);
+  }
 
   if (event.target === projectsField) renderProjectImages();
 

@@ -49,8 +49,11 @@
               name="title"
               type="text"
               placeholder="My Professional Portfolio"
+              autocomplete="off"
+              aria-describedby="title-error"
               required
             >
+            <p id="title-error" class="field-error" role="alert" hidden></p>
 
             <label for="full_name">Full name</label>
             <input
@@ -59,8 +62,10 @@
               type="text"
               placeholder="Your full name"
               autocomplete="name"
+              aria-describedby="full_name-error"
               required
             >
+            <p id="full_name-error" class="field-error" role="alert" hidden></p>
 
             <label for="profile_image_file">Profile picture</label>
 
